@@ -5,7 +5,7 @@
     <title>Portal Colaborador</title>
 </head>
 <body>
-    <a href="updateInfo.php">
+    <a href="UserDB.php">
         <button type="button">Update Info</button>
     </a>
 </body>
