@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Portal Colaborador</title>
+    <title>Buttons</title>
 </head>
 <body>
-    <a href="UserDB.php">
-        <button type="button">Update Info</button>
-    </a>
+
+    <button onclick="location.href='login.php'">Login</button>
+    <button onclick="location.href='register.php'">Atualizar/Registar</button>
+
 </body>
 </html>
