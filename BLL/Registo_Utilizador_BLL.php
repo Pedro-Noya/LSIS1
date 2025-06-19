@@ -1,5 +1,5 @@
 <?php
-require_once 'RegistoUtilizador_dal.php';
+require_once __DIR__ . '/../DAL/Registo_Utilizador_DAL.php';
 
 class Registo_Utilizador_BLL {
     private $dal;

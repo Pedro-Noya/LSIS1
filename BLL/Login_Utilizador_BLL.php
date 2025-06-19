@@ -1,6 +1,5 @@
 <?php
-// Login_Utilizador_BLL.php
-require_once 'Login_Utilizador_DAL.php';
+require_once __DIR__ . '/../DAL/Login_Utilizador_DAL.php';
 
 class Login_Utilizador_BLL {
     private $dal;

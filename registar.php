@@ -1,20 +1,22 @@
 <?php
-// login.php
-require_once 'BLL/Login_Utilizador_BLL.php';
-
-session_start();
+require_once 'BLL/Registo_Utilizador_BLL.php';
 
 $mensagemErro = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $bll = new Login_Utilizador_BLL();
-    $resultado = $bll->autenticarUtilizador($_POST['username'], $_POST['password']);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = $_POST['username'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $confirm = $_POST['confirm'] ?? '';
+
+    $bll = new Registo_Utilizador_BLL();
+    $resultado = $bll->registarUtilizador($username, $email, $password, $confirm);
 
     if ($resultado === true) {
-        header("Location: area_utilizador.php"); // Redireciona após login bem-sucedido
+        header("Location: login.php");
         exit();
     } else {
-        $mensagemErro = $resultado; // Mensagem de erro da BLL
+        $mensagemErro = $resultado;
     }
 }
 ?>
@@ -22,13 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Portal do Colaborador - Login</title>
+  <title>Portal do Colaborador - Registo</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/login.css">
+  <link rel="stylesheet" href="CSS/registar.css">
 </head>
 <body>
 
-  <!-- Cabeçalho completo -->
+  <!-- Cabeçalho -->
   <div class="topbar">
     <div class="topnav">
       <div class="logo">tlantic</div>
@@ -50,25 +52,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
   <!-- Subtítulo -->
-  <div class="section-title">Login | Entrar no seu Portal</div>
+  <div class="section-title">Registar-se no Portal</div>
 
   <!-- Formulário -->
   <div class="container">
+    <form method="POST" action="">
+      <input type="text" name="username" placeholder="Nome de Utilizador" required><br>
+      <input type="password" name="password" placeholder="Palavra-Passe" required><br>
+      <input type="password" name="confirm" placeholder="Confirmar Palavra-Passe" required><br>
+      <input type="email" name="email" placeholder="Email" required><br>
+      <button type="submit">Registar/Atualizar Informação</button>
+    </form>
     <?php if (!empty($mensagemErro)): ?>
       <div class="erro"><?= htmlspecialchars($mensagemErro) ?></div>
     <?php endif; ?>
-
-    <form method="POST">
-      <input type="text" name="username" placeholder="Nome de Utilizador" required><br>
-      <input type="password" name="password" placeholder="Palavra-Passe" required><br>
-      <div style="font-size: 12px; color: grey;">Caps-Lock Ativo</div>
-      <button type="submit">Login</button>
-    </form>
-
-    <div class="link">
-      <a href="forgot.php">Esqueci-me da palavra-passe</a> |
-      <a href="registar.php">Não tem conta? Registar</a>
-    </div>
   </div>
 
 </body>

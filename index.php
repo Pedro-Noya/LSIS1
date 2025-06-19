@@ -6,7 +6,7 @@
 <body>
 
     <button onclick="location.href='login.php'">Login</button>
-    <button onclick="location.href='register.php'">Atualizar/Registar</button>
+    <button onclick="location.href='registar.php'">Atualizar/Registar</button>
 
 </body>
 </html>
