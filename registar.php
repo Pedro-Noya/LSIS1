@@ -8,9 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $confirm = $_POST['confirm'] ?? '';
+    $role = $_POST['role'] ?? ''; // Default role
 
     $bll = new Registo_Utilizador_BLL();
-    $resultado = $bll->registarUtilizador($username, $email, $password, $confirm);
+    $resultado = $bll->registarUtilizador($username, $email, $password, $confirm, $role);
 
     if ($resultado === true) {
         header("Location: login.php");
@@ -60,13 +61,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <input type="text" name="username" placeholder="Nome de Utilizador" required><br>
       <input type="password" name="password" placeholder="Palavra-Passe" required><br>
       <input type="password" name="confirm" placeholder="Confirmar Palavra-Passe" required><br>
+      <div id="capsLockSpacing"></div>
+      <div id="capsLockWarning">
+        Caps-Lock Ativo
+      </div>
       <input type="email" name="email" placeholder="Email" required><br>
+      <label for="role">Papel:</label>
+      <select id="role" name="role">
+        <option value="collaborator">Collaborator</option>
+        <option value="coordinator">Coordinator</option>
+        <option value="human-resources">Human Resources</option>
+        <option value="administrator">Administrator</option>
+      </select> <br>
       <button type="submit">Registar/Atualizar Informação</button>
     </form>
     <?php if (!empty($mensagemErro)): ?>
       <div class="erro"><?= htmlspecialchars($mensagemErro) ?></div>
     <?php endif; ?>
   </div>
-
+  <script src="js/capsLockWarning.js"></script> 
 </body>
 </html>

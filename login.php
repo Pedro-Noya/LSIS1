@@ -8,7 +8,7 @@ $mensagemErro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bll = new Login_Utilizador_BLL();
-    $resultado = $bll->autenticarUtilizador($_POST['username'], $_POST['password']);
+    $resultado = $bll->autenticarUtilizador($_POST['email'], $_POST['password']);
 
     if ($resultado === true) {
         header("Location: area_utilizador.php"); // Redireciona após login bem-sucedido
@@ -59,9 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <form method="POST">
-      <input type="text" name="username" placeholder="Nome de Utilizador" required><br>
+      <input type="text" name="email" placeholder="Email" required><br>
       <input type="password" name="password" placeholder="Palavra-Passe" required><br>
-      <div style="font-size: 12px; color: grey;">Caps-Lock Ativo</div>
+      <div id="capsLockSpacing"></div>
+      <div id="capsLockWarning">
+        Caps-Lock Ativo
+      </div>
       <button type="submit">Login</button>
     </form>
 
@@ -70,6 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="registar.php">Não tem conta? Registar</a>
     </div>
   </div>
-
+  <script src="js/capsLockWarning.js"></script>
 </body>
 </html>

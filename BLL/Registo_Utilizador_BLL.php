@@ -8,7 +8,7 @@ class Registo_Utilizador_BLL {
         $this->dal = new Registo_Utilizador_DAL();
     }
 
-    public function registarUtilizador($username, $email, $password, $confirmPassword) {
+    public function registarUtilizador($username, $email, $password, $confirmPassword, $role) {
         // 1. Verificar se as passwords coincidem
         if ($password !== $confirmPassword) {
             return "As palavras-passe não coincidem.";
@@ -23,7 +23,7 @@ class Registo_Utilizador_BLL {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // 4. Inserir utilizador
-        $sucesso = $this->dal->createUtilizador($username, $email, $hashedPassword);
+        $sucesso = $this->dal->createUtilizador($username, $email, $hashedPassword, $role);
 
         if ($sucesso) {
             return true;

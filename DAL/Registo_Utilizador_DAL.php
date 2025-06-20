@@ -10,7 +10,7 @@ class Registo_Utilizador_DAL{
     }
   }
 
-  function createUtilizador($username, $email, $password_hash, $role = 'collaborator') {
+  function createUtilizador($username, $email, $password_hash, $role) {
     if ($this->conn) {
       $query = "INSERT INTO user (username, email, password_hash, role) VALUES (?, ?, ?, ?)";
       $stmt = $this->conn->prepare($query);

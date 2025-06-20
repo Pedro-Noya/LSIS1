@@ -8,12 +8,12 @@ class Login_Utilizador_BLL {
         $this->dal = new Login_Utilizador_DAL();
     }
 
-    public function autenticarUtilizador($username, $password) {
-        if (empty($username) || empty($password)) {
+    public function autenticarUtilizador($email, $password) {
+        if (empty($email) || empty($password)) {
             return "Por favor, preencha todos os campos.";
         }
 
-        $user = $this->dal->obterUtilizadorPorUsername($username);
+        $user = $this->dal->obterUtilizadorPorEmail($email);
         if (!$user) {
             return "Utilizador não encontrado.";
         }
