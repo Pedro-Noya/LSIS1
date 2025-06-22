@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = $bll->autenticarUtilizador($_POST['email'], $_POST['password']);
 
     if ($resultado === true) {
-        header("Location: area_utilizador.php"); // Redireciona após login bem-sucedido
+        header("Location: 4.php"); // Redireciona após login bem-sucedido
         exit();
     } else {
         $mensagemErro = $resultado; // Mensagem de erro da BLL
@@ -69,8 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <div class="link">
-      <a href="forgot.php">Esqueci-me da palavra-passe</a> |
-      <a href="registar.php">Não tem conta? Registar</a>
+      <a href="passReset.php">Esqueci-me da palavra-passe</a>
     </div>
   </div>
   <script src="js/capsLockWarning.js"></script>

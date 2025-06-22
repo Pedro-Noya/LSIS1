@@ -13,19 +13,19 @@ class Login_Utilizador_BLL {
             return "Por favor, preencha todos os campos.";
         }
 
-        $user = $this->dal->obterUtilizadorPorEmail($email);
-        if (!$user) {
+        $utilizador = $this->dal->obterUtilizadorPorEmail($email);
+        if (!$utilizador) {
             return "Utilizador não encontrado.";
         }
 
-        if (!password_verify($password, $user['password_hash'])) {
+        if (!password_verify($password, $utilizador['password_hash'])) {
             return "Palavra-passe incorreta.";
         }
 
         // Tudo certo, login com sucesso
         session_start();
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
+        $_SESSION['utilizador_id'] = $utilizador['id'];
+        $_SESSION['nome'] = $utilizador['nome'];
 
         return true;
     }
