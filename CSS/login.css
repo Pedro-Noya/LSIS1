@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
-    background-color: #ffffff;
+    background-color: #bedbff;
 }
 
 .topbar {
@@ -85,6 +85,7 @@ nav a {
     border: 1px solid #2a9df3;
     border-radius: 15px;
     text-align: center;
+    background: linear-gradient(135deg, #0768EA, #2A9DF3);
 }
 
 .container h2 {
@@ -120,7 +121,7 @@ button {
 }
 
 .link a {
-    color: #39a4f3;
+    color: white;
     text-decoration: none;
 }
 
