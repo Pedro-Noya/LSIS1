@@ -9,11 +9,17 @@
 .container input, .container select {
     width: 30%;
     padding: 10px 10px;
-    border: 3px solid black;
+    border: 1px solid black;
     border-radius: 10px;
-    background-color: #f1f1f1;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
 }
-h3{
-    color: blue;
-    margin-left: 6px;
+label{
+    font-size: 25px;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    margin-bottom: 10px;
 }

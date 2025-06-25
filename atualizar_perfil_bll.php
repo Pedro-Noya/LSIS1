@@ -20,16 +20,16 @@ function showForm($dados){
     if($dados){
     echo '<form action="atualizar_perfil.php" method="POST">
         <div class="container">
-        <h3>Nome Completo:</h3> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" readonly required>
-        <h3>Nome Abreviado:</h3> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" value="',$dados["nomeAbreviado"],'"readonly required><br>
+        <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" readonly required><br><br>
+        <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" value="',$dados["nomeAbreviado"],'"readonly required>
         </div>
         <div class="container">
-        Data de Nascimento: <input type="date" name="dataNascimento" value="',$dados["dataNascimento"],'" readonly required><br>
+        <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" value="',$dados["dataNascimento"],'" readonly required><br>
         </div>
         <div class="container">
-        Número de Identificação Fiscal: <input type="text" name="nif" placeholder="NIF" value="',$dados["nif"],'" readonly required>
-        Número de Segurança Social: <input type="text" name="niss" placeholder="NISS" value="',$dados["niss"],'" readonly required>
-        Número Cartão de Cidadão: <input type="text" name="cc" placeholder="CC" value="',$dados["cc"],'" readonly required>
+        <label>Número de Identificação Fiscal:</label> <input type="text" name="nif" placeholder="NIF" value="',$dados["nif"],'" readonly required>&nbsp;
+        <label>Número de Segurança Social:</label> <input type="text" name="niss" placeholder="NISS" value="',$dados["niss"],'" readonly required>&nbsp;
+        <label>Número Cartão de Cidadão:</label> <input type="text" name="cc" placeholder="CC" value="',$dados["cc"],'" readonly required>
         </div>';
 
         $genero_array=["M","F"];
