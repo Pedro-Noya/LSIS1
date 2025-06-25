@@ -19,4 +19,8 @@ class DAL_Atualizar{
         }
         return false;
     }
+
+    function atualizarDadosPerfil($email, ){
+
+    }
 }

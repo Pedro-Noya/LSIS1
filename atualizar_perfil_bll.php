@@ -14,6 +14,12 @@ function obterDadosPerfil(){
     showForm($dados);
 }
 
+function isThisACallback(){
+    if($_POST){ //Acrescentar mais validações que possam ser necessárias
+        return true;
+    }
+    return false;
+}
 //Dados de escrita: Morada; Género; Situação IRS; Nº Dependentes; IBAN; Hab. Literárias; Curso; Frequência; Contacto de Emergência;
 //Matrícula; Cartão Continente; Grau de Relacionamento; Contacto;  
 function showForm($dados){
@@ -121,5 +127,14 @@ function showForm($dados){
         <input type="submit" value="Atualizar Informações / Registar">
         </div>
         </form>';
+    }
+
+    function showUI(){
+        if(!isThisACallback()){
+            showForm();
+        }
+        else {
+            
+        }
     }
 }
