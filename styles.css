@@ -1,8 +1,8 @@
-
+/*Estilos para a página de login*/
 body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background-color: #bedbff;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #ffffff;
 }
 
 .topbar {
@@ -85,7 +85,6 @@ nav a {
     border: 1px solid #2a9df3;
     border-radius: 15px;
     text-align: center;
-    background: linear-gradient(135deg, #0768EA, #2A9DF3);
 }
 
 .container h2 {
@@ -121,22 +120,6 @@ button {
 }
 
 .link a {
-    color: white;
+    color: #39a4f3;
     text-decoration: none;
-}
-
-.erro {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-#capsLockWarning {
-    font-size: 12px;
-    color: red;
-    display: none;
-}
-
-#capsLockSpacing {
-    height: 16px;
 }

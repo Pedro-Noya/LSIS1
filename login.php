@@ -1,22 +1,6 @@
 <?php
-// login.php
-require_once 'BLL/Login_Utilizador_BLL.php';
-
-session_start();
-
-$mensagemErro = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $bll = new Login_Utilizador_BLL();
-    $resultado = $bll->autenticarUtilizador($_POST['email'], $_POST['password']);
-
-    if ($resultado === true) {
-        header("Location: 4.php"); // Redireciona após login bem-sucedido
-        exit();
-    } else {
-        $mensagemErro = $resultado; // Mensagem de erro da BLL
-    }
-}
+// portal.php
+include "login_bll.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -24,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <title>Portal do Colaborador - Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/login.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -38,10 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="#">setores</a>
         <a href="#">recursos</a>
         <a href="#">Pesquisar 🔍</a>
+
+        <!-- Botão branco com sino + texto -->
         <div class="pedido-demo-box">
           <span>🔔</span>
           <span>Pedir uma demo</span>
         </div>
+
+        <!-- Botão azul escuro -->
         <a href="#" class="btn-experiment">Experimente agora</a>
         <a href="#">PT ▾</a>
       </nav>
@@ -54,24 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <!-- Formulário -->
   <div class="container">
-    <?php if (!empty($mensagemErro)): ?>
-      <div class="erro"><?= htmlspecialchars($mensagemErro) ?></div>
-    <?php endif; ?>
-
-    <form method="POST">
-      <input type="text" name="email" placeholder="Email" required><br>
-      <input type="password" name="password" placeholder="Palavra-Passe" required><br>
-      <div id="capsLockSpacing"></div>
-      <div id="capsLockWarning">
-        Caps-Lock Ativo
-      </div>
-      <button type="submit">Login</button>
-    </form>
-
+    <?php showUI(); ?>
     <div class="link">
-      <a href="passReset.php">Esqueci-me da palavra-passe</a>
+      <a href="forgot.php">Esqueci-me da palavra-passe</a> |
+      <a href="register.php">Não tem conta? Registar</a>
     </div>
   </div>
-  <script src="js/capsLockWarning.js"></script>
+
 </body>
 </html>
