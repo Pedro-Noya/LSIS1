@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Buttons</title>
+    <link rel="stylesheet" href="CSS/global.css" />
 </head>
 <body>
 

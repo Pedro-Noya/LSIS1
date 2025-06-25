@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('keyup', checkCapsLock);
 });
 
+
+
 /**
 <script>
   const capsWarning = document.getElementById('capsLockWarning');

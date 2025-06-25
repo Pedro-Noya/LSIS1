@@ -8,7 +8,7 @@ class Registo_Utilizador_BLL {
     $this->dal = new Registo_Utilizador_DAL();
   }
 
-  public function registarUtilizador($nome, $email, $password, $confirmPassword, $role, $sexo, $nacionalidade, $dataNascimento, $tipoContrato, $dataInicio, $dataFim, $regimeHorarioTrabalho) {
+  public function registarUtilizador($nome, $email, $password, $confirmPassword, $papel, $sexo, $nacionalidade, $dataNascimento, $tipoContrato, $dataInicio, $dataFim, $regimeHorarioTrabalho, $contacto, $situacaoIrs, $numDependentes, $remuneracao, $habLiterarias, $curso, $frequencia) {
     // 1. Verificar se as passwords coincidem
     if ($password !== $confirmPassword) {
       return "As palavras-passe não coincidem.";
@@ -27,27 +27,38 @@ class Registo_Utilizador_BLL {
       $nome,
       $email,
       $password_hash,
-      $role
+      $papel
     );
 
     if (!$sucesso_ut) {
       return "Erro ao registar o utilizador.";
     }
 
-    $sucesso_cu = $this->dal->createContratoUtilizador(
+    /* $sucesso_cu = $this->dal->createContratoUtilizador(
       $tipoContrato, 
       $dataInicio, 
       $dataFim, 
       $regimeHorarioTrabalho
-    );
+    ); */
 
     // 5. Inserir dados adicionais do colaborador
-    if (strtolower($role) === 'colaborador') {
+    if ($papel === 1) { // Verifica se o papel é de colaborador
       $sucesso_co = $this->dal->createFichaColaborador(
         $email, 
         $sexo, 
         $nacionalidade, 
-        $dataNascimento
+        $dataNascimento, 
+        $tipoContrato, 
+        $dataInicio, 
+        $dataFim, 
+        $regimeHorarioTrabalho, 
+        $contacto, 
+        $situacaoIrs, 
+        $numDependentes, 
+        $remuneracao, 
+        $habLiterarias, 
+        $curso, 
+        $frequencia
       );
 
       if (!$sucesso_co) {

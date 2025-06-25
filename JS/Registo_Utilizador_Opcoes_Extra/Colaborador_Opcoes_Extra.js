@@ -1,15 +1,14 @@
-
-const role = document.getElementById('role');
+const papel = document.getElementById('papel');
+const colaboradorOptions = document.getElementById('colaboradorOptions');
 
 document.addEventListener('DOMContentLoaded', function () {
-    const colaboradorDivs = document.querySelectorAll('.colaboradorOptions');
-    colaboradorDivs.forEach(div => div.style.display = 'none');
-    role.addEventListener('change', function () {
-        const selectedValue = role.value;
-        if (selectedValue == 'Colaborador') {
-            colaboradorDivs.forEach(div => div.style.display = 'block');
+    papel.addEventListener('change', function () {
+        const selectedValue = papel.value;
+
+        if (selectedValue === '1') {
+            colaboradorOptions.style.display = 'block';
         } else {
-            colaboradorDivs.forEach(div => div.style.display = 'none');
+            colaboradorOptions.style.display = 'none';
         }
     });
 });

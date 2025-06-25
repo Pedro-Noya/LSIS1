@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+}
+
+label {
+    color: white
+}
+
+.topbar {
+    background: linear-gradient(to right, #0767ea, #2a9df3);
+    color: white;
+    padding: 20px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.topnav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-experiment {
+    background: #1a3760;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.pedido-demo-box {
+    background: white;
+    border-radius: 20px;
+    padding: 5px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pedido-demo-box span {
+    color: #0767ea;
+    font-weight: 600;
+}
+
+.topbar h1 {
+    margin-top: 20px;
+    font-weight: normal;
+    font-size: 26px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 22px;
+    color: #2a9df3;
+    font-weight: 500;
+    margin-top: 30px;
+}
+
+.container {
+    margin: 30px auto 60px auto;
+    max-width: 400px;
+    padding: 30px;
+    border: 1px solid #2a9df3;
+    border-radius: 15px;
+    text-align: center;
+    background: linear-gradient(135deg, #0768EA, #2A9DF3);
+}

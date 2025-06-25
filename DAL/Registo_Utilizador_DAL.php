@@ -9,25 +9,30 @@ class Registo_Utilizador_DAL {
     }
   }
 
-  function createUtilizador($nome, $email, $password_hash) {
-    $query = "INSERT INTO utilizador (nome, email, password_hash) VALUES (?, ?, ?)";
+  function createUtilizador($nome, $email, $password_hash, $papel) {
+    $query = "INSERT INTO utilizador (nome, email, password_hash, papel) VALUES (?, ?, ?, ?)";
     $stmt = $this->conn->prepare($query);
     if (!$stmt) {
       die("Erro na preparação da query: " . $this->conn->error);
     }
-    $stmt->bind_param("sss", $nome, $email, $password_hash);
+    $stmt->bind_param("sssi", $nome, $email, $password_hash, $papel);
     
     return $stmt->execute();
   }
 
-  function createFichaColaborador($email, $sexo, $nacionalidade, $dataNascimento) {
-    $query = "INSERT INTO fichaColaborador (email, sexo, nacionalidade, dataNascimento) VALUES (?, ?, ?, ?)";
+  function createFichaColaborador($email, $sexo, $nacionalidade, $dataNascimento, $tipoContrato, $dataInicio, $dataFim, $regimeHorarioTrabalho, $contacto, $situacaoIrs, $numDependentes, $remuneracao, $habLiterarias, $curso, $frequencia) {
+    $query = "INSERT INTO fichacolaborador (email, sexo, nacionalidade, dataNascimento, tipoContrato, dataInicio, dataFim, regimeHorarioTrabalho, contacto, situacaoIrs, numDependentes, remuneracao, habLiterarias, curso, frequencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $this->conn->prepare($query);
     if (!$stmt) {
       die("Erro na preparação da query: " . $this->conn->error);
     }
-    $stmt->bind_param("ssss", $email, $sexo, $nacionalidade, $dataNascimento);
-    return $stmt->execute();
+    $stmt->bind_param("ssssssssssiisss", $email, $sexo, $nacionalidade, $dataNascimento, $tipoContrato, $dataInicio, $dataFim, $regimeHorarioTrabalho, $contacto, $situacaoIrs, $numDependentes, $remuneracao, $habLiterarias, $curso, $frequencia);
+    if ($stmt->execute()) {
+      $stmt->insert_id;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   function existeUtilizador($email) {

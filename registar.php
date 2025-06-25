@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $email = $_POST['email'] ?? '';
   $password = $_POST['password'] ?? '';
   $confirmPassword = $_POST['confirmPassword'] ?? '';
-  $role = $_POST['role'] ?? '';
+  $papel = isset($_POST['papel']) ? intval($_POST['papel']) : null;
   $sexo = $_POST['sexo'] ?? '';
   $nacionalidade = $_POST['nacionalidade'] ?? '';
   $dataNascimento = $_POST['dataNascimento'] ?? '';
@@ -16,6 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $dataInicio = $_POST['dataInicio'] ?? '';
   $dataFim = $_POST['dataFim'] ?? '';
   $regimeHorarioTrabalho = $_POST['regimeHorarioTrabalho'] ?? '';
+  $nacionalidade = $_POST['nacionalidade'] ?? '';
+  $contacto = $_POST['contacto'] ?? '';
+  $situacaoIrs = $_POST['situacaoIrs'] ?? '';
+  $numDependentes = isset($_POST['numDependentes']) ? intval($_POST['numDependentes']) : null;
+  $remuneracao = isset($_POST['remuneracao']) ? floatval($_POST['remuneracao']) : null;
+  $habLiterarias = $_POST['habLiterarias'] ?? '';
+  $curso = $_POST['curso'] ?? '';
+  $frequencia = $_POST['frequencia'] ?? '';
 
   $bll = new Registo_Utilizador_BLL();
   $resultado = $bll->registarUtilizador(
@@ -23,14 +31,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email,
     $password,
     $confirmPassword,
-    $role,
+    $papel,
     $sexo,
     $nacionalidade,
     $dataNascimento,
     $tipoContrato,
     $dataInicio,
     $dataFim,
-    $regimeHorarioTrabalho
+    $regimeHorarioTrabalho,
+    $contacto,
+    $situacaoIrs,
+    $numDependentes,
+    $remuneracao,
+    $habLiterarias,
+    $curso,
+    $frequencia
   );
 
   if ($resultado === true) {
@@ -48,6 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <meta charset="UTF-8" />
   <title>Portal do Colaborador - Registo</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="CSS/global.css" />
   <link rel="stylesheet" href="CSS/registar.css" />
 </head>
 <body>
@@ -112,16 +128,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       </div>
 
 
-      <label for="role">Papel:</label>
-      <select id="role" name="role" required>
-        <option value="" selected disabled>Papel</option>
-        <option value="Colaborador">Colaborador</option>
-        <option value="Coordinator">Coordenador</option>
-        <option value="HR">Recursos Humanos</option>
-        <option value="Admin">Administrador</option>
+      <label for="papel">Papel:</label>
+      <select id="papel" name="papel" required>
+        <option value='0' selected disabled>Papel</option>
+        <option value='1'>Colaborador</option>
+        <option value='2'>Coordenador</option>
+        <option value='3'>Recursos Humanos</option>
+        <option value='4'>Administrador</option>
       </select><br/>
 
-      <div class="colaboradorOptions">
+      <div id="colaboradorOptions" style="display: none;">
         <label for="sexo">Sexo:</label>
         <select id="sexo" name="sexo">
           <option value="" selected disabled>Sexo</option>
@@ -130,10 +146,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </select><br />
 
         <input type="text" name="nacionalidade" placeholder="Nacionalidade"/><br />
-        <br />
 
+        <input type="text" name="contacto" id="contacto" placeholder="Contacto Telefónico" /><br />
+
+        <input type="text" name="situacaoIrs" id="situacaoIrs" placeholder="Situação IRS (ex: Casado, Solteiro)" /><br />
+
+        <input type="text" name="numDependentes" id="numDependentes" placeholder="Nº de Dependentes" /><br />
+
+        <input type="text" name="remuneracao" id="remuneracao" placeholder="Remuneração em € (ex: 1200)" /><br />
+
+        <input type="text" name="habLiterarias" id="habLiterarias" placeholder="Habilitações Literárias" /><br />
+
+        <input type="text" name="curso" id="curso" placeholder="Curso Académico" /><br />
+
+        <input type="text" name="frequencia" id="frequencia" placeholder="Nível de Frequência (ex: Licenciatura, Mestrado)" /><br />
+
+        <br />
         <label for="dataNascimento">Data de Nascimento:</label>
         <input type="date" id="dataNascimento" name="dataNascimento"/><br />
+
       </div>
       <br />
       <button type="submit">Registar</button>
