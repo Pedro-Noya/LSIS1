@@ -6,6 +6,7 @@ include "atualizar_perfil_bll.php";
 <head>
   <meta charset="UTF-8">
   <title>Portal do Colaborador - Login</title>
+  <link rel="stylesheet" href="styles_atualizar_perfil.css">
 </head>
 <body>
     <h1> Dados pessoais </h1>
