@@ -27,20 +27,33 @@ function showForm($dados){
         <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" value="',$dados["dataNascimento"],'" readonly required><br>
         </div>
         <div class="container">
-        <label>Número de Identificação Fiscal:</label> <input type="text" name="nif" placeholder="NIF" value="',$dados["nif"],'" readonly required>&nbsp;
-        <label>Número de Segurança Social:</label> <input type="text" name="niss" placeholder="NISS" value="',$dados["niss"],'" readonly required>&nbsp;
-        <label>Número Cartão de Cidadão:</label> <input type="text" name="cc" placeholder="CC" value="',$dados["cc"],'" readonly required>
+        <span class="caixa2">
+            <label>Número de Identificação Fiscal:</label>
+            <br>
+            <input class="caixa2" type="text" name="nif" placeholder="NIF" value="',$dados["nif"],'" readonly required>
+        </span>
+        
+        <span class="caixa2">
+            <label>Número de Segurança Social:</label>
+            <br>
+            <input class="caixa2" type="text" name="niss" placeholder="NISS" value="',$dados["niss"],'" readonly required>
+        </span>
+        <span class="caixa2">
+            <label>Número Cartão de Cidadão:</label>
+            <br>
+            <input class="caixa2" type="text" name="cc" placeholder="CC" value="',$dados["cc"],'" readonly required>
+        </span>
         </div>';
 
-        $genero_array=["M","F"];
-        #É correr o array genero_array e ver em qual indice o valor do genero é igual ao genero do colaborador em questão.
+        $sexo_array=["M","F"];
+        #É correr o array sexo_array e ver em qual indice o valor do sexo é igual ao sexo do colaborador em questão.
         echo '<div class="container">
-        Sexo: <select name="genero" required>';
-        foreach ($genero_array as $genero){
-            if($genero==$dados["genero"]){
-                echo '<option value="',$genero,'" selected>',$genero,'</option>';
+        Sexo: <select name="sexo" required>';
+        foreach ($sexo_array as $sexo){
+            if($sexo==$dados["sexo"]){
+                echo '<option value="',$sexo,'" selected>',$sexo,'</option>';
             } else{
-                echo '<option value="',$genero,'">',$genero,'</option>';
+                echo '<option value="',$sexo,'">',$sexo,'</option>';
             }            
         }
         echo '</select><br>';
@@ -63,7 +76,7 @@ function showForm($dados){
         IRS Jovem: O que é isto?<br>
         Primeiro ano de descontos (independente): O que é isto?<br></div>
         <div class="container">
-        Morada: <input type="text" name="morada" placeholer="Morada, i.e. Rua, Nº da Porta" value="',$dados["rua"],', ',$dados["numPorta"],'" required><br>
+        Morada: <input type="text" name="morada" placeholder="Morada, i.e. Rua, Nº da Porta" value="',$dados["rua"],', ',$dados["numPorta"],'" required><br>
         Localidade: <input type="text" name="localidade" placeholder="Localidade" value="', $dados["localidade"],'" required><br>
         Código Postal: <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" value="', $dados["codPost"],'" required><br>
         </div>';
