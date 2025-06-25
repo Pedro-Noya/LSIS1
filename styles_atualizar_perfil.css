@@ -1,3 +1,20 @@
+.container_button {
+    width: 80%;
+    margin: 20px auto; /* center horizontally */
+    padding: 15px;
+}
+.container_button input {
+    width: 80%;
+    height:50px;
+    padding: 10px 10px;
+    margin-left: 10%;
+    border: 1px solid white;;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    color: white;
+}
 .container {
     width: 80%;
     margin: 20px auto; /* center horizontally */
@@ -9,21 +26,52 @@
 .container input, .container select {
     width: 30%;
     padding: 10px 10px;
+    margin: 10px;
     border: 1px solid black;
     border-radius: 10px;
     background-color: white;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
 }
-.container .caixa2{
-    width: 30%;
-    padding: 10px 20px;
-    margin-left: 20px;
+.caixa2 input, .caixa2 select{
+    width: 80%;
+    padding: 10px 10px;
+    margin: 10px;
     border: 1px solid black;
     border-radius: 10px;
     background-color: white;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
 }
-
+.caixa2{
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 20px auto; /* center horizontally */
+    padding: 15px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+.caixa3 input, .caixa3 select{
+    width: 80%;
+    padding: 10px 10px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+.caixa3{
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 20px auto; /* center horizontally */
+    padding: 15px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
 label{
     font-size: 25px;
     font-weight: 600;
