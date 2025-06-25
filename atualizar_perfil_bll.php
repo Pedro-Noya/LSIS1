@@ -20,8 +20,8 @@ function showForm($dados){
     if($dados){
     echo '<form action="atualizar_perfil.php" method="POST">
         <div class="container">
-        Nome Completo: <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" readonly required><br>
-        Nome Abreviado: <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" value="',$dados["nomeAbreviado"],'"readonly required><br>
+        <h3>Nome Completo:</h3> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" readonly required>
+        <h3>Nome Abreviado:</h3> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" value="',$dados["nomeAbreviado"],'"readonly required><br>
         </div>
         <div class="container">
         Data de Nascimento: <input type="date" name="dataNascimento" value="',$dados["dataNascimento"],'" readonly required><br>
