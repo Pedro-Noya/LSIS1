@@ -12,11 +12,16 @@ function obterDadosPerfil(){
     $dados=$dal->obterDadosPerfil($_SESSION["email"], $_SESSION["password"]);
     if($dados["papel"]!=2){
         if($_POST){
+            //Separação da Morada em Rua e Nº da Porta
+            list($rua, $numPorta)=explode(", ", $_POST["morada"]);
+
             $dal->atualizarDadosPessoais($_POST["numMec"], $_POST["email"], $_POST["nomeAbreviado"], $_POST["dataNascimento"],
-            $_POST["designacaoDdiTelemovel"], $_POST["telemovel"], $_POST["sexo"], $_POST["numPorta"], $_POST["rua"]
+            $_POST["designacaoDdiTelemovel"], $_POST["telemovel"], $_POST["sexo"], $numPorta, $rua,
             $_POST["codPostal"], $_POST["localidade"], $_POST["nacionalidade"], $_POST["designacaoDdiContacto"],
             $_POST["contacto"], $_POST["contactoEmergencia"], $_POST["grauRelacionamento"], $_POST["matricula"]);
 
+            $dal->atualizarDadosHabilitacoes($_POST["email"], $_POST["habLiterarias"], $_POST["curso"],
+            $_POST["frequencia"]);
             
         }
         showForm($dados);

@@ -70,24 +70,49 @@ class DAL_Atualizar{
     function atualizarDadosPessoais($numMec, $email, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel, $sexo,
     $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia, 
     $grauRelacionamento, $matricula){
-        $sql=$this->conn->prepare("UPDATE DadosPessoaisColaborador SET numMec=$numMec, email=$email, nomeAbreviado=$nomeAbreviado,
-        dataNascimento=$dataNascimento, designacaoDdiTelemovel=$designacaoDdiTelemovel, telemovel=$telemovel, sexo=$sexo
-        numPorta=$numPorta, rua=$rua, codPost=$codPost, localidade=$localidade, nacionalidade=$nacionalidade, 
-        designacaoDdiContacto=$designacaoDdiContacto, contacto=$contacto, contactoEmergencia=$contactoEmergencia, 
-        grauRelacionamento=$grauRelacionamento, matricula=$matricula WHERE email=$email");
+        $newEmail=$email;
+        $sql = $this->conn->prepare("UPDATE DadosPessoaisColaborador SET
+        numMec = ?,
+        nomeAbreviado = ?,
+        dataNascimento = ?,
+        designacaoDdiTelemovel = ?,
+        telemovel = ?,
+        sexo = ?,
+        numPorta = ?,
+        rua = ?,
+        codPost = ?,
+        localidade = ?,
+        nacionalidade = ?,
+        designacaoDdiContacto = ?,
+        contacto = ?,
+        contactoEmergencia = ?,
+        grauRelacionamento = ?,
+        matricula = ?
+        WHERE email = ?");
+
+        $sql->bind_param('isssssissssssssss', $numMec, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel,
+        $sexo, $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia,
+        $grauRelacionamento, $matricula, $email);
+
         $sql->execute();
     }
 
     function atualizarDadosHabilitacoes($email, $habLiterarias, $curso, $frequencia){
-        $sql=$this->conn->prepare("UPDATE DadosHabilitacoesColaborador SET email=$email, habLiterarias=$habLiterarias,
-        curso=$curso, frequencia=$frequencia WHERE email=$email");
+        $newEmail=$email;
+        $sql=$this->conn->prepare("UPDATE DadosHabilitacoesColaborador SET
+        email = ?,
+        habLiterarias = ?,
+        curso = ?,
+        frequencia = ?
+        WHERE email = ?");
+
+        $sql->bind_param("sssss", $newEmail, $habLiterarias, $curso, $frequencia, $email);
+
         $sql->execute();
     }
 
     function atualizarDadosFinanceiros($email, $cc, $nif, $niss, $situacaoIrs, $numDependentes, $iban, $remuneracao){
-        $sql=$this->conn->prepare("UPDATE DadosFinanceirosColaborador SET email=$email, cc=$cc, nif=$nif, niss=$niss,
-        situacaoIrs=$situacaoIrs, numDependentes=$numDependentes, iban=$iban, remuneracao=$remuneracao WHERE email=$email");
-        $sql->execute();
+        
     }
 
     function atualizarDadosExtras($email, $cartaoContinente, $VoucherNos){
