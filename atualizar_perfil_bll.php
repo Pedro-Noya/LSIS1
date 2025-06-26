@@ -55,13 +55,7 @@ function showForm($dados){
         echo '<div class="caixa2">
         <span>
         <label>Sexo:</label><br> <select name="sexo" required>';
-        foreach ($sexo_array as $sexo){
-            if($sexo==$dados["sexo"]){
-                echo '<option value="',$sexo,'" selected>',$sexo,'</option>';
-            } else{
-                echo '<option value="',$sexo,'">',$sexo,'</option>';
-            }            
-        }
+       
         echo '</select><br>';
         echo '</span>';
         echo '<span>
@@ -71,15 +65,8 @@ function showForm($dados){
         $situacaoIrs_array=["Declaração de IRS recepcionada","Declaração certa","Liquidação processada","Reembolso Emitido","Pagamento Confirmado","Liquidada com nota de cobrança emitida","Notificação emitida","Liquidada com Saldo Nulo Emitido"];
 
         echo '<div class="caixa3">
-        <span>
-        <label>Situação IRS:</label><br> <select name="situacaoIrs" required>';
-        foreach($situacaoIrs_array as $situacaoIrs){
-            if($situacaoIrs==$dados["situacaoIrs"]){
-                echo '<option value="',$situacaoIrs,'" selected>',$situacaoIrs,'</option>';
-            } else{
-                echo '<option value="',$situacaoIrs,'">',$situacaoIrs,'</option>';
-            }
-        }
+        <span>'
+        
         echo '</select><br>
         </span>';
         

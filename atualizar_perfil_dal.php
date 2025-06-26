@@ -25,7 +25,42 @@ class DAL_Atualizar{
         return false;
     }
 
-    function atualizarDadosPerfil($email, ){
+    function obterDDIs(){
+        $sql=$this->conn->prepare("SELECT * FROM DDI");
+        $sql->execute();
+        $result=$sql->get_result()->fetch_assoc();
+        return $result;
+    }
+
+    function obterHabilitacoesLiterarias(){
+        $sql=$this->conn->prepare("SELECT * FROM HabilitacoesLiterarias");
+        $sql->execute();
+        $result=$sql->get_result()->fetch_assoc();
+        return $result;
+    }
+
+    function obterRegimesHorarioTrabalho(){
+        $sql=$this->conn->prepare("SELECT * FROM RegimeHorarioTrabalho");
+        $sql->execute();
+        $result=$sql->get_result()->fetch_assoc();
+        return $result;
+    }
+
+    function obterSexo(){
+        $sql=$this->conn->prepare("SELECT * FROM Sexo");
+        $sql->execute();
+        $result=$sql->get_result()->fetch_assoc();
+        return $result;
+    }
+
+    function obterSituacaoIrs(){
+        $sql=$this->conn->prepare("SELECT * FROM SituacaoIrs");
+        $sql->execute();
+        $result=$sql->get_result()->fetch_assoc();
+        return $result;
+    }
+
+    function atualizarDadosPessoais($email, ){
 
     }
 }
