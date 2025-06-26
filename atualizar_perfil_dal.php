@@ -50,7 +50,10 @@ class DAL_Atualizar{
         $sql=$this->conn->prepare("SELECT * FROM Sexo");
         $sql->execute();
         $result=$sql->get_result()->fetch_assoc();
-        return $result;
+        if($result){
+            return $result;
+        }
+        return false;
     }
 
     function obterSituacaoIrs(){

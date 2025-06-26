@@ -23,6 +23,7 @@ function isThisACallback(){
 //Dados de escrita: Morada; Género; Situação IRS; Nº Dependentes; IBAN; Hab. Literárias; Curso; Frequência; Contacto de Emergência;
 //Matrícula; Cartão Continente; Grau de Relacionamento; Contacto;  
 function showForm($dados){
+    $dal=new DAL_Atualizar();
     if($dados){
     echo '<form action="atualizar_perfil.php" method="POST">
         <div class="container">
@@ -50,7 +51,27 @@ function showForm($dados){
             </span>
         </div>';
 
-        $sexo_array=["M","F"];
+        $sexo_result_array=$dal->obterSexo();
+        echo '<label>Género:</label><br> <select name="sexo" required>';
+        if($sexo_result_array){
+            echo "<label>Existe sexo retornado</label>";
+        } else{
+            echo "<label>Não há sexo</label>";
+        }
+        var_dump($sexo_result_array);
+        /*foreach($sexo_result_array["sexo"] as $element){
+            $sexo_array[]=$element;
+        }
+        foreach($sexo_result_array["designacao"] as $element){
+            $designacaoSexo_array[]=$element;
+        }*/
+        for($i=0; $i<=count($sexo_array); $i++){
+            if($sexo_array[$i]==$dados["sexo"]){
+                echo '<option value="',$sexo_array["$i"],'" selected>',$designacaoSexo_array["$i"],'</option>';
+            } else{
+                echo '<option value="',$sexo_array["$i"],'">',$designacaoSexo_array["$i"],'</option>';
+            }
+        }
         #É correr o array sexo_array e ver em qual indice o valor do sexo é igual ao sexo do colaborador em questão.
         echo '<div class="caixa2">
         <span>
@@ -65,7 +86,7 @@ function showForm($dados){
         $situacaoIrs_array=["Declaração de IRS recepcionada","Declaração certa","Liquidação processada","Reembolso Emitido","Pagamento Confirmado","Liquidada com nota de cobrança emitida","Notificação emitida","Liquidada com Saldo Nulo Emitido"];
 
         echo '<div class="caixa3">
-        <span>'
+        <span>';
         
         echo '</select><br>
         </span>';
