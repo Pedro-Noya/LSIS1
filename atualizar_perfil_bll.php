@@ -22,7 +22,18 @@ function obterDadosPerfil(){
 
             $dal->atualizarDadosHabilitacoes($_POST["email"], $_POST["habLiterarias"], $_POST["curso"],
             $_POST["frequencia"]);
-            
+
+            $dal->atualizarDadosFinanceiros($_POST["email"], $_POST["cc"], $_POST["nif"], $_POST["niss"],
+            $_POST["situacaoIrs"], $_POST["numDependentes"], $_POST["iban"], $_POST["remuneracao"]);
+
+            $dal->atualizarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
+            if($dados["papel"]==1){
+                $dal->atualizarDadosContrato_Colaborador($_POST["email"], $_POST["regimeHorarioTrabalho"],
+                $_POST["dataInicio"], $_POST["dataFim"]);
+            } else{
+                $dal->atualizarDadosContrato_RH($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
+                $_POST["dataInicio"], $_POST["dataFim"]);
+            }
         }
         showForm($dados);
     }
@@ -202,10 +213,10 @@ function showForm($dados){
         echo '</select>
         </span>
         <span>
-        <label>Data de Início</label><input type="date" value="',$dados["dataInicio"],'" ',$controlo,' required/>
+        <label>Data de Início</label><input type="date" name="dataInicio" value="',$dados["dataInicio"],'" ',$controlo,' required/>
         </span>
         <span>
-        <label>Data de Fim</label><input type="date" value="',$dados["dataFim"],'" ',$controlo,' required/>
+        <label>Data de Fim</label><input type="date" name="dataFim"value="',$dados["dataFim"],'" ',$controlo,' required/>
         </span>
         <span>
         <label>Remuneração:</label><input type="text" name="remuneracao" value="',$dados["remuneracao"],'" ',$controlo,' required/>
