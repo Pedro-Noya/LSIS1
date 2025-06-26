@@ -18,3 +18,4 @@ class Login_Utilizador_DAL {
         return $resultado->fetch_assoc();
     }
 }
+?>
