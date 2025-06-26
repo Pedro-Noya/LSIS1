@@ -53,7 +53,7 @@
     box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
 }
 .caixa3 input, .caixa3 select{
-    width: 80%;
+    width: 60%;
     padding: 10px 10px;
     margin: 10px;
     border: 1px solid black;
@@ -80,4 +80,23 @@ label{
     background-clip: text;
     -webkit-background-clip: text;
     margin-bottom: 10px;
+}
+#ddiTelemovel{
+    width: 30%;
+    padding: 10px 10px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+#ddiContacto{
+    width: 20%;
+    padding: 10px 10px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
 }
