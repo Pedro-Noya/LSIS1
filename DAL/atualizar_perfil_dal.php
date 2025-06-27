@@ -1,0 +1,173 @@
+<?php
+class DAL_Atualizar{
+    private $conn;
+    function __construct() {
+        $this->conn = new mysqli('localhost', 'root', '', 'tlantic');
+        if ($this->conn->connect_error) {
+            die("Erro na ligação à base de dados: " . $this->conn->connect_error);
+        }
+    }
+
+    function obterDadosPerfil($email){
+        $sql = $this->conn->prepare("SELECT * FROM utilizador JOIN DadosPessoaisColaborador ON DadosPessoaisColaborador.email=Utilizador.email
+                                      JOIN DadosHabilitacoesColaborador ON DadosHabilitacoesColaborador.email=DadosPessoaisColaborador.email
+                                      JOIN DadosFinanceirosColaborador ON DadosFinanceirosColaborador.email=DadosPessoaisColaborador.email
+                                      JOIN DadosExtrasColaborador ON DadosExtrasColaborador.email=DadosPessoaisColaborador.email
+                                      JOIN DadosContratoColaborador ON DadosContratoColaborador.email=DadosPessoaisColaborador.email
+                                        WHERE Utilizador.email = ?");
+        $sql->bind_param("s", $email);
+        $sql->execute();
+        $result = $sql->get_result()->fetch_assoc();
+
+        if($result){
+            return $result;
+        }
+        return false;
+    }
+
+    function obterDDIs(){
+        $sql=$this->conn->prepare("SELECT * FROM DDI");
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function obterHabilitacoesLiterarias(){
+        $sql=$this->conn->prepare("SELECT * FROM HabilitacoesLiterarias");
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function obterRegimesHorarioTrabalho(){
+        $sql=$this->conn->prepare("SELECT * FROM RegimeHorarioTrabalho");
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function obterSexo(){
+        $sql=$this->conn->prepare("SELECT * FROM Sexo");
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function obterSituacaoIrs(){
+        $sql=$this->conn->prepare("SELECT * FROM SituacaoIrs");
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function obterTipoContrato(){
+        $sql=$this->conn->prepare("SELECT * FROM TipoContrato");
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function atualizarDadosPessoais($numMec, $email, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel, $sexo,
+    $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia, 
+    $grauRelacionamento, $matricula){
+        $newEmail=$email;
+        $sql = $this->conn->prepare("UPDATE DadosPessoaisColaborador SET
+        numMec = ?,
+        nomeAbreviado = ?,
+        dataNascimento = ?,
+        designacaoDdiTelemovel = ?,
+        telemovel = ?,
+        sexo = ?,
+        numPorta = ?,
+        rua = ?,
+        codPost = ?,
+        localidade = ?,
+        nacionalidade = ?,
+        designacaoDdiContacto = ?,
+        contacto = ?,
+        contactoEmergencia = ?,
+        grauRelacionamento = ?,
+        matricula = ?
+        WHERE email = ?");
+
+        $sql->bind_param('isssssissssssssss', $numMec, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel,
+        $sexo, $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia,
+        $grauRelacionamento, $matricula, $email);
+
+        $sql->execute();
+    }
+
+    function atualizarDadosHabilitacoes($email, $habLiterarias, $curso, $frequencia){
+        $newEmail=$email;
+        $sql=$this->conn->prepare("UPDATE DadosHabilitacoesColaborador SET
+        email = ?,
+        habLiterarias = ?,
+        curso = ?,
+        frequencia = ?
+        WHERE email = ?");
+
+        $sql->bind_param("sssss", $newEmail, $habLiterarias, $curso, $frequencia, $email);
+
+        $sql->execute();
+    }
+
+    function atualizarDadosFinanceiros($email, $cc, $nif, $niss, $situacaoIrs, $numDependentes, $iban, $remuneracao){
+        $newEmail=$email;
+        $sql=$this->conn->prepare("UPDATE DadosFinanceirosColaborador SET
+        email = ?,
+        cc = ?,
+        nif = ?,
+        niss = ?,
+        situacaoIrs = ?,
+        numDependentes = ?,
+        iban = ?,
+        remuneracao = ?
+        WHERE email = ?");
+
+        $sql->bind_param("sssssisss", $newEmail, $cc, $nif, $niss, $situacaoIrs, $numDependentes, $iban, $remuneracao, $email);
+
+        $sql->execute();
+    }
+
+    function atualizarDadosExtras($email, $cartaoContinente, $VoucherNos){
+        $newEmail=$email;
+        $sql=$this->conn->prepare("UPDATE DadosExtrasColaborador SET
+        email = ?,
+        cartaoContinente = ?,
+        VoucherNos = ?
+        WHERE email = ?");
+
+        $sql->bind_param("ssss", $newEmail, $cartaoContinente, $VoucherNos, $email);
+
+        $sql->execute();
+    }
+
+    function atualizarDadosContrato_Colaborador($email, $regimeHorarioTrabalho, $dataInicio, $dataFim){
+        $newEmail=$email;
+        $sql=$this->conn->prepare("UPDATE DadosContratoColaborador SET
+        email = ?,
+        regimeHorarioTrabalho = ?,
+        dataInicio = ?,
+        dataFim = ?
+        WHERE email = ?");
+
+        $sql->bind_param("sssss", $newEmail, $regimeHorarioTrabalho, $dataInicio, $dataFim, $email);
+
+        $sql->execute();
+    }
+
+    function atualizarDadosContrato_RH($email, $tipoContrato, $regimeHorarioTrabalho, $dataInicio, $dataFim){
+        $newEmail=$email;
+        $sql=$this->conn->prepare("UPDATE DadosContratoColaborador SET
+        email = ?,
+        tipoContrato = ?,
+        regimeHorarioTrabalho = ?,
+        dataInicio = ?,
+        dataFim = ?
+        WHERE email = ?");
+
+        $sql->bind_param("ssssss", $newEmail, $tipoContrato, $regimeHorarioTrabalho, $dataInicio, $dataFim, $email);
+
+        $sql->execute();
+    }
+}
