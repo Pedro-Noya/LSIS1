@@ -85,6 +85,7 @@ class DAL_Atualizar{
         $newEmail=$email;
         $sql = $this->conn->prepare("UPDATE DadosPessoaisColaborador SET
         numMec = ?,
+        email = ?,
         nomeAbreviado = ?,
         dataNascimento = ?,
         designacaoDdiTelemovel = ?,
@@ -102,9 +103,40 @@ class DAL_Atualizar{
         matricula = ?
         WHERE email = ?");
 
-        $sql->bind_param('isssssissssssssss', $numMec, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel,
+        $sql->bind_param('issssssissssssssss', $numMec, $newEmail, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel,
         $sexo, $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia,
         $grauRelacionamento, $matricula, $email);
+
+        $sql->execute();
+    }
+
+    function registarDadosPessoais($numMec, $email, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel, $sexo,
+    $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia, 
+    $grauRelacionamento, $matricula){
+        $newEmail=$email;
+        $sql = $this->conn->prepare("INSERT INTO DadosPessoaisColaborador(
+        numMec,
+        email,
+        nomeAbreviado,
+        dataNascimento,
+        designacaoDdiTelemovel,
+        telemovel,
+        sexo,
+        numPorta,
+        rua,
+        codPost,
+        localidade,
+        nacionalidade,
+        designacaoDdiContacto,
+        contacto,
+        contactoEmergencia,
+        grauRelacionamento,
+        matricula) VALUES(
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $sql->bind_param('issssssisssssssss', $numMec, $newEmail, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel,
+        $sexo, $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia,
+        $grauRelacionamento, $matricula);
 
         $sql->execute();
     }
@@ -119,6 +151,19 @@ class DAL_Atualizar{
         WHERE email = ?");
 
         $sql->bind_param("sssss", $newEmail, $habLiterarias, $curso, $frequencia, $email);
+
+        $sql->execute();
+    }
+
+    function registarDadosHabilitacoes($email, $habLiterarias, $curso, $frequencia){
+        $newEmail=$email;
+        $sql=$this->conn->prepare("INSERT INTO DadosHabilitacoesColaborador (
+        email,
+        habLiterarias,
+        curso,
+        frequencia) VALUES (?, ?, ?, ?)");
+
+        $sql->bind_param("ssss", $newEmail, $habLiterarias, $curso, $frequencia);
 
         $sql->execute();
     }
@@ -141,6 +186,25 @@ class DAL_Atualizar{
         $sql->execute();
     }
 
+    function registarDadosFinanceiros($email, $cc, $nif, $niss, $situacaoIrs, $numDependentes, $iban, $remuneracao){
+        $newEmail=$email;
+        $sql=$this->conn->prepare("INSERT INTO DadosFinanceirosColaborador(
+        email,
+        cc,
+        nif,
+        niss,
+        situacaoIrs,
+        numDependentes,
+        iban,
+        remuneracao) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $sql->bind_param("sssssiss", $newEmail, $cc, $nif, $niss, $situacaoIrs, $numDependentes, $iban, $remuneracao);
+
+        $sql->execute();
+    }
+
+    
+
     function atualizarDadosExtras($email, $cartaoContinente, $VoucherNos){
         $newEmail=$email;
         $sql=$this->conn->prepare("UPDATE DadosExtrasColaborador SET
@@ -150,6 +214,18 @@ class DAL_Atualizar{
         WHERE email = ?");
 
         $sql->bind_param("ssss", $newEmail, $cartaoContinente, $VoucherNos, $email);
+
+        $sql->execute();
+    }
+
+    function registarDadosExtras($email, $cartaoContinente, $VoucherNos){
+        $newEmail=$email;
+        $sql=$this->conn->prepare("INSERT INTO DadosExtrasColaborador (
+        email,
+        cartaoContinente,
+        VoucherNos) VALUES (?, ?, ?)");
+
+        $sql->bind_param("sss", $newEmail, $cartaoContinente, $VoucherNos);
 
         $sql->execute();
     }
@@ -180,6 +256,29 @@ class DAL_Atualizar{
 
         $sql->bind_param("ssssss", $newEmail, $tipoContrato, $regimeHorarioTrabalho, $dataInicio, $dataFim, $email);
 
+        $sql->execute();
+    }
+
+    function registarDadosContrato($email, $tipoContrato, $regimeHorarioTrabalho, $dataInicio, $dataFim){
+        $newEmail=$email;
+        $sql=$this->conn->prepare("INSERT INTO DadosContratoColaborador (
+        email,
+        tipoContrato,
+        regimeHorarioTrabalho,
+        dataInicio,
+        dataFim) VALUES (?, ?, ?, ?, ?)");
+
+        $sql->bind_param("sssss", $newEmail, $tipoContrato, $regimeHorarioTrabalho, $dataInicio, $dataFim);
+
+        $sql->execute();
+    }
+
+    function atualizarEstadoColaborador($email){
+        $newEmail=$email;
+        $estado=1;
+        $sql=$this->conn->prepare("UPDATE Utilizador SET estado = ? WHERE email = ?");
+
+        $sql->bind_param("is", $estado, $newEmail);
         $sql->execute();
     }
 }

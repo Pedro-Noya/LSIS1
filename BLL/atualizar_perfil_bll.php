@@ -67,25 +67,25 @@ function obterDadosPerfil(){
                 //Separação da Morada em Rua e Nº da Porta
                 list($rua, $numPorta)=explode(", ", $_POST["morada"]);
 
-                $dal->atualizarDadosPessoais($_POST["numMec"], $_POST["email"], $_POST["nomeAbreviado"], $_POST["dataNascimento"],
+                $dal->registarDadosPessoais($_POST["numMec"], $_POST["email"], $_POST["nomeAbreviado"], $_POST["dataNascimento"],
                 $_POST["designacaoDdiTelemovel"], $_POST["telemovel"], $_POST["sexo"], $numPorta, $rua,
                 $_POST["codPostal"], $_POST["localidade"], $_POST["nacionalidade"], $_POST["designacaoDdiContacto"],
                 $_POST["contacto"], $_POST["contactoEmergencia"], $_POST["grauRelacionamento"], $_POST["matricula"]);
 
-                $dal->atualizarDadosHabilitacoes($_POST["email"], $_POST["habLiterarias"], $_POST["curso"],
+                $dal->registarDadosHabilitacoes($_POST["email"], $_POST["habLiterarias"], $_POST["curso"],
                 $_POST["frequencia"]);
 
-                $dal->atualizarDadosFinanceiros($_POST["email"], $_POST["cc"], $_POST["nif"], $_POST["niss"],
+                $dal->registarDadosFinanceiros($_POST["email"], $_POST["cc"], $_POST["nif"], $_POST["niss"],
                 $_POST["situacaoIrs"], $_POST["numDependentes"], $_POST["iban"], $_POST["remuneracao"]);
 
-                $dal->atualizarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
-                if($dados["papel"]==1){
-                    $dal->atualizarDadosContrato_Colaborador($_POST["email"], $_POST["regimeHorarioTrabalho"],
-                    $_POST["dataInicio"], $_POST["dataFim"]);
-                } else{
-                    $dal->atualizarDadosContrato_RH($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
-                    $_POST["dataInicio"], $_POST["dataFim"]);
-                }
+                $dal->registarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
+
+                $dal->registarDadosContrato($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
+                $_POST["dataInicio"], $_POST["dataFim"]);
+
+                $dal->atualizarEstadoColaborador($_POST["email"]);
+
+                header("Location: atualizar_perfil.php");
             }
             showFormRegistar($dados);
         }
