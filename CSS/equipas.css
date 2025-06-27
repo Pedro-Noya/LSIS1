@@ -1,0 +1,125 @@
+/* Base */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff;
+}
+
+/* Topbar */
+.topbar {
+  background: linear-gradient(to right, #0767ea, #2a9df3);
+  color: white;
+  padding: 20px 40px;
+  border-radius: 20px;
+}
+
+.topbar .topnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.topbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.topbar nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.topbar nav a,
+.pedido-demo-box {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pedido-demo-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-experiment {
+  background: #1a3760;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Título da Secção */
+.section-title {
+  text-align: center;
+  margin: 30px 0 20px;
+  font-size: 22px;
+  color: #1a3760;
+  font-weight: 600;
+}
+
+/* Container do formulário */
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 0px solid #2a9df3;
+    border-radius: 20px;
+    background-color: #f4f4f4;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Mensagem de erro */
+.erro {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+/* Labels e inputs */
+form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;
+  color: #1a3760;
+}
+
+form input[type="text"],
+form input[type="date"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Botão de submit */
+form button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  background-color: #0767ea;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+  background-color: #2a9df3;
+}

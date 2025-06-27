@@ -1,5 +1,6 @@
 <?php
 require_once '../BLL/Equipas_BLL.php';
+<link rel="stylesheet" href="../CSS/equipas.css">
 
 session_start();
 
