@@ -1,3 +1,6 @@
+body{
+    color: blue;
+}
 .container_button {
     width: 80%;
     margin: 20px auto; /* center horizontally */
