@@ -1,6 +1,8 @@
 <?php
 require_once '../BLL/Equipas_BLL.php';
 
+session_start();
+
 $mensagemErro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

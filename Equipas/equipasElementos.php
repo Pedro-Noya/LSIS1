@@ -2,6 +2,8 @@
 require_once '../BLL/Equipas_Elementos_BLL.php';
 require_once '../BLL/Global_BLL.php';
 
+session_start();
+
 $mensagemErro = '';
 
 $globalbll = new Global_BLL();

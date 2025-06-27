@@ -1,6 +1,8 @@
 <?php
 require_once 'BLL/Registo_Utilizador_BLL.php';
 
+session_start();
+
 $mensagemErro = '';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

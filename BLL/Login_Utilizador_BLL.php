@@ -29,4 +29,12 @@ class Login_Utilizador_BLL {
 
         return true;
     }
+
+    public function obterPapelPorEmail($email) {
+        $utilizador = $this->dal->obterUtilizadorPorEmail($email);
+        if ($utilizador) {
+            return $utilizador['papel']; // Retorna o papel do utilizador
+        }
+        return null; // Se não encontrar o utilizador, retorna null
+    }
 }

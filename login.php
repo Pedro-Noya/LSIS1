@@ -1,5 +1,4 @@
 <?php
-// login.php
 require_once 'BLL/Login_Utilizador_BLL.php';
 
 session_start();
@@ -11,7 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = $bll->autenticarUtilizador($_POST['email'], $_POST['password']);
 
     if ($resultado === true) {
-        header("Location: 4.php"); // Redireciona após login bem-sucedido
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['papel'] = $bll->obterPapelPorEmail($_POST['email']);
+        $_SESSION['logged_in'] = true;
+        header("Location: dashboard.php"); // Redireciona após login bem-sucedido
         exit();
     } else {
         $mensagemErro = $resultado; // Mensagem de erro da BLL

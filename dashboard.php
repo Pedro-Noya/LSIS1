@@ -1,5 +1,17 @@
 <?php
 // dashboard.php
+
+  session_start();
+  if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+      header("Location: login.php");
+      exit();
+  }
+
+  // no-cache headers to prevent the browser from showing a cached page after logout
+  header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+  header("Cache-Control: post-check=0, pre-check=0", false);
+  header("Pragma: no-cache");
+
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -172,6 +184,13 @@
         <img src="https://via.placeholder.com/180x180?text=Gráfico+1" alt="Demográficas 1">
       </div>
     </div>
+
+    <?php if ($_SESSION['logged_in']): ?>
+      <div class="link">
+        Bem-vindo, <?= htmlspecialchars($_SESSION['papel']) ?>!
+        <a href="logout.php">Sair</a>
+      </div>
+    <?php endif; ?>
 
     <div class="box">
       <h2>Demográficas Empresariais</h2>
