@@ -1,15 +1,11 @@
 <?php
 session_start();
-include "atualizar_perfil_dal.php";
-
-echo "<br>Email do Utilizador logado: ", $_SESSION["email"];
-echo "<br><br>Password do Utilizador logado: ", $_SESSION["password"];
-
+require_once __DIR__ . '/../DAL/Equipas_DAL.php';
 
 
 function obterDadosPerfil(){
     $dal=new DAL_Atualizar();
-    $dados=$dal->obterDadosPerfil($_SESSION["email"], $_SESSION["password"]);
+    $dados=$dal->obterDadosPerfil($_SESSION["email"]);
     if($dados["papel"]!=2){
         if($_POST){
             //Separação da Morada em Rua e Nº da Porta

@@ -8,14 +8,14 @@ class DAL_Atualizar{
         }
     }
 
-    function obterDadosPerfil($email, $password){
-        $sql = $this->conn->prepare("SELECT * FROM Utilizador JOIN DadosPessoaisColaborador ON DadosPessoaisColaborador.email=Utilizador.email
+    function obterDadosPerfil($email){
+        $sql = $this->conn->prepare("SELECT * FROM utilizador JOIN DadosPessoaisColaborador ON DadosPessoaisColaborador.email=Utilizador.email
                                       JOIN DadosHabilitacoesColaborador ON DadosHabilitacoesColaborador.email=DadosPessoaisColaborador.email
                                       JOIN DadosFinanceirosColaborador ON DadosFinanceirosColaborador.email=DadosPessoaisColaborador.email
                                       JOIN DadosExtrasColaborador ON DadosExtrasColaborador.email=DadosPessoaisColaborador.email
                                       JOIN DadosContratoColaborador ON DadosContratoColaborador.email=DadosPessoaisColaborador.email
-                                        WHERE Utilizador.email = ? AND Utilizador.password_hash=?");
-        $sql->bind_param("ss", $email, $password);
+                                        WHERE Utilizador.email = ?");
+        $sql->bind_param("s", $email);
         $sql->execute();
         $result = $sql->get_result()->fetch_assoc();
 
