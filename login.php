@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <form method="POST">
-      <input type="text" name="email" placeholder="Email" required><br>
+      <input id="emailInput" type="text" name="email" placeholder="Email" required><br>
       <input type="password" name="password" placeholder="Palavra-Passe" required><br>
       <div id="capsLockSpacing"></div>
       <div id="capsLockWarning">
@@ -76,5 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </div>
   <script src="js/capsLockWarning.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>
