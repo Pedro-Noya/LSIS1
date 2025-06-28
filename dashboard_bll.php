@@ -96,26 +96,24 @@ function showStatistics(){
 
     var chart2 = new CanvasJS.Chart('chartContainer2', {
 	animationEnabled: true,
-	exportEnabled: true,
-	theme: 'light1',
-	title:{
+	theme: 'light2', // 'light1', 'light2', 'dark1', 'dark2'
+	title: {
 		text: 'Distribuição da Remuneração'
 	},
-  	axisY: {
-      includeZero: true
-    },
+	axisY: {
+		title: 'Nº de Colaboradores'
+	},
+	axisX: {
+		title: 'Remuneração'
+	},
 	data: [{
-		type: 'column', //change type to bar, line, area, pie, etc
-		//indexLabel: '{y}', //Shows y value on all Data Points
-		indexLabelFontColor: '#5A5757',
-      	indexLabelFontSize: 16,
-		indexLabelPlacement: 'outside',
+		type: 'column',
 		dataPoints: [
-			{ x: 1, y: ",$countEuro,"},
-			{ x: 2, y: ",$countReal,"},
-			{ x: 3, y: ",$countSterling,"},
-			{ x: 4, y: ",$countMetical,"}
-	    ]
+			{ label: 'Euro', y: ",$countEuro," },	
+			{ label: 'Real', y: ",$countReal," },	
+			{ label: 'Sterling', y: ",$countSterling," },
+			{ label: 'Metical', y: ",$countMetical," },			
+		]
 	}]
     });
     chart2.render();
