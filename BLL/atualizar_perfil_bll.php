@@ -152,9 +152,21 @@ function showFormAtualizar($dados){
         echo '</select><br>';
         echo '</span>';
         echo '<span>
-        <label>Nacionalidade:</label><br> <input type="text" name="nacionalidade" placeholder="Nacionalidade" value="',$dados["nacionalidade"],'" ',$controlo,' required><br>
+        <label>Nacionalidade:</label><br>
+        <select name="nacionalidade" disabled required>';
+        $nacionalidade_array=$dal->obterNacionalidade();
+        foreach($nacionalidade_array as $nacionalidade){
+            if($nacionalidae["nacionalidade"]==$dados["nacionalidade"]){
+                echo '<option value="',$nacionalidade["nacionalidade"],'" selected>',$nacionalidade["nacionalidade"],'</option>';
+            } else{
+                echo '<option value="',$nacionalidade["nacionalidade"],'">',$nacionalidade["nacionalidade"],'</option>';
+            }
+        }
+        echo '</select>
+
         </span>
         </div>';
+
         $situacaoIrs_array=$dal->obterSituacaoIrs();
 
         echo '<div class="caixa3">
@@ -272,7 +284,17 @@ function showFormAtualizar($dados){
         <label>Data de Fim</label><input type="date" name="dataFim"value="',$dados["dataFim"],'" ',$controlo,' required/>
         </span>
         <span>
-        <label>Remuneração:</label><input type="text" name="remuneracao" value="',$dados["remuneracao"],'" ',$controlo,' required/>
+        <label>Remuneração:</label>
+        <select name="remuneracao" disabled required>';
+        $remuneracao_array=$dal->obterRemuneracao();
+        foreach($remuneracao_array as $remuneracao){
+            if($remuneracao["remuneracao"]==$dados["remuneracao"]){
+                echo '<option value="',$remuneracao["remuneracao"],'" selected>',$remuneracao["remuneracao"],'</option>';
+            } else{
+                echo '<option value="',$remuneracao["remuneracao"],'">',$remuneracao["remuneracao"],'</option>';
+            }
+        }
+        echo '</select>
         </span>
         <span>
         <label>Regime de Horário de Trabalho</label>
@@ -336,7 +358,17 @@ function showFormAtualizar($dados){
         echo '</select><br>';
         echo '</span>';
         echo '<span>
-        <label>Nacionalidade:</label><br> <input type="text" name="nacionalidade" placeholder="Nacionalidade" required><br>
+        <label>Nacionalidade:</label><br>
+        <select name="nacionalidade" required>';
+        $nacionalidade_array=$dal->obterNacionalidade();
+        foreach($nacionalidade_array as $nacionalidade){
+            if($nacionalidae["nacionalidade"]==$dados["nacionalidade"]){
+                echo '<option value="',$nacionalidade["nacionalidade"],'" selected>',$nacionalidade["nacionalidade"],'</option>';
+            } else{
+                echo '<option value="',$nacionalidade["nacionalidade"],'">',$nacionalidade["nacionalidade"],'</option>';
+            }
+        }
+        echo '</select>
         </span>
         </div>';
         $situacaoIrs_array=$dal->obterSituacaoIrs();
@@ -436,7 +468,17 @@ function showFormAtualizar($dados){
         <label>Data de Fim</label><input type="date" name="dataFim" required/>
         </span>
         <span>
-        <label>Remuneração:</label><input type="text" name="remuneracao" required/>
+        <label>Remuneração:</label>
+        <select name="remuneracao" required>';
+        $remuneracao_array=$dal->obterRemuneracao();
+        foreach($remuneracao_array as $remuneracao){
+            if($remuneracao["remuneracao"]==$dados["remuneracao"]){
+                echo '<option value="',$remuneracao["remuneracao"],'" selected>',$remuneracao["remuneracao"],'</option>';
+            } else{
+                echo '<option value="',$remuneracao["remuneracao"],'">',$remuneracao["remuneracao"],'</option>';
+            }
+        }
+        echo '</select>
         </span>
         <span>
         <label>Regime de Horário de Trabalho</label>

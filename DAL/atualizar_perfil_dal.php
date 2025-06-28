@@ -79,6 +79,20 @@ class DAL_Atualizar{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    function obterNacionalidade(){
+        $sql=$this->conn->prepare("SELECT nacionalidade FROM MoedaNacionalidade");
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function obterRemuneracao(){
+        $sql=$this->conn->prepare("SELECT * FROM Moeda");
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     function atualizarDadosPessoais($numMec, $email, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel, $sexo,
     $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia, 
     $grauRelacionamento, $matricula){
