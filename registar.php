@@ -3,14 +3,23 @@ require_once 'BLL/Registo_Utilizador_BLL.php';
 
 session_start();
 
+function generateRandomPassword($length = 8) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
+    $password = '';
+    $maxIndex = strlen($chars) - 1;
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $chars[random_int(0, $maxIndex)];
+    }
+    return $password;
+}
+
 $mensagemErro = '';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $nome = $_POST['nome'] ?? 'Colaborador(a)';
   $emailPessoal = $_POST['emailPessoal'] ?? '';
   $email = $_POST['email'] ?? '';
-  $password = $_POST['password'] ?? '';
-  $confirmPassword = $_POST['confirmPassword'] ?? '';
+  $password = generateRandomPassword();
 
 
   $bll = new Registo_Utilizador_BLL();
@@ -18,8 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $emailPessoal,
     $nome,
     $email,
-    $password,
-    $confirmPassword
+    $password
   );
 
   if ($resultado === true) {
@@ -68,8 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <input type="text" name="nome" placeholder="Nome" required /><br />
       <input type="email" name="emailPessoal" placeholder="Email Pessoal" required /><br />
       <input type="email" name="email" placeholder="Email" required /><br />
-      <input type="password" name="password" placeholder="Palavra-Passe" required /><br />
-      <input type="password" name="confirmPassword" placeholder="Confirmar Palavra-Passe" required /><br />
       <div id="capsLockSpacing" style="height: 16px;"></div>
       <div id="capsLockWarning">
         Caps-Lock Ativo

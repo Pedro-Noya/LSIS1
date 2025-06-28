@@ -15,12 +15,12 @@ function enviarEmailRegisto($emailPessoal, $emailEmpresa, $nome, $password) {
     $mail->isSMTP();
     $mail->Host = 'smtp.mailersend.net';
     $mail->SMTPAuth = true;
-    $mail->Username = 'MS_2OGv0X@test-pzkmgq7zz92l059v.mlsender.net';
-    $mail->Password = 'mssp.Q2BiZPY.jpzkmgq5o11g059v.kUUy7p6';
+    $mail->Username = 'MS_NvGkht@test-pzkmgq7zzenl059v.mlsender.net';
+    $mail->Password = 'mssp.BJLcJSq.3yxj6ljy91xldo2r.IR4nNKe';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
-    $mail->setFrom('grupo5tlantic@test-pzkmgq7zz92l059v.mlsender.net', 'TLantic');
+    $mail->setFrom('grupo5tlantic@test-pzkmgq7zzenl059v.mlsender.net', 'TLantic');
     $mail->addAddress($emailPessoal, $nome);
 
     $mail->addAttachment('Imagens/mailLogo.png', 'Imagem-Logo.png');
@@ -52,11 +52,7 @@ class Registo_Utilizador_BLL {
     $this->dal = new Registo_Utilizador_DAL();
   }
 
-  public function registarUtilizador($emailPessoal, $nome, $email, $password, $confirmPassword) {
-    // 1. Verificar se as passwords coincidem
-    if ($password !== $confirmPassword) {
-      return "As palavras-passe não coincidem.";
-    }
+  public function registarUtilizador($emailPessoal, $nome, $email, $password) {
 
     // 2. Verificar se o utilizador já existe
     if ($this->dal->existeUtilizador($email)) {
