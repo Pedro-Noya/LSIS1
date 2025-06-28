@@ -10,7 +10,7 @@ include "dashboard_bll.php";
         <link href="styles_dashboard.css" rel="stylesheet">
         <!-- Incluir bibliotecas -->
         <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-        <script src="https://unpkg.com/simple-statistics@7.7.2/dist/simple-statistics.min.js"></script>
+        <script src="https://unpkg.com/simple-statistics@7.8.8/dist/simple-statistics.min.js"></script>
     </head>
     <body>
         <div class="topbar">
@@ -36,7 +36,10 @@ include "dashboard_bll.php";
                     <div>Férias</div>
                     <div>Formações</div>
                 </div>
-                <?php showStatistics(); ?>
+                <p id="idadeMedia"></p>
+                <?php
+                showStatistics();
+                ?>
                 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                 <br><br>
                 <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
