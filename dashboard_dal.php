@@ -8,8 +8,19 @@ class DAL_Dashboard{
         }
     }
 
-    function obterDadosColaborador($email){
+    function obterDadosPessoaisColaborador($email){
         $sql=$this->conn->prepare("SELECT dataNascimento, sexo FROM DadosPessoaisColaborador WHERE email=?");
+        $sql->bind_param("s",$email);
+        $sql->execute();
+        $result=$sql->get_result()->fetch_assoc();
+        if($result){
+            return $result;
+        }
+        return false;
+    }
+
+    function obterDadosFinanceirosColaborador($email){
+        $sql=$this->conn->prepare("SELECT remuneracao FROM DadosFinanceirosColaborador WHERE email=?");
         $sql->bind_param("s",$email);
         $sql->execute();
         $result=$sql->get_result()->fetch_assoc();
