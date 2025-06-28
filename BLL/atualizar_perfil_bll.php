@@ -156,7 +156,7 @@ function showFormAtualizar($dados){
         <select name="nacionalidade" disabled required>';
         $nacionalidade_array=$dal->obterNacionalidade();
         foreach($nacionalidade_array as $nacionalidade){
-            if($nacionalidae["nacionalidade"]==$dados["nacionalidade"]){
+            if($nacionalidade["nacionalidade"]==$dados["nacionalidade"]){
                 echo '<option value="',$nacionalidade["nacionalidade"],'" selected>',$nacionalidade["nacionalidade"],'</option>';
             } else{
                 echo '<option value="',$nacionalidade["nacionalidade"],'">',$nacionalidade["nacionalidade"],'</option>';
@@ -207,7 +207,7 @@ function showFormAtualizar($dados){
             }
         }
         echo '</select>
-        <input type="text" name="telemovel" placeholder="Telemóvel" value="', $dados["contacto"],'" required>
+        <input type="text" name="telemovel" placeholder="Telemóvel" value="', $dados["telemovel"],'" required>
         </span>
         <span>
         <label>Email:</label><br><input type="text" name="email" placeholder="email" value="',$dados["email"],'" readonly required>
@@ -362,7 +362,7 @@ function showFormAtualizar($dados){
         <select name="nacionalidade" required>';
         $nacionalidade_array=$dal->obterNacionalidade();
         foreach($nacionalidade_array as $nacionalidade){
-            if($nacionalidae["nacionalidade"]==$dados["nacionalidade"]){
+            if($nacionalidade["nacionalidade"]==$dados["nacionalidade"]){
                 echo '<option value="',$nacionalidade["nacionalidade"],'" selected>',$nacionalidade["nacionalidade"],'</option>';
             } else{
                 echo '<option value="',$nacionalidade["nacionalidade"],'">',$nacionalidade["nacionalidade"],'</option>';
