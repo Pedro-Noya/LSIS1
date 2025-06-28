@@ -1,6 +1,7 @@
 <?php
 require_once '../BLL/Equipas_BLL.php';
 
+
 session_start();
 
 $mensagemErro = '';

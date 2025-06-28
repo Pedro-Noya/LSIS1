@@ -85,11 +85,20 @@ nav a {
 }
 
 .container {
-    margin: 30px auto 60px auto;
-    max-width: 400px;
+    max-width: 500px;
+    margin: 0 auto;
     padding: 30px;
-    border: 1px solid #2a9df3;
-    border-radius: 15px;
-    text-align: center;
-    background: linear-gradient(135deg, #0768EA, #2A9DF3);
+    border: 0px solid #2a9df3;
+    border-radius: 20px;
+    background-color: #f4f4f4;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.erro {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-weight: 500;
 }

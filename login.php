@@ -9,14 +9,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bll = new Login_Utilizador_BLL();
     $resultado = $bll->autenticarUtilizador($_POST['email'], $_POST['password']);
 
-    if ($resultado === true) {
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['papel'] = $bll->obterPapelPorEmail($_POST['email']);
-        $_SESSION['logged_in'] = true;
-        header("Location: dashboard.php"); // Redireciona após login bem-sucedido
-        exit();
+    if ($resultado === 'ativo') {
+      $_SESSION['email'] = $_POST['email'];
+      $_SESSION['papel'] = $bll->obterPapelPorEmail($_POST['email']);
+      $_SESSION['logged_in'] = true;
+      header("Location: dashboard.php"); // Redireciona após login bem-sucedido
+      exit();
+    } else if ($resultado === 'inativo') {
+      $_SESSION['email'] = $_POST['email'];
+      $_SESSION['papel'] = $bll->obterPapelPorEmail($_POST['email']);
+      $_SESSION['logged_in'] = true;
+      header("Location: atualizar_perfil.php"); // Redireciona após login bem-sucedido
+      exit();
     } else {
-        $mensagemErro = $resultado; // Mensagem de erro da BLL
+      $mensagemErro = $resultado; // Mensagem de erro da BLL
     }
 }
 ?>
@@ -62,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <form method="POST">
-      <input type="text" name="email" placeholder="Email" required><br>
+      <input id="emailInput" type="text" name="email" placeholder="Email" required><br>
       <input type="password" name="password" placeholder="Palavra-Passe" required><br>
       <div id="capsLockSpacing"></div>
       <div id="capsLockWarning">
@@ -76,5 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </div>
   <script src="js/capsLockWarning.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>
