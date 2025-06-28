@@ -1,5 +1,5 @@
 <?php
-class DAL_Atualizar{
+class DAL_Dashboard{
     private $conn;
     function __construct() {
         $this->conn = new mysqli('localhost', 'root', '', 'tlantic');
@@ -8,16 +8,24 @@ class DAL_Atualizar{
         }
     }
 
-    function obterDadosPerfil($email){
-        $sql = $this->conn->prepare("SELECT * FROM utilizador JOIN DadosPessoaisColaborador ON DadosPessoaisColaborador.email=Utilizador.email
-                                      JOIN DadosHabilitacoesColaborador ON DadosHabilitacoesColaborador.email=DadosPessoaisColaborador.email
-                                      JOIN DadosFinanceirosColaborador ON DadosFinanceirosColaborador.email=DadosPessoaisColaborador.email
-                                      JOIN DadosExtrasColaborador ON DadosExtrasColaborador.email=DadosPessoaisColaborador.email
-                                      JOIN DadosContratoColaborador ON DadosContratoColaborador.email=DadosPessoaisColaborador.email
-                                        WHERE Utilizador.email = ?");
+    function obterDadosColaborador($email){
+        $sql=$this->conn->prepare("SELECT dataNascimento, sexo FROM DadosPessoaisColaborador WHERE email=?");
+        $sql->bind_param("s",$email);
+        $sql->execute();
+        $result=$sql->get_result()->fetch_assoc();
+        if($result){
+            return $result;
+        }
+        return false;
+    }
+
+    function obterEmailColaborador_Coordenador($email){
+        $sql = $this->conn->prepare("SELECT ColaboradoresEquipa.email FROM ColaboradoresEquipa JOIN CoordenadoresEquipa
+        ON ColaboradoresEquipa.nomeEquipa=CoordenadoresEquipa.nomeEquipa
+        WHERE CoordenadoresEquipa.email = ?");
         $sql->bind_param("s", $email);
         $sql->execute();
-        $result = $sql->get_result()->fetch_assoc();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
 
         if($result){
             return $result;
