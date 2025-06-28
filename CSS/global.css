@@ -1,97 +1,143 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background-color: white;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: white;
 }
 
-label {
-    color: white
-}
 
 .topbar {
-    background: linear-gradient(to right, #0767ea, #2a9df3);
-    color: white;
-    padding: 20px 40px 40px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+  background: linear-gradient(to right, #0767ea, #2a9df3);
+  color: white;
+  padding: 20px 40px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .topnav {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 nav {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .btn-experiment {
-    background: #1a3760;
-    color: white;
-    padding: 6px 15px;
-    border-radius: 20px;
-    font-weight: 600;
-    text-decoration: none;
+  background: #1a3760;
+  color: white;
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .pedido-demo-box {
-    background: white;
-    border-radius: 20px;
-    padding: 5px 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  background: white;
+  border-radius: 20px;
+  padding: 5px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .pedido-demo-box span {
-    color: #0767ea;
-    font-weight: 600;
+  color: #0767ea;
+  font-weight: 600;
 }
 
 .topbar h1 {
-    margin-top: 20px;
-    font-weight: normal;
-    font-size: 26px;
+  margin-top: 20px;
+  font-weight: normal;
+  font-size: 26px;
 }
+
 
 .section-title {
-    text-align: center;
-    font-size: 22px;
-    color: #2a9df3;
-    font-weight: 500;
-    margin-top: 30px;
+  text-align: center;
+  font-size: 22px;
+  color: #2a9df3;
+  font-weight: 500;
+  margin-top: 30px;
 }
 
+
 .container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 30px;
-    border: 0px solid #2a9df3;
-    border-radius: 20px;
-    background-color: #f4f4f4;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 0px solid #2a9df3;
+  border-radius: 20px;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;
+  color: #1a3760;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+button,
+input[type="submit"],
+.button-primary {
+  display: block;
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  background-color: #0767ea;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+input[type="submit"]:hover,
+.button-primary:hover {
+  background-color: #2a9df3;
 }
 
 .erro {
@@ -101,4 +147,5 @@ nav a {
   border-radius: 8px;
   margin-bottom: 15px;
   font-weight: 500;
+  text-align: center;
 }
