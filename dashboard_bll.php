@@ -65,17 +65,10 @@ function showStatistics(){
 
     $countMetical=$countRemuneracao-($countEuro+$countReal+$countSterling);
 
-    echo $countEuro;
-    echo $countReal;
-    echo $countSterling;
-    echo $countMetical;
-
-
     echo "<script>
-    let idades=",json_encode($arrayIdade),"
+    let idades=",json_encode($arrayIdade),";
     let media = ss.mean(idades);
     document.getElementById('idadeMedia').innerHTML='<h2>Idade Média: '+media+'</h2>';
-
     window.onload = function() {
     var chart=new CanvasJS.Chart('chartContainer', {
 	theme: 'light2',
@@ -111,31 +104,6 @@ function showStatistics(){
 	},
 	axisX: {
 		title: 'Remuneração'
-	},
-	data: [{
-		type: 'column',
-		dataPoints: [
-			{ label: 'Euro', y: ",$countEuro," },	
-			{ label: 'Real', y: ",$countReal," },	
-			{ label: 'Sterling', y: ",$countSterling," },
-			{ label: 'Metical', y: ",$countMetical," },			
-		]
-	}]
-    });
-    chart2.render();
-    }
-
-    var chart3 = new CanvasJS.Chart('chartContainer3', {
-	animationEnabled: true,
-	theme: 'light2', // 'light1', 'light2', 'dark1', 'dark2'
-	title: {
-		text: 'Distribuição por Geografia (Localidade)'
-	},
-	axisY: {
-		title: 'Nº de Colaboradores'
-	},
-	axisX: {
-		title: 'Localidade'
 	},
 	data: [{
 		type: 'column',

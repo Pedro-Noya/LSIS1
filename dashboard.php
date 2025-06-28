@@ -36,7 +36,7 @@ include "dashboard_bll.php";
                     <div>Férias</div>
                     <div>Formações</div>
                 </div>
-                <p id="idadeMedia"></p>
+                <div id="idadeMedia"></div>
                 <?php
                 showStatistics();
                 ?>
