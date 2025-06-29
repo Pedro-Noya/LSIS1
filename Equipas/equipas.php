@@ -9,7 +9,7 @@ $mensagemErro = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nomeEquipa = $_POST['nomeEquipa'] ?? '';
     $localizacao = $_POST['localizacao'] ?? '';
-    $dataCriacao = $_POST['dataCriacao'] ?? '';
+    $dataCriacao = $_POST['dataCriacao'] ?? date('d-m-Y');
 
     $bll = new Equipa_BLL();
     $resultado = $bll->registarEquipa($nomeEquipa, $localizacao, $dataCriacao);
@@ -67,10 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" id="localizacao" name="localizacao" required>
 
             <label for="dataCriacao">Data de Criação:</label>
-            <input type="date" id="dataCriacao" name="dataCriacao" required value="<?= date('Y-m-d') ?>" disabled>
+            <input type="date" id="dataCriacao" name="dataCriacao" value="<?= date('d-m-Y') ?>" disabled>
 
             <button type="submit">Registar Equipa</button>
         </form>
     </div>
 </body>
-</html>
+</html> 
