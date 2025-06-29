@@ -5,24 +5,26 @@ session_start();
 
 $mensagemErro = '';
 
+function login($email, $bll) {
+  $_SESSION['email'] = $email;
+  $_SESSION['papel'] = $bll->obterPapelPorEmail($email);
+  $_SESSION['logged_in'] = true;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bll = new Login_Utilizador_BLL();
     $resultado = $bll->autenticarUtilizador($_POST['email'], $_POST['password']);
 
     if ($resultado === 'ativo') {
-      $_SESSION['email'] = $_POST['email'];
-      $_SESSION['papel'] = $bll->obterPapelPorEmail($_POST['email']);
-      $_SESSION['logged_in'] = true;
-      header("Location: dashboard.php"); // Redireciona após login bem-sucedido
+      login($_POST['email'], $bll);
+      header("Location: dashboard.php");
       exit();
     } else if ($resultado === 'inativo') {
-      $_SESSION['email'] = $_POST['email'];
-      $_SESSION['papel'] = $bll->obterPapelPorEmail($_POST['email']);
-      $_SESSION['logged_in'] = true;
-      header("Location: atualizar_perfil.php"); // Redireciona após login bem-sucedido
+      login($_POST['email'], $bll);
+      header("Location: atualizar_perfil.php"); 
       exit();
     } else {
-      $mensagemErro = $resultado; // Mensagem de erro da BLL
+      $mensagemErro = $resultado;
     }
 }
 ?>
