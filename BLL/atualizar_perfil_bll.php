@@ -7,6 +7,7 @@ function obterDadosPerfil(){
     $dal=new DAL_Atualizar();
     $dados=$dal->obterDadosUtilizador($_SESSION["email"]);
     if($dados["papel"]==3){
+        $email=$_GET["email"];
         if($_POST){
             //Separação da Morada em Rua e Nº da Porta
             list($rua, $numPorta)=explode(", ", $_POST["morada"]);
@@ -31,7 +32,13 @@ function obterDadosPerfil(){
                 $_POST["dataInicio"], $_POST["dataFim"]);
             }
         }
-        showFormRegistar($dados);
+        $dadosColaborador=$dal->obterDadosColaborador($email);
+        showFormRegistar($dadosColaborador);
+    }
+    if($dados["papel"]==2){
+        $email=$_GET["email"];
+        $dadosColaborador=$dal->obterDadosColaborador($email);
+        showFormCoordenador($dadosColaborador);
     }
     if($dados["papel"]==1){
         if($dados["estado"]==true){
@@ -497,6 +504,102 @@ function showFormAtualizar($dados){
         </form>';
     }
 
+    function showFormCoordenador($dados){
+        $dal=new DAL_Atualizar();
+        if($dados){
+            echo '<form action="atualizar_perfil.php" method="POST">
+                <div class="container">
+                <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" readonly required><br><br>
+                <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" readonly required><br><br>
+                <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" readonly required>
+                </div>
+                <div class="container">
+                <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" readonly required><br>
+                </div>';
+            $sexo_result_array=$dal->obterSexo();
+            #É correr o array sexo_array e ver em qual indice o valor do sexo é igual ao sexo do colaborador em questão.
+            echo '<div class="caixa2">
+            <span>
+            <label>Sexo:</label><br> <select name="sexo" required>';
+            foreach($sexo_result_array as $element){
+                echo '<option value="',$element["sexo"],'">',$element["designacao"],'</option>';
+            }
+            echo '</select><br>';
+            echo '</span>';
+            echo '<span>
+            <label>Nacionalidade:</label><br>
+            <select name="nacionalidade" required>';
+            $nacionalidade_array=$dal->obterNacionalidade();
+            foreach($nacionalidade_array as $nacionalidade){
+                if($nacionalidade["nacionalidade"]==$dados["nacionalidade"]){
+                    echo '<option value="',$nacionalidade["nacionalidade"],'" selected>',$nacionalidade["nacionalidade"],'</option>';
+                } else{
+                    echo '<option value="',$nacionalidade["nacionalidade"],'">',$nacionalidade["nacionalidade"],'</option>';
+                }
+            }
+            echo '</select>
+            </span>
+            </div>';
+            $situacaoIrs_array=$dal->obterSituacaoIrs();
+
+            echo '<div class="container">
+            <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" readonly required><br>
+            <label>Localidade:</label> <input type="text" name="localidade" placeholder="Localidade" readonly required><br>
+            <label>Código Postal:</label> <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" readonly required><br>
+            </div>';
+
+
+            echo '<div class="caixa3">
+            <span>
+            <label>Telemóvel:</label><br>
+            <select name="designacaoDdiTelemovel" id="ddiTelemovel" disabled required>';
+            $ddi_array=$dal->obterDDIs();
+            foreach($ddi_array as $ddi){
+                echo '<option value="',$ddi["designacao"],'">+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
+            }
+            echo '</select>
+            <input type="text" name="telemovel" placeholder="Telemóvel" readonly required>
+            </span>
+            <span>
+            <label>Email:</label><br><input type="text" name="email" value="',$dados["email"],'" placeholder="email" readonly required>
+            </span>
+            </div>
+            <div class="container">
+            <label>Contacto de Emergência:</label><input type="text" name="contactoEmergencia" placeholder="Nome" readonly required><br>
+            <label>Grau de Relacionamento:</label><input type="text" name="grauRelacionamento" placeholder="Grau de Parentesco" readonly required><br>
+            <label>Contacto:</label>';
+            echo '<select name="designacaoDdiContacto" id="ddiContacto" disabled required>';
+            foreach($ddi_array as $ddi){
+                echo '<option value="',$ddi["designacao"],'">+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
+            }
+            echo '</select>
+            <input type="text" name="contacto" placeholder=""9********" readonly required><br>
+            </div>
+            <div class="container">
+            <label>Habilitações Literárias</label>
+            <select name="habLiterarias" disabled required>';
+            $habLiterarias_array=$dal->obterHabilitacoesLiterarias();
+
+            foreach($habLiterarias_array as $habLiterarias){
+                echo '<option value="',$habLiterarias["habLiterarias"],'">',$habLiterarias["habLiterarias"],'</option>';
+            }
+
+            echo '</select><br>
+            <label>Curso</label><input type="text" name="curso" placeholder="Curso" readonly required/><br>
+            <label>Frequência</label><input type="text" name="frequencia" placeholder="Indique \'Concluído\' ou \'Em curso\'" readonly required/>
+            </div>
+
+            <div class="caixa2">
+            <span>
+            <label>Data de Início</label><input type="date" name="dataInicio" readonly required/>
+            </span>
+            <span>
+            <label>Data de Fim</label><input type="date" name="dataFim" readonly required/>
+            </span>
+            </div>
+            </form>';
+        }
+    }
     /*function showUI(){
         if(!isThisACallback()){
             showForm();
@@ -505,4 +608,3 @@ function showFormAtualizar($dados){
             
         }
     }*/
-}
