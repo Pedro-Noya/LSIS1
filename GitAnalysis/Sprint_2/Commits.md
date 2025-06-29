@@ -605,7 +605,7 @@ M	atualizar_perfil.php
 <summary>Commits</summary>
 
 <pre>
-commit 727922da83bc30facb9acc9fd99fce5fb63d9815	refs/heads/master (HEAD -> master, tag: sprint-3-entrega, origin/master, origin/HEAD)
+commit 727922da83bc30facb9acc9fd99fce5fb63d9815	refs/tags/sprint-3-entrega (tag: sprint-3-entrega)
 Author: Pedro-Noya <pedrodefreitasnoya@gmail.com>
 Date:   Sun Jun 29 18:57:04 2025 +0100
 
