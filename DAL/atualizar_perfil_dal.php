@@ -93,6 +93,24 @@ class DAL_Atualizar{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    function obterDadosColaborador($email){
+        $sql=$this->conn->prepare("SELECT * FROM Utilizador WHERE email=?");
+        $sql->bind_param("s",$email);
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_assoc();
+    }
+    function obterEquipasColaborador($email){
+        $sql=$this->conn->prepare("SELECT nomeEquipa FROM Equipa
+        JOIN ColaboradoresEquipa ON Equipa.nomeEquipa=ColaboradoresEquipa.nomeEquipa
+        JOIN ColaboradoresEquipa ON ColaboradoresEquipa.email=Utilizador.email
+        WHERE Utilizador.email=?");
+        $sql->bind_param("s",$email);
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     function atualizarDadosPessoais($numMec, $email, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel, $sexo,
     $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia, 
     $grauRelacionamento, $matricula){
