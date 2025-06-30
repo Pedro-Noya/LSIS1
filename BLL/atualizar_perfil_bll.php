@@ -324,7 +324,7 @@ function showFormAtualizar($dados){
         </form>';
     }
 }
-    function showFormRegistar($dados){
+    function showFormRegistar($dados){  
     $dal=new DAL_Atualizar();
     if($dados){
         echo '<form action="atualizar_perfil.php" method="POST">
@@ -503,7 +503,7 @@ function showFormAtualizar($dados){
         </div>
         </form>';
     }
-
+    }
     function showFormCoordenador($dados){
         $dal=new DAL_Atualizar();
         if($dados){
