@@ -502,6 +502,7 @@ function showFormAtualizar($dados){
         <input type="submit" value="Atualizar Informações / Registar">
         </div>
         </form>';
+        }
     }
     }
     function showFormCoordenador($dados){
