@@ -100,20 +100,7 @@ session_start();
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="logo">tlantic</div>
-    <nav>
-      <a href="#">sobre nós</a>
-      <a href="#">soluções</a>
-      <a href="#">setores</a>
-      <a href="#">recursos</a>
-      <a href="#">Pesquisar 🔍</a>
-      <a href="#" class="btn-demo">🔔 Pedir uma demo</a>
-      <a href="#" class="btn-experiment">Experimente agora</a>
-      <a href="#">PT ▾</a>
-    </nav>
-  </div>
-
+  <?php include "cabecalho.php"; ?>
   <h1>Esqueci-me da Palavra Passe</h1>
 
   <div class="container">
