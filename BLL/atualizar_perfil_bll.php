@@ -33,7 +33,6 @@ function obterDadosPerfil(){
             }
         }
         $dadosColaborador=$dal->obterDadosColaborador($email);
-        var_dump($dadosColaborador);
         showFormRegistar_RH($dadosColaborador);
     }
     if($dados["papel"]==2){
@@ -67,6 +66,7 @@ function obterDadosPerfil(){
                     $dal->atualizarDadosContrato_RH($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
                     $_POST["dataInicio"], $_POST["dataFim"]);
                 }
+                $dal->atualizarPedidos($_POST["email"], $rua, $numPorta);
             }
             showFormAtualizar($dados);
         }
@@ -171,7 +171,7 @@ function showFormAtualizar($dados){
             }
         }
         echo '</select>
-
+        <input type="text" value="',$dados["nacionalidade"],'" name="nacionalidade" hidden>
         </span>
         </div>';
 
@@ -195,7 +195,8 @@ function showFormAtualizar($dados){
         <label>Nº de Dependentes:</label><br> <input type="text" name="numDependentes" placeholder="Número de Dependentes" value="',$dados["numDependentes"],'" required></span>
         </div>
         <div class="container">
-        <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" value="',$dados["rua"],', ',$dados["numPorta"],'" required><br>
+        <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" value="',$dados["rua"],', ',$dados["numPorta"],'" required>
+        <input type="file" name="documentoMorada"/><br>
         <label>Localidade:</label> <input type="text" name="localidade" placeholder="Localidade" value="', $dados["localidade"],'" required><br>
         <label>Código Postal:</label> <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" value="', $dados["codPost"],'" required><br>
         </div>';
@@ -284,6 +285,7 @@ function showFormAtualizar($dados){
         }
 
         echo '</select>
+        <input type="text" value="',$dados["tipoContrato"],'" name="tipoContrato" hidden>
         </span>
         <span>
         <label>Data de Início</label><input type="date" name="dataInicio" value="',$dados["dataInicio"],'" ',$controlo,' required/>
@@ -303,6 +305,7 @@ function showFormAtualizar($dados){
             }
         }
         echo '</select>
+        <input type="text" value="',$dados["remuneracao"],'" name="remuneracao" hidden>
         </span>
         <span>
         <label>Regime de Horário de Trabalho</label>

@@ -313,4 +313,12 @@ class DAL_Atualizar{
         $sql->bind_param("is", $estado, $newEmail);
         $sql->execute();
     }
+
+    function atualizarPedidos($email, $rua, $numPorta){
+        $dataLimite="2025-08-10";
+        $sql=$this->conn->prepare("INSERT INTO PedidoMorada(ruaNova, numPortaNova, dataLimite, email) VALUES(
+        ?, ?, ?, ?)");
+        $sql->bind_param("siss", $rua, $numPorta, $dataLimite, $email);
+        $sql->execute();
+    }
 }
