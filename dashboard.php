@@ -43,6 +43,8 @@ include "dashboard_bll.php";
                 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                 <br><br>
                 <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+                <br><br>
+                <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
                 <div class="content">
                     <div class="box">
                         

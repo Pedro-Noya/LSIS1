@@ -23,18 +23,17 @@ function showStatistics(){
             echo "Algo deu erro! ! !";
             break;
     }
-    var_dump($colaboradoresEquipa);
     //$dadosArray=obterEmailColaborador_Coordenador();
     $arrayDataNascimento=[];
     $arraySexo=[];
     $arrayRenumeracao=[];
-    //var_dump($dadosArray);
+    $arrayNacionalidade=[];
     foreach($colaboradoresEquipa as $colaborador){
         $dadosPessoais=$dal->obterDadosPessoaisColaborador($colaborador["email"]);
         $dadosFinanceiros=$dal->obterDadosFinanceirosColaborador($colaborador["email"]);
-        var_dump($dadosPessoais["dataNascimento"]);
         $arrayDataNascimento[]=$dadosPessoais["dataNascimento"];
         $arraySexo[]=$dadosPessoais["sexo"];
+        $arrayNacionalidade[]=$dadosPessoais["nacionalidade"];
         $arrayRemuneracao[]=$dadosFinanceiros["remuneracao"];
     }
 
@@ -76,8 +75,34 @@ function showStatistics(){
             $countSterling++;
         }
     }
-
     $countMetical=$countRemuneracao-($countEuro+$countReal+$countSterling);
+
+    $countNacionalidade=count($arrayNacionalidade);
+    $countAndorra=0;
+    $countEspanha=0;
+    $countPortugal=0;
+    $countMocambique=0;
+    $countBrasil=0;
+    $countReinoUnido=0;
+
+    foreach($arrayNacionalidade as $nacionalidade){
+        if($nacionalidade=="Andorra"){
+            $countAndorra++;
+        }
+        if($nacionalidade=="Espanha"){
+            $countEspanha++;
+        }
+        if($nacionalidade=="Portugal"){
+            $countPortugal++;
+        }
+        if($nacionalidade=="Mocambique"){
+            $countMocambique++;
+        }
+        if($nacionalidade=="Brasil"){
+            $countBrasil++;
+        }
+    }
+    $countReinoUnido=$countNacionalidade-$countAndorra-$countEspanha-$countPortugal-$countMocambique-$countBrasil;
 
     echo "<script>
     let idades=",json_encode($arrayIdade),";
@@ -125,11 +150,37 @@ function showStatistics(){
 			{ label: 'Euro', y: ",$countEuro," },	
 			{ label: 'Real', y: ",$countReal," },	
 			{ label: 'Sterling', y: ",$countSterling," },
-			{ label: 'Metical', y: ",$countMetical," },			
+			{ label: 'Metical', y: ",$countMetical," }		
 		]
 	}]
     });
     chart2.render();
+
+    var chart3 = new CanvasJS.Chart('chartContainer3', {
+	animationEnabled: true,
+	theme: 'light2', // 'light1', 'light2', 'dark1', 'dark2'
+	title: {
+		text: 'Distribuição da Nacionalidade'
+	},
+	axisY: {
+		title: 'Nº de Colaboradores'
+	},
+	axisX: {
+		title: 'Nacionalidade'
+	},
+	data: [{
+		type: 'column',
+		dataPoints: [
+			{ label: 'Andorra', y: ",$countAndorra," },
+			{ label: 'Espanha', y: ",$countEspanha," },
+			{ label: 'Portugal', y: ",$countPortugal," },
+			{ label: 'Moçambique', y: ",$countMocambique," },
+            { label: 'Brasil', y: ",$countBrasil," },
+            { label: 'Reino Unido', y: ",$countReinoUnido," }
+		]
+	}]
+    });
+    chart3.render();
     }
     </script>";
 }

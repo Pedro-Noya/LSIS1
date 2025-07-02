@@ -67,9 +67,9 @@ class DAL_Dashboard{
         }
         return false;
     }
-    
+
     function obterDadosPessoaisColaborador($email){
-        $sql=$this->conn->prepare("SELECT dataNascimento, sexo, localidade FROM DadosPessoaisColaborador WHERE email=?");
+        $sql=$this->conn->prepare("SELECT dataNascimento, sexo, nacionalidade FROM DadosPessoaisColaborador WHERE email=?");
         $sql->bind_param("s",$email);
         $sql->execute();
         $result=$sql->get_result()->fetch_assoc();
