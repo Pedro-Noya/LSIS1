@@ -511,28 +511,28 @@ function showFormAtualizar($dados){
     if($dados){
         echo '<form action="atualizar_perfil.php" method="POST">
             <div class="container">
-            <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" readonly required><br><br>
-            <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" required><br><br>
-            <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" required>
+            <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" value="',$dados["numMec"],'" ',$controlo,' required><br><br>
+            <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" ',$controlo,' required><br><br>
+            <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" value="',$dados["nomeAbreviado"],'"',$controlo,' required>
             </div>
             <div class="container">
-            <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" required><br>
+            <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" value="',$dados["dataNascimento"],'" ',$controlo,' required><br>
             </div>
             <div class="caixa2">
                 <span>
                 <label>Número de Identificação Fiscal:</label>
                 <br>
-                <input type="text" name="nif" placeholder="NIF" required>
+                <input type="text" name="nif" placeholder="NIF" value="',$dados["nif"],'" ',$controlo,' required>
                 </span>
                 <span>
                 <label>Número de Segurança Social:</label>
                 <br>
-                <input type="text" name="niss" placeholder="NISS" required>
+                <input type="text" name="niss" placeholder="NISS" value="',$dados["niss"],'" ',$controlo,' required>
                 </span>
                 <span>
                 <label>Número Cartão de Cidadão:</label>
                 <br>
-                <input type="text" name="cc" placeholder="CC" required>
+                <input type="text" name="cc" placeholder="CC" value="',$dados["cc"],'" ',$controlo,' required>
                 </span>
             </div>';
 
@@ -542,13 +542,18 @@ function showFormAtualizar($dados){
         <span>
         <label>Sexo:</label><br> <select name="sexo" required>';
         foreach($sexo_result_array as $element){
-            echo '<option value="',$element["sexo"],'">',$element["designacao"],'</option>';
+            if($dados["sexo"]==$element["sexo"]){
+                echo '<option value="',$element["sexo"],'" selected>',$element["designacao"],'</option>';
+            } else{
+                echo '<option value="',$element["sexo"],'">',$element["designacao"],'</option>';
+            }
+            
         }
         echo '</select><br>';
         echo '</span>';
         echo '<span>
         <label>Nacionalidade:</label><br>
-        <select name="nacionalidade" required>';
+        <select name="nacionalidade" disabled required>';
         $nacionalidade_array=$dal->obterNacionalidade();
         foreach($nacionalidade_array as $nacionalidade){
             if($nacionalidade["nacionalidade"]==$dados["nacionalidade"]){
@@ -558,27 +563,33 @@ function showFormAtualizar($dados){
             }
         }
         echo '</select>
+
         </span>
         </div>';
+
         $situacaoIrs_array=$dal->obterSituacaoIrs();
 
         echo '<div class="caixa3">
         <span>
         <label>Situação IRS:</label><br> <select name="situacaoIrs" required>';
         foreach($situacaoIrs_array as $situacaoIrs){
-            echo '<option value="',$situacaoIrs["situacaoIrs"],'">',$situacaoIrs["situacaoIrs"],'</option>';
+            if($situacaoIrs["situacaoIrs"]==$dados["situacaoIrs"]){
+                echo '<option value="',$situacaoIrs["situacaoIrs"],'" selected>',$situacaoIrs["situacaoIrs"],'</option>';
+            } else{
+                echo '<option value="',$situacaoIrs["situacaoIrs"],'">',$situacaoIrs["situacaoIrs"],'</option>';
+            }
         }
         echo '</select><br>
         </span>';
         
         
         echo '<span>
-        <label>Nº de Dependentes:</label><br> <input type="text" name="numDependentes" placeholder="Número de Dependentes" required></span>
+        <label>Nº de Dependentes:</label><br> <input type="text" name="numDependentes" placeholder="Número de Dependentes" value="',$dados["numDependentes"],'" required></span>
         </div>
         <div class="container">
-        <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" required><br>
-        <label>Localidade:</label> <input type="text" name="localidade" placeholder="Localidade" required><br>
-        <label>Código Postal:</label> <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" required><br>
+        <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" value="',$dados["rua"],', ',$dados["numPorta"],'" required><br>
+        <label>Localidade:</label> <input type="text" name="localidade" placeholder="Localidade" value="', $dados["localidade"],'" required><br>
+        <label>Código Postal:</label> <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" value="', $dados["codPost"],'" required><br>
         </div>';
 
 
@@ -589,39 +600,47 @@ function showFormAtualizar($dados){
         <select name="designacaoDdiTelemovel" id="ddiTelemovel" required>';
         $ddi_array=$dal->obterDDIs();
         foreach($ddi_array as $ddi){
-            echo '<option value="',$ddi["designacao"],'">+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
+            if($ddi["designacao"]==$dados["designacaoDdiTelemovel"]){
+                echo '<option value="',$ddi["designacao"],'" selected>+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
+            } else{
+                echo '<option value="',$ddi["designacao"],'">+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
+            }
         }
         echo '</select>
-        <input type="text" name="telemovel" placeholder="Telemóvel" required>
+        <input type="text" name="telemovel" placeholder="Telemóvel" value="', $dados["telemovel"],'" required>
         </span>
         <span>
-        <label>Email:</label><br><input type="text" name="email" value="',$dados["email"],'" placeholder="email" readonly required>
+        <label>Email:</label><br><input type="text" name="email" placeholder="email" value="',$dados["email"],'" readonly required>
         </span>
         </div>
         <div class="container">
-        <label>IBAN:</label> <input type="text" name="iban" placeholder="IBAN" required>
+        <label>IBAN:</label> <input type="text" name="iban" placeholder="IBAN" value="',$dados["iban"],'" required>
         </div>
         <div class="container">
-        <label>Contacto de Emergência:</label><input type="text" name="contactoEmergencia" placeholder="Nome" required><br>
-        <label>Grau de Relacionamento:</label><input type="text" name="grauRelacionamento" placeholder="Grau de Parentesco" required><br>
+        <label>Contacto de Emergência:</label><input type="text" name="contactoEmergencia" placeholder="Nome" value="',$dados["contactoEmergencia"],'" required><br>
+        <label>Grau de Relacionamento:</label><input type="text" name="grauRelacionamento" placeholder="Grau de Parentesco" value="',$dados["grauRelacionamento"],'" required><br>
         <label>Contacto:</label>';
         echo '<select name="designacaoDdiContacto" id="ddiContacto" required>';
         foreach($ddi_array as $ddi){
-            echo '<option value="',$ddi["designacao"],'">+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
+            if($ddi["designacao"]==$dados["designacaoDdiContacto"]){
+                echo '<option value="',$ddi["designacao"],'" selected>+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
+            } else{
+                echo '<option value="',$ddi["designacao"],'">+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
+            }
         }
         echo '</select>
-        <input type="text" name="contacto" placeholder=""9********" required><br>
+        <input type="text" name="contacto" placeholder=""9********" value="',$dados["contacto"],'" required><br>
         </div>
 
         <div class="caixa3">
         <span>
-        <label>Matrícula do Carro</label><input type="text" name="matricula" placeholer="Matrícula" required>
+        <label>Matrícula do Carro</label><input type="text" name="matricula" placeholer="Matrícula" value="',$dados["matricula"],'" required>
         </span>
         <span>
-        <label>Continente</label><input type="text" name="cartaoContinente" placeholer="Nº Cartão Continente" required>
+        <label>Continente</label><input type="text" name="cartaoContinente" placeholer="Nº Cartão Continente" value="',$dados["cartaoContinente"],'" required>
         </span>
         <span>
-        <label>Voucher NOS</label><input type="date" name="voucherNos" required/>
+        <label>Voucher NOS</label><input type="date" name="voucherNos" value="',$dados["VoucherNos"],'" ',$controlo,' required/>
         </span>
         </div>
         <div class="container">
@@ -630,35 +649,43 @@ function showFormAtualizar($dados){
         $habLiterarias_array=$dal->obterHabilitacoesLiterarias();
 
         foreach($habLiterarias_array as $habLiterarias){
-            echo '<option value="',$habLiterarias["habLiterarias"],'">',$habLiterarias["habLiterarias"],'</option>';
+            if($habLiterarias["habLiterarias"]==$dados["habLiterarias"]){
+                echo '<option value="',$habLiterarias["habLiterarias"],'" selected>',$habLiterarias["habLiterarias"],'</option>';
+            } else{
+                echo '<option value="',$habLiterarias["habLiterarias"],'">',$habLiterarias["habLiterarias"],'</option>';
+            }
         }
 
         echo '</select><br>
-        <label>Curso</label><input type="text" name="curso" placeholder="Curso" required/><br>
-        <label>Frequência</label><input type="text" name="frequencia" placeholder="Indique \'Concluído\' ou \'Em curso\'" required/>
+        <label>Curso</label><input type="text" value="',$dados["curso"],'" name="curso" placeholder="Curso" required/><br>
+        <label>Frequência</label><input type="text" value="',$dados["frequencia"],'" name="frequencia" placeholder="Indique \'Concluído\' ou \'Em curso\'" required/>
         </div>
 
         <div class="caixa2">
         <span>
         <label>Tipo de Contrato:</label>
-        <select name="tipoContrato" required>';
+        <select name="tipoContrato" ',$select,' required>';
         $tipoContrato_array=$dal->obterTipoContrato();
 
         foreach($tipoContrato_array as $tipoContrato){
-            echo '<option value="',$tipoContrato["tipoContrato"],'">',$tipoContrato["tipoContrato"],'</option>';
+            if($tipoContrato["tipoContrato"]==$dados["tipoContrato"]){
+                echo '<option value="',$tipoContrato["tipoContrato"],'" selected>',$tipoContrato["tipoContrato"],'</option>';
+            } else{
+                echo '<option value="',$tipoContrato["tipoContrato"],'">',$tipoContrato["tipoContrato"],'</option>';
+            }
         }
 
         echo '</select>
         </span>
         <span>
-        <label>Data de Início</label><input type="date" name="dataInicio" required/>
+        <label>Data de Início</label><input type="date" name="dataInicio" value="',$dados["dataInicio"],'" ',$controlo,' required/>
         </span>
         <span>
-        <label>Data de Fim</label><input type="date" name="dataFim" required/>
+        <label>Data de Fim</label><input type="date" name="dataFim"value="',$dados["dataFim"],'" ',$controlo,' required/>
         </span>
         <span>
         <label>Remuneração:</label>
-        <select name="remuneracao" required>';
+        <select name="remuneracao" disabled required>';
         $remuneracao_array=$dal->obterRemuneracao();
         foreach($remuneracao_array as $remuneracao){
             if($remuneracao["remuneracao"]==$dados["remuneracao"]){
@@ -671,122 +698,23 @@ function showFormAtualizar($dados){
         </span>
         <span>
         <label>Regime de Horário de Trabalho</label>
-        <select name="regimeHorarioTrabalho" required>';
+        <select name="regimeHorarioTrabalho" ',$controlo,' required>';
         $regimeHorarioTrabalho_array=$dal->obterRegimesHorarioTrabalho();
 
         foreach($regimeHorarioTrabalho_array as $regimeHorarioTrabalho){
-            echo '<option value="',$regimeHorarioTrabalho["regimeHorarioTrabalho"],'">',$regimeHorarioTrabalho["regimeHorarioTrabalho"],'</option>';
+            if($regimeHorarioTrabalho["regimeHorarioTrabalho"]==$dados["regimeHorarioTrabalho"]){
+                echo '<option value="',$regimeHorarioTrabalho["regimeHorarioTrabalho"],'" selected>',$regimeHorarioTrabalho["regimeHorarioTrabalho"],'</option>';
+            } else{
+                echo '<option value="',$regimeHorarioTrabalho["regimeHorarioTrabalho"],'">',$regimeHorarioTrabalho["regimeHorarioTrabalho"],'</option>';
+            }
         }
         echo '</select>
         </span>
-        </div>';
-        $equipasColaborador=$dal->obterEquipasColaborador($dados["email"]);
-        echo '<div class="container">
-        <label>Equipas as quais este Colaborador pertence: </label>';
-        foreach($equipasColaborador as $equipaColaborador){
-            echo $equipaColaborador, ' ';
-        }
-        echo '</div>
+        </div>
         <div class="container_button">
         <input type="submit" value="Atualizar Informações / Registar">
         </div>
         </form>';
-        }
-    }
-    function showFormCoordenador($dados){
-        $dal=new DAL_Atualizar();
-        if($dados){
-            echo '<form action="atualizar_perfil.php" method="POST">
-                <div class="container">
-                <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" readonly required><br><br>
-                <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" readonly required><br><br>
-                <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" readonly required>
-                </div>
-                <div class="container">
-                <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" readonly required><br>
-                </div>';
-            $sexo_result_array=$dal->obterSexo();
-            #É correr o array sexo_array e ver em qual indice o valor do sexo é igual ao sexo do colaborador em questão.
-            echo '<div class="caixa2">
-            <span>
-            <label>Sexo:</label><br> <select name="sexo" required>';
-            foreach($sexo_result_array as $element){
-                echo '<option value="',$element["sexo"],'">',$element["designacao"],'</option>';
-            }
-            echo '</select><br>';
-            echo '</span>';
-            echo '<span>
-            <label>Nacionalidade:</label><br>
-            <select name="nacionalidade" required>';
-            $nacionalidade_array=$dal->obterNacionalidade();
-            foreach($nacionalidade_array as $nacionalidade){
-                if($nacionalidade["nacionalidade"]==$dados["nacionalidade"]){
-                    echo '<option value="',$nacionalidade["nacionalidade"],'" selected>',$nacionalidade["nacionalidade"],'</option>';
-                } else{
-                    echo '<option value="',$nacionalidade["nacionalidade"],'">',$nacionalidade["nacionalidade"],'</option>';
-                }
-            }
-            echo '</select>
-            </span>
-            </div>';
-            $situacaoIrs_array=$dal->obterSituacaoIrs();
-
-            echo '<div class="container">
-            <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" readonly required><br>
-            <label>Localidade:</label> <input type="text" name="localidade" placeholder="Localidade" readonly required><br>
-            <label>Código Postal:</label> <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" readonly required><br>
-            </div>';
-
-
-            echo '<div class="caixa3">
-            <span>
-            <label>Telemóvel:</label><br>
-            <select name="designacaoDdiTelemovel" id="ddiTelemovel" disabled required>';
-            $ddi_array=$dal->obterDDIs();
-            foreach($ddi_array as $ddi){
-                echo '<option value="',$ddi["designacao"],'">+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
-            }
-            echo '</select>
-            <input type="text" name="telemovel" placeholder="Telemóvel" readonly required>
-            </span>
-            <span>
-            <label>Email:</label><br><input type="text" name="email" value="',$dados["email"],'" placeholder="email" readonly required>
-            </span>
-            </div>
-            <div class="container">
-            <label>Contacto de Emergência:</label><input type="text" name="contactoEmergencia" placeholder="Nome" readonly required><br>
-            <label>Grau de Relacionamento:</label><input type="text" name="grauRelacionamento" placeholder="Grau de Parentesco" readonly required><br>
-            <label>Contacto:</label>';
-            echo '<select name="designacaoDdiContacto" id="ddiContacto" disabled required>';
-            foreach($ddi_array as $ddi){
-                echo '<option value="',$ddi["designacao"],'">+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
-            }
-            echo '</select>
-            <input type="text" name="contacto" placeholder=""9********" readonly required><br>
-            </div>
-            <div class="container">
-            <label>Habilitações Literárias</label>
-            <select name="habLiterarias" disabled required>';
-            $habLiterarias_array=$dal->obterHabilitacoesLiterarias();
-
-            foreach($habLiterarias_array as $habLiterarias){
-                echo '<option value="',$habLiterarias["habLiterarias"],'">',$habLiterarias["habLiterarias"],'</option>';
-            }
-
-            echo '</select><br>
-            <label>Curso</label><input type="text" name="curso" placeholder="Curso" readonly required/><br>
-            <label>Frequência</label><input type="text" name="frequencia" placeholder="Indique \'Concluído\' ou \'Em curso\'" readonly required/>
-            </div>
-
-            <div class="caixa2">
-            <span>
-            <label>Data de Início</label><input type="date" name="dataInicio" readonly required/>
-            </span>
-            <span>
-            <label>Data de Fim</label><input type="date" name="dataFim" readonly required/>
-            </span>
-            </div>
-            </form>';
         }
     }
     /*function showUI(){
