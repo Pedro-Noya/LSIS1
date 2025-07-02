@@ -4,7 +4,7 @@ require_once 'BLL/Registo_Utilizador_BLL.php';
 session_start();
 
 function generateRandomPassword($length = 8) {
-    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789s';
     $password = '';
     $maxIndex = strlen($chars) - 1;
     for ($i = 0; $i < $length; $i++) {

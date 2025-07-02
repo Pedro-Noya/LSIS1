@@ -2,23 +2,37 @@
 session_start();
 include 'dashboard_dal.php';
 
-function obterEmailColaborador_Coordenador(){
-    $dal=new DAL_Dashboard();
-    $email=$_SESSION["email"];
-    $dados=$dal->obterEmailColaborador_Coordenador($email);
+/*function obterEmailColaborador_Coordenador(){
+    $dal=new DAL_Dashboard();*/
+    /*$dados=$dal->obterEmailColaborador_Coordenador($email);
     return $dados;
-}
+}*/
 
 function showStatistics(){
     $dal=new DAL_Dashboard();
-    $dadosArray=obterEmailColaborador_Coordenador();
+    $email=$_SESSION["email"];
+    $funcao=$dal->obterFuncao($email);
+    switch($funcao["papel"]){
+        case 2:
+            $colaboradoresEquipa=$dal->obterMembrosEquipa_Coordenador($email);
+            break;
+        case 3:
+            $colaboradoresEquipa=$dal->obterMembrosEquipa_RH($email);
+            break;
+        default:
+            echo "Algo deu erro! ! !";
+            break;
+    }
+    var_dump($colaboradoresEquipa);
+    //$dadosArray=obterEmailColaborador_Coordenador();
     $arrayDataNascimento=[];
     $arraySexo=[];
     $arrayRenumeracao=[];
     //var_dump($dadosArray);
-    foreach($dadosArray as $dados){
-        $dadosPessoais=$dal->obterDadosPessoaisColaborador($dados["email"]);
-        $dadosFinanceiros=$dal->obterDadosFinanceirosColaborador($dados["email"]);
+    foreach($colaboradoresEquipa as $colaborador){
+        $dadosPessoais=$dal->obterDadosPessoaisColaborador($colaborador["email"]);
+        $dadosFinanceiros=$dal->obterDadosFinanceirosColaborador($colaborador["email"]);
+        var_dump($dadosPessoais["dataNascimento"]);
         $arrayDataNascimento[]=$dadosPessoais["dataNascimento"];
         $arraySexo[]=$dadosPessoais["sexo"];
         $arrayRemuneracao[]=$dadosFinanceiros["remuneracao"];
