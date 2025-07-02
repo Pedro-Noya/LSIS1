@@ -104,6 +104,8 @@ function showStatistics(){
     }
     $countReinoUnido=$countNacionalidade-$countAndorra-$countEspanha-$countPortugal-$countMocambique-$countBrasil;
 
+    $arrayFuncao=["Colaborador","Coordenador","RH","Administrador"];
+
     echo "<script>
     let idades=",json_encode($arrayIdade),";
     let media = ss.mean(idades);
