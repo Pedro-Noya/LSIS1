@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../DAL/atualizar_perfil_dal.php';
+require_once __DIR__ . '/../DAL/InformacoesColaborador_dal.php';
 
 
 function obterDadosPerfil(){
