@@ -121,8 +121,8 @@ class DAL_Atualizar{
         $sql->bind_param("sss",$newEmail, $nome, $email);
         $sql->execute();
     }
-    
-    function atualizarDadosPessoais($numMec, $email, $nome, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel, $sexo,
+
+    function atualizarDadosPessoais($numMec, $email, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel, $sexo,
     $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia, 
     $grauRelacionamento, $matricula){
         $newEmail=$email;
