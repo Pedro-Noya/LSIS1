@@ -15,6 +15,8 @@ function obterDadosPerfil(){
                 //Separação da Morada em Rua e Nº da Porta
                 list($rua, $numPorta)=explode(", ", $_POST["morada"]);
 
+                $dal->atualizarColaborador($_POST["nome"], $_POST["email"]);
+
                 $dal->atualizarDadosPessoais($_POST["numMec"], $_POST["email"], $_POST["nomeAbreviado"], $_POST["dataNascimento"],
                 $_POST["designacaoDdiTelemovel"], $_POST["telemovel"], $_POST["sexo"], $numPorta, $rua,
                 $_POST["codPostal"], $_POST["localidade"], $_POST["nacionalidade"], $_POST["designacaoDdiContacto"],
@@ -31,7 +33,9 @@ function obterDadosPerfil(){
                 $dal->atualizarDadosContrato($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
                 $_POST["dataInicio"], $_POST["dataFim"]);
 
-                $dal->atualizarPedidos($_POST["email"], $rua, $numPorta);
+                //$dal->atualizarPedidos($_POST["email"], $rua, $numPorta);
+
+                header("Location: perfil.php");
             }
             $controlo="readonly";
             $disabled="disabled";
@@ -60,7 +64,7 @@ function obterDadosPerfil(){
 
                 $dal->atualizarEstadoColaborador($_POST["email"]);
 
-                //header("Location: atualizar_perfil.php");
+                header("Location: perfil.php");
             }
             showFormRegistar($dados);
         }
@@ -69,6 +73,8 @@ function obterDadosPerfil(){
         if($_POST){
             //Separação da Morada em Rua e Nº da Porta
             list($rua, $numPorta)=explode(", ", $_POST["morada"]);
+            
+            $dal->atualizarColaborador($_POST["nome"], $_POST["email"]);
 
             $dal->atualizarDadosPessoais($_POST["numMec"], $_POST["email"], $_POST["nomeAbreviado"], $_POST["dataNascimento"],
             $_POST["designacaoDdiTelemovel"], $_POST["telemovel"], $_POST["sexo"], $numPorta, $rua,
@@ -82,14 +88,13 @@ function obterDadosPerfil(){
             $_POST["situacaoIrs"], $_POST["numDependentes"], $_POST["iban"], $_POST["remuneracao"]);
 
             $dal->atualizarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
-            if($dados["papel"]==1){
-                $dal->atualizarDadosContrato_Colaborador($_POST["email"], $_POST["regimeHorarioTrabalho"],
-                $_POST["dataInicio"], $_POST["dataFim"]);
-            } else{
-                $dal->atualizarDadosContrato_RH($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
-                $_POST["dataInicio"], $_POST["dataFim"]);
-            }
-            $dal->atualizarPedidos($_POST["email"], $rua, $numPorta);
+
+            $dal->atualizarDadosContrato($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
+            $_POST["dataInicio"], $_POST["dataFim"]);
+
+            //$dal->atualizarPedidos($_POST["email"], $rua, $numPorta);
+
+            header("Location: perfil.php");
         }
         $controlo="";
         $disabled="";

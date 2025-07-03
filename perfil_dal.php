@@ -111,7 +111,18 @@ class DAL_Atualizar{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    function atualizarDadosPessoais($numMec, $email, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel, $sexo,
+    function atualizarColaborador($nome, $email){
+        $newEmail=$email;
+        $sql=$this->conn->prepare("UPDATE Utilizador SET
+        email = ?,
+        nome = ?
+        WHERE email = ?");
+
+        $sql->bind_param("sss",$newEmail, $nome, $email);
+        $sql->execute();
+    }
+    
+    function atualizarDadosPessoais($numMec, $email, $nome, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel, $sexo,
     $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia, 
     $grauRelacionamento, $matricula){
         $newEmail=$email;
