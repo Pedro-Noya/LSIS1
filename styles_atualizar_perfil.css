@@ -103,3 +103,27 @@ label{
     background-color: white;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
 }
+
+.input-file-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.input-file-wrapper input[type="file"] {
+  display: none;
+}
+
+.input-file-label {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #7d5ba6;
+  color: #7d5ba6;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.input-file-label:hover {
+  background-color: #68459a;
+}

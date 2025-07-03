@@ -73,7 +73,7 @@ function obterDadosPerfil(){
         if($_POST){
             //Separação da Morada em Rua e Nº da Porta
             list($rua, $numPorta)=explode(", ", $_POST["morada"]);
-            
+
             $dal->atualizarColaborador($_POST["nome"], $_POST["email"]);
 
             $dal->atualizarDadosPessoais($_POST["numMec"], $_POST["email"], $_POST["nomeAbreviado"], $_POST["dataNascimento"],
@@ -200,7 +200,11 @@ function showFormAtualizar($dados, $controlo, $disabled){
         </div>
         <div class="container">
         <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" value="',$dados["rua"],', ',$dados["numPorta"],'" required>
-        <input type="file" name="documentoMorada"/><br>
+        <div class="input-file-wrapper">
+        <label for="ficheiroMorada" class="input-file-label">Escolher comprovativo de morada</label>
+        <br>
+        <input type="file" id="ficheiroMorada" name="documentoMorada"/>
+        </div><br>
         <label>Localidade:</label> <input type="text" name="localidade" placeholder="Localidade" value="', $dados["localidade"],'" required><br>
         <label>Código Postal:</label> <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" value="', $dados["codPost"],'" required><br>
         </div>';
