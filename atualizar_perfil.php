@@ -11,4 +11,6 @@ include "BLL/atualizar_perfil_bll.php";
 <body>
     <h1> Dados pessoais </h1>
     <?php obterDadosPerfil();?>
+</body>
+</html>
 
