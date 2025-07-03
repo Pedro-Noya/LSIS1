@@ -30,7 +30,7 @@ function obterDadosPerfil(){
 
                 $dal->atualizarDadosContrato($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
                 $_POST["dataInicio"], $_POST["dataFim"]);
-                
+
                 $dal->atualizarPedidos($_POST["email"], $rua, $numPorta);
             }
             $controlo="readonly";
@@ -114,7 +114,7 @@ function showFormAtualizar($dados, $controlo, $disabled){
             $controlo="readonly";
             $select="disabled";
         }
-        echo '<form action="atualizar_perfil.php" method="POST">
+        echo '<form action="perfil.php" method="POST">
             <div class="container">
             <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" value="',$dados["numMec"],'" ',$controlo,' required><br><br>
             <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" ',$controlo,' required><br><br>
@@ -338,7 +338,7 @@ function showFormAtualizar($dados, $controlo, $disabled){
 function showFormRegistar($dados, $controlo){  
     $dal=new DAL_Atualizar();
     if($dados){
-        echo '<form action="atualizar_perfil.php" method="POST">
+        echo '<form action="perfil.php" method="POST">
             <div class="container">
             <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" readonly required><br><br>
             <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" required><br><br>
