@@ -27,13 +27,10 @@ function obterDadosPerfil(){
                 $_POST["situacaoIrs"], $_POST["numDependentes"], $_POST["iban"], $_POST["remuneracao"]);
 
                 $dal->atualizarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
-                if($dados["papel"]==1){
-                    $dal->atualizarDadosContrato_Colaborador($_POST["email"], $_POST["regimeHorarioTrabalho"],
-                    $_POST["dataInicio"], $_POST["dataFim"]);
-                } else{
-                    $dal->atualizarDadosContrato_RH($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
-                    $_POST["dataInicio"], $_POST["dataFim"]);
-                }
+
+                $dal->atualizarDadosContrato($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
+                $_POST["dataInicio"], $_POST["dataFim"]);
+                
                 $dal->atualizarPedidos($_POST["email"], $rua, $numPorta);
             }
             $controlo="readonly";

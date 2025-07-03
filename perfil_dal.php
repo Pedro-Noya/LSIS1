@@ -262,21 +262,7 @@ class DAL_Atualizar{
         $sql->execute();
     }
 
-    function atualizarDadosContrato_Colaborador($email, $regimeHorarioTrabalho, $dataInicio, $dataFim){
-        $newEmail=$email;
-        $sql=$this->conn->prepare("UPDATE DadosContratoColaborador SET
-        email = ?,
-        regimeHorarioTrabalho = ?,
-        dataInicio = ?,
-        dataFim = ?
-        WHERE email = ?");
-
-        $sql->bind_param("sssss", $newEmail, $regimeHorarioTrabalho, $dataInicio, $dataFim, $email);
-
-        $sql->execute();
-    }
-
-    function atualizarDadosContrato_RH($email, $tipoContrato, $regimeHorarioTrabalho, $dataInicio, $dataFim){
+    function atualizarDadosContrato($email, $tipoContrato, $regimeHorarioTrabalho, $dataInicio, $dataFim){
         $newEmail=$email;
         $sql=$this->conn->prepare("UPDATE DadosContratoColaborador SET
         email = ?,
