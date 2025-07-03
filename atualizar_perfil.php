@@ -1,5 +1,5 @@
 <?php
-include "perfil_bll.php";
+include "/../BLL/atualizar_perfil_bll.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt">
