@@ -30,7 +30,7 @@
         }
     ?>
     <button onclick="location.href='registar.php'">Registar</button>
-    <button onclick="location.href='atualizar_perfil.php'">Atualizar</button>
+    <button onclick="location.href='perfil.php'">Perfil</button>
 
 </body>
 </html>

@@ -6,11 +6,10 @@ require_once 'perfil_dal.php';
 function obterDadosPerfil(){
     $dal=new DAL_Atualizar();
     //$dados=$dal->obterDadosUtilizador($_SESSION["email"]);
-    $dados=$dal->obterDadosPerfil($_SESSION["email"]);
-
-    if($dados["papel"]==1){
-        if($dados["estado"]==true){
-            //$dados=$dal->obterDadosPerfil($_SESSION["email"]);
+    $result=$dal->obterEstadoPapel($_SESSION["email"]);
+    if($result["papel"]==1){
+        if($result["estado"]==true){
+            $dados=$dal->obterDadosPerfil($_SESSION["email"]);
             if($_POST){
                 //Separação da Morada em Rua e Nº da Porta
                 list($rua, $numPorta)=explode(", ", $_POST["morada"]);
@@ -72,10 +71,11 @@ function obterDadosPerfil(){
 
                 header("Location: perfil.php");
             }
-            showFormRegistar($dados);
+            showFormRegistar();
         }
     }
-    else if($dados["papel"]==2 || $dados["papel"]==3 || $dados["papel"]==4){
+    else if($result["papel"]==2 || $result["papel"]==3 || $result["papel"]==4){
+        $dados=$dal->obterDadosPerfil($_SESSION["email"]);
         if($_POST){
             //Separação da Morada em Rua e Nº da Porta
             list($rua, $numPorta)=explode(", ", $_POST["morada"]);
@@ -349,13 +349,12 @@ function showFormAtualizar($dados, $controlo, $disabled){
     }
 }
 
-function showFormRegistar($dados, $controlo){  
+function showFormRegistar(){  
     $dal=new DAL_Atualizar();
-    if($dados){
         echo '<form action="perfil.php" method="POST">
             <div class="container">
             <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" readonly required><br><br>
-            <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" required><br><br>
+            <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" required><br><br>
             <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" required>
             </div>
             <div class="container">
@@ -438,7 +437,7 @@ function showFormRegistar($dados, $controlo){
         <input type="text" name="telemovel" placeholder="Telemóvel" required>
         </span>
         <span>
-        <label>Email:</label><br><input type="text" name="email" value="',$dados["email"],'" placeholder="email" readonly required>
+        <label>Email:</label><br><input type="text" name="email" value="',$_SESSION["email"],'" placeholder="email" readonly required>
         </span>
         </div>
         <div class="container">
@@ -527,5 +526,4 @@ function showFormRegistar($dados, $controlo){
         <input type="submit" value="Atualizar Informações / Registar">
         </div>
         </form>';
-    }
 }

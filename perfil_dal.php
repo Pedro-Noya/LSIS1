@@ -20,6 +20,13 @@ class DAL_Atualizar{
         }
     }
 
+    function obterEstadoPapel($email){
+        $sql=$this->conn->prepare("SELECT papel, estado FROM Utilizador WHERE email=?");
+        $sql->bind_param("s",$email);
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_assoc();
+    }
     function obterDadosPerfil($email){
         $sql = $this->conn->prepare("SELECT * FROM utilizador JOIN DadosPessoaisColaborador ON DadosPessoaisColaborador.email=Utilizador.email
                                       JOIN DadosHabilitacoesColaborador ON DadosHabilitacoesColaborador.email=DadosPessoaisColaborador.email
