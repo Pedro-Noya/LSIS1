@@ -6,10 +6,10 @@ include "BLL/atualizar_perfil_bll.php";
 <head>
   <meta charset="UTF-8">
   <title>Portal do Colaborador - Login</title>
-  <link rel="stylesheet" href="styles_atualizar_perfil.css">
+  <link rel="stylesheet" href="CSS/atualizar_perfil.css">
 </head>
 <body>
-  <?php include "cabecalho.php"; ?>
+  <!-- <?php include "cabecalho.php"; ?> -->
   <h1> Dados pessoais </h1>
   <?php obterDadosPerfil();?>
 </body>

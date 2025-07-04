@@ -1,0 +1,43 @@
+
+.alerta-card { 
+    background: #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px #eee; 
+    margin-bottom: 20px; 
+    padding: 20px; 
+}
+
+.alerta-titulo { 
+    font-size: 1.2em; 
+    font-weight: bold; 
+}
+
+.alerta-desc { 
+    margin: 10px 0; 
+}
+
+.alerta-periodo { 
+    color: #888; 
+    font-size: 0.95em; 
+}
+
+.novo-alerta { 
+    background: #f9f9f9; 
+    border: 1px solid #ddd; 
+    padding: 20px; 
+    border-radius: 8px; 
+    margin-bottom: 30px; 
+}
+
+.btn { 
+    background: #007bff; 
+    color: #fff; 
+    border: none; 
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    cursor: pointer;
+}
+
+.btn:hover { 
+    background: #0056b3; 
+}
