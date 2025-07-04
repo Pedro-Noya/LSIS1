@@ -111,6 +111,14 @@ class DAL_Atualizar{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    function guardarDocumento($tipoDocumento, $documento, $estado){
+        $null=NULL;
+        $sql=$this->conn->prepare("INSERT INTO Documento(tipoDocumento, documento, estado) VALUES(?, ?, ?)");
+        $sql->bind_param("ssi",$tipoDocumento, $null, $estado);
+        $sql->send_long_data(1, $documento);
+        $sql->execute();
+    }
+
     function atualizarColaborador($nome, $email){
         $newEmail=$email;
         $sql=$this->conn->prepare("UPDATE Utilizador SET

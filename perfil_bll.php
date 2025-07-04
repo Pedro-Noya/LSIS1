@@ -17,6 +17,12 @@ function obterDadosPerfil(){
 
                 $dal->atualizarColaborador($_POST["nome"], $_POST["email"]);
 
+                if (isset($_FILES['documentoMorada']) && $_FILES['documentoMorada']['error'] === UPLOAD_ERR_OK) {
+                    $tipoDocumento="Mod99";
+                    $fileTmpPath = $_FILES['documentoMorada']['tmp_name'];
+                    $fileData = file_get_contents($fileTmpPath);
+                    $dal->guardarDocumento($tipoDocumento, $fileData, 0);
+                }
                 $dal->atualizarDadosPessoais($_POST["numMec"], $_POST["email"], $_POST["nomeAbreviado"], $_POST["dataNascimento"],
                 $_POST["designacaoDdiTelemovel"], $_POST["telemovel"], $_POST["sexo"], $numPorta, $rua,
                 $_POST["codPostal"], $_POST["localidade"], $_POST["nacionalidade"], $_POST["designacaoDdiContacto"],
@@ -108,8 +114,7 @@ function isThisACallback(){
     }
     return false;
 }
-//Dados de escrita: Morada; Género; Situação IRS; Nº Dependentes; IBAN; Hab. Literárias; Curso; Frequência; Contacto de Emergência;
-//Matrícula; Cartão Continente; Grau de Relacionamento; Contacto;  
+  
 function showFormAtualizar($dados, $controlo, $disabled){
     $dal=new DAL_Atualizar();
     if($dados){
@@ -119,7 +124,7 @@ function showFormAtualizar($dados, $controlo, $disabled){
             $controlo="readonly";
             $select="disabled";
         }
-        echo '<form action="perfil.php" method="POST">
+        echo '<form action="perfil.php" method="POST" enctype="multipart/form-data">
             <div class="container">
             <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" value="',$dados["numMec"],'" ',$controlo,' required><br><br>
             <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" ',$controlo,' required><br><br>

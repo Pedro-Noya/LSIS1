@@ -8,10 +8,14 @@ include 'dashboard_dal.php';
     return $dados;
 }*/
 
-function showStatistics(){
+function obterFuncao(){
     $dal=new DAL_Dashboard();
     $email=$_SESSION["email"];
     $funcao=$dal->obterFuncao($email);
+    return $funcao;
+}
+function showStatistics($papelMax){
+    $funcao=obterFuncao();
     switch($funcao["papel"]){
         case 2:
             $colaboradoresEquipa=$dal->obterMembrosEquipa_Coordenador($email);
@@ -30,11 +34,15 @@ function showStatistics(){
     $arrayNacionalidade=[];
     foreach($colaboradoresEquipa as $colaborador){
         $dadosPessoais=$dal->obterDadosPessoaisColaborador($colaborador["email"]);
+        if(!($dadosPessoais==null)){
+            $arrayDataNascimento[]=$dadosPessoais["dataNascimento"];
+            $arraySexo[]=$dadosPessoais["sexo"];
+            $arrayNacionalidade[]=$dadosPessoais["nacionalidade"];
+        }
         $dadosFinanceiros=$dal->obterDadosFinanceirosColaborador($colaborador["email"]);
-        $arrayDataNascimento[]=$dadosPessoais["dataNascimento"];
-        $arraySexo[]=$dadosPessoais["sexo"];
-        $arrayNacionalidade[]=$dadosPessoais["nacionalidade"];
-        $arrayRemuneracao[]=$dadosFinanceiros["remuneracao"];
+        if(!($dadosFinanceiros==null)){
+            $arrayRemuneracao[]=$dadosFinanceiros["remuneracao"];
+        }
     }
 
     $arrayIdade=[];
@@ -48,16 +56,17 @@ function showStatistics(){
     //print_r($arrayIdade);
     //print_r($arraySexo);
 
-    $countSexo=0;
     $countMasculino=0;
+    $countFeminino=0;
     foreach($arraySexo as $sexo){
         if($sexo=="M"){
             $countMasculino++;
+        } else if($sexo=="F"){
+            $countFeminino++;
         }
-        $countSexo++;
     }
 
-    $percentMasculino=($countMasculino/$countSexo)*100;
+    $percentMasculino=($countMasculino/($countMasculino+$countFeminino))*100;
     $percentFeminino=100-$percentMasculino;
 
     $countRemuneracao=count($arrayRemuneracao);
