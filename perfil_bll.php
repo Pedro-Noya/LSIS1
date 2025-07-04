@@ -265,7 +265,14 @@ function showFormAtualizar($dados, $controlo, $disabled){
         <label>Continente</label><input type="text" name="cartaoContinente" placeholer="Nº Cartão Continente" value="',$dados["cartaoContinente"],'" required>
         </span>
         <span>
-        <label>Voucher NOS</label><input type="date" name="voucherNos" value="',$dados["VoucherNos"],'" ',$controlo,' required/>
+        <label>Voucher NOS</label>';
+
+        $resultado=$dal->obterDataVoucherNos($dados["email"]);
+
+        echo '<select name="voucherNos" ',$disabled,'>
+        <option value="',$dados["idVoucherNos"],'">',$resultado["voucherNos"],'</option>
+        </select>
+        <input type="date" name="voucherNos" value="',$dados["idVoucherNos"],'" ',$controlo,' hidden/>
         </span>
         </div>
         <div class="container">
@@ -465,8 +472,19 @@ function showFormRegistar(){
         <span>
         <label>Continente</label><input type="text" name="cartaoContinente" placeholer="Nº Cartão Continente" required>
         </span>
-        <span>
-        <label>Voucher NOS</label><input type="date" name="voucherNos" required/>
+        <span>';
+
+        $voucherNos_array=$dal->obterVoucherNos();
+        #É correr o array sexo_array e ver em qual indice o valor do sexo é igual ao sexo do colaborador em questão.
+
+        echo '<label>Voucher NOS:</label><br> <select name="voucherNos">
+        <option value="',null,'">Indique uma data VoucherNOS</option>';
+        foreach($voucherNos_array as $resultado){
+            if($resultado["estado"]==0){
+                echo '<option value="',$resultado["idVoucherNos"],'">',$resultado["voucherNos"],'</option>';
+            }
+        }
+        echo '</select><br>
         </span>
         </div>
         <div class="container">

@@ -100,6 +100,22 @@ class DAL_Atualizar{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    function obterVoucherNos(){
+        $sql=$this->conn->prepare("SELECT * FROM VoucherNos");
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function obterDataVoucherNos($email){
+        $sql=$this->conn->prepare("SELECT VoucherNos.idVoucherNos, voucherNos FROM VoucherNos JOIN DadosExtrasColaborador
+        ON VoucherNos.idVoucherNos=DadosExtrasColaborador.idVoucherNos
+        WHERE DadosExtrasColaborador.email=?");
+        $sql->bind_param("s",$email);
+        $sql->execute();
+        $result=$sql->get_result();
+        return $result->fetch_assoc();
+    }
     function obterDadosColaborador($email){
         $sql=$this->conn->prepare("SELECT * FROM Utilizador WHERE email=?");
         $sql->bind_param("s",$email);
@@ -270,10 +286,10 @@ class DAL_Atualizar{
         $sql=$this->conn->prepare("UPDATE DadosExtrasColaborador SET
         email = ?,
         cartaoContinente = ?,
-        VoucherNos = ?
+        idVoucherNos = ?
         WHERE email = ?");
 
-        $sql->bind_param("ssss", $newEmail, $cartaoContinente, $VoucherNos, $email);
+        $sql->bind_param("ssis", $newEmail, $cartaoContinente, $VoucherNos, $email);
 
         $sql->execute();
     }
@@ -283,9 +299,9 @@ class DAL_Atualizar{
         $sql=$this->conn->prepare("INSERT INTO DadosExtrasColaborador (
         email,
         cartaoContinente,
-        VoucherNos) VALUES (?, ?, ?)");
+        idVoucherNos) VALUES (?, ?, ?)");
 
-        $sql->bind_param("sss", $newEmail, $cartaoContinente, $VoucherNos);
+        $sql->bind_param("ssi", $newEmail, $cartaoContinente, $VoucherNos);
 
         $sql->execute();
     }
