@@ -93,13 +93,13 @@ class DAL_Atualizar{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    function obterDadosColaborador($email){
+    /*function obterDadosColaborador($email){
         $sql=$this->conn->prepare("SELECT * FROM Utilizador WHERE email=?");
         $sql->bind_param("s",$email);
         $sql->execute();
         $result=$sql->get_result();
         return $result->fetch_assoc();
-    }
+    }*/
     function obterEquipasColaborador($email){
         $sql=$this->conn->prepare("SELECT nomeEquipa FROM Equipa
         JOIN ColaboradoresEquipa ON Equipa.nomeEquipa=ColaboradoresEquipa.nomeEquipa

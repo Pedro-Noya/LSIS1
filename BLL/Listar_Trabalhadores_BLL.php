@@ -36,9 +36,9 @@ class Listar_Trabalhadores_BLL {
         foreach ($equipas as $equipa) {
             $nomeEquipa = $equipa['nomeEquipa'];
             $elementosColaboradores = $this->listarTrabalhadoresDAL->obterElementosPorEquipa($nomeEquipa, 'colaboradoresequipa', $utilizadores);
-            $elementosCoordenadores = $this->listarTrabalhadoresDAL->obterElementosPorEquipa($nomeEquipa, 'coordenadoresequipa', $utilizadores);
+            /*$elementosCoordenadores = $this->listarTrabalhadoresDAL->obterElementosPorEquipa($nomeEquipa, 'ColaboradoresEquipa', $utilizadores);
             
-            $elementosEquipa = array_merge($elementosCoordenadores, $elementosColaboradores);
+            $elementosEquipa = array_merge($elementosCoordenadores, $elementosColaboradores);*/
             $equipasArray[$nomeEquipa] = $elementosEquipa;
         }
 

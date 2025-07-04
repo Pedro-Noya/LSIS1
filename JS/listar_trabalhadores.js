@@ -6,7 +6,7 @@ const converterPapel = {
 };
 
 function atualizarPerfil(email) {
-    window.location.href = 'atualizar_perfil.php?email=' + encodeURIComponent(email);
+    window.location.href = 'InformacoesColaborador.php?email=' + encodeURIComponent(email);
 }
 
 function mostrarCategoria() {
