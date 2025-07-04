@@ -17,5 +17,22 @@ class Login_Utilizador_DAL {
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc();
     }
+
+    public function verificarTabelaCoordenador($email) {
+        $stmt = $this->conn->prepare("SELECT * FROM coordenador WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        if (!$stmt->execute()) {
+            die("Erro ao executar a query: " . $stmt->error);
+        }
+        if ($stmt->get_result()->num_rows === 0) {
+            $query = "INSERT INTO coordenador (email, nivelHierarquico) VALUES (?, 1)";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("s", $email);
+            
+            if (!$stmt->execute()) {
+                die("Erro ao executar a query: " . $stmt->error);
+            }
+        }
+    }
 }
 ?>

@@ -33,8 +33,11 @@ class Login_Utilizador_BLL {
     public function obterPapelPorEmail($email) {
         $utilizador = $this->dal->obterUtilizadorPorEmail($email);
         if ($utilizador) {
-            return $utilizador['papel']; // Retorna o papel do utilizador
+            if ($utilizador['papel'] == 2) {
+                $this->dal->verificarTabelaCoordenador($utilizador['email']);
+            }
+            return $utilizador['papel'];
         }
-        return null; // Se não encontrar o utilizador, retorna null
+        return null;
     }
 }

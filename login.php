@@ -5,24 +5,26 @@ session_start();
 
 $mensagemErro = '';
 
+function login($email, $bll) {
+  $_SESSION['email'] = $email;
+  $_SESSION['papel'] = $bll->obterPapelPorEmail($email);
+  $_SESSION['logged_in'] = true;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bll = new Login_Utilizador_BLL();
     $resultado = $bll->autenticarUtilizador($_POST['email'], $_POST['password']);
 
     if ($resultado === 'ativo') {
-      $_SESSION['email'] = $_POST['email'];
-      $_SESSION['papel'] = $bll->obterPapelPorEmail($_POST['email']);
-      $_SESSION['logged_in'] = true;
-      header("Location: dashboard.php"); // Redireciona após login bem-sucedido
+      login($_POST['email'], $bll);
+      header("Location: dashboard.php");
       exit();
     } else if ($resultado === 'inativo') {
-      $_SESSION['email'] = $_POST['email'];
-      $_SESSION['papel'] = $bll->obterPapelPorEmail($_POST['email']);
-      $_SESSION['logged_in'] = true;
-      header("Location: atualizar_perfil.php"); // Redireciona após login bem-sucedido
+      login($_POST['email'], $bll);
+      header("Location: atualizar_perfil.php"); 
       exit();
     } else {
-      $mensagemErro = $resultado; // Mensagem de erro da BLL
+      $mensagemErro = $resultado;
     }
 }
 ?>
@@ -32,31 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <title>Portal do Colaborador - Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/global.css" />
   <link rel="stylesheet" href="CSS/login.css">
 </head>
 <body>
-
-  <!-- Cabeçalho completo -->
-  <div class="topbar">
-    <div class="topnav">
-      <div class="logo">tlantic</div>
-      <nav>
-        <a href="#">sobre nós</a>
-        <a href="#">soluções</a>
-        <a href="#">setores</a>
-        <a href="#">recursos</a>
-        <a href="#">Pesquisar 🔍</a>
-        <div class="pedido-demo-box">
-          <span>🔔</span>
-          <span>Pedir uma demo</span>
-        </div>
-        <a href="#" class="btn-experiment">Experimente agora</a>
-        <a href="#">PT ▾</a>
-      </nav>
-    </div>
-    <h1>Portal do Colaborador</h1>
-  </div>
+  <?php include "cabecalho.php"; ?>
 
   <!-- Subtítulo -->
   <div class="section-title">Login | Entrar no seu Portal</div>

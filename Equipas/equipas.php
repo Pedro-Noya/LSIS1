@@ -9,7 +9,7 @@ $mensagemErro = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nomeEquipa = $_POST['nomeEquipa'] ?? '';
     $localizacao = $_POST['localizacao'] ?? '';
-    $dataCriacao = $_POST['dataCriacao'] ?? '';
+    $dataCriacao = $_POST['dataCriacao'] ?? date('Y-m-d');
 
     $bll = new Equipa_BLL();
     $resultado = $bll->registarEquipa($nomeEquipa, $localizacao, $dataCriacao);
@@ -32,25 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../CSS/equipas.css">
 </head>
 <body>
-    <div class="topbar">
-        <div class="topnav">
-            <div class="logo">tlantic</div>
-            <nav>
-                <a href="#">sobre nós</a>
-                <a href="#">soluções</a>
-                <a href="#">setores</a>
-                <a href="#">recursos</a>
-                <a href="#">Pesquisar 🔍</a>
-                <div class="pedido-demo-box">
-                    <span>🔔</span>
-                    <span>Pedir uma demo</span>
-                </div>
-                <a href="#" class="btn-experiment">Experimente agora</a>
-                <a href="#">PT ▾</a>
-            </nav>
-        </div>
-        <h1>Portal do Colaborador</h1>
-    </div>
+    <?php include "../cabecalho.php"; ?>
 
     <div class="section-title">Registo de Equipa</div>
 
@@ -67,10 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" id="localizacao" name="localizacao" required>
 
             <label for="dataCriacao">Data de Criação:</label>
-            <input type="date" id="dataCriacao" name="dataCriacao" required value="<?= date('Y-m-d') ?>" disabled>
+            <input type="date" id="dataCriacao" name="dataCriacao" value="<?= date('Y-m-d') ?>" disabled>
 
             <button type="submit">Registar Equipa</button>
         </form>
     </div>
 </body>
-</html>
+</html> 

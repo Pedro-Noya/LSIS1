@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="CSS/global.css" />
 </head>
 <body>
-
+    <?php include "cabecalho.php"; ?>
 
     <?php
         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {

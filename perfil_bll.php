@@ -448,7 +448,7 @@ function showFormRegistar($dados, $controlo){
             echo '<option value="',$ddi["designacao"],'">+',$ddi["ddi"],' - (',$ddi["designacao"],')</option>';
         }
         echo '</select>
-        <input type="text" name="contacto" placeholder=""9********" required><br>
+        <input type="text" name="contacto" placeholder="9********" required><br>
         </div>
 
         <div class="caixa3">
