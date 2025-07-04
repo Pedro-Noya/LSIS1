@@ -14,7 +14,7 @@ function obterDadosPerfil(){
                 //Separação da Morada em Rua e Nº da Porta
                 list($rua, $numPorta)=explode(", ", $_POST["morada"]);
 
-                $dal->atualizarColaborador($_POST["nome"], $_POST["email"]);
+                $dal->atualizarColaborador($_POST["nome"], $_POST["email"], $_POST["password"]);
 
                 if (isset($_FILES['documentoMorada']) && $_FILES['documentoMorada']['error'] === UPLOAD_ERR_OK) {
                     $tipoDocumento="Mod99";
@@ -233,6 +233,9 @@ function showFormAtualizar($dados, $controlo, $disabled){
         </span>
         <span>
         <label>Email:</label><br><input type="text" name="email" placeholder="email" value="',$dados["email"],'" readonly required>
+        </span>
+        <span>
+        <label>Password:</label><br><input type="password" name="password" placeholder="Palavra-Passe" value="',$dados["password_hash"],'" required>
         </span>
         </div>
         <div class="container">

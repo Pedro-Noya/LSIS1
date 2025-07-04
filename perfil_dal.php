@@ -126,14 +126,16 @@ class DAL_Atualizar{
         $sql->execute();
     }
 
-    function atualizarColaborador($nome, $email){
+    function atualizarColaborador($nome, $email, $password){
         $newEmail=$email;
+        $password_hash=password_hash($password, PASSWORD_DEFAULT);
         $sql=$this->conn->prepare("UPDATE Utilizador SET
         email = ?,
-        nome = ?
+        nome = ?,
+        password_hash = ?
         WHERE email = ?");
 
-        $sql->bind_param("sss",$newEmail, $nome, $email);
+        $sql->bind_param("ssss",$newEmail, $nome, $password_hash, $email);
         $sql->execute();
     }
 
