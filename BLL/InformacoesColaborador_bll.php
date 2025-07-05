@@ -100,12 +100,12 @@ function isThisACallback(){
     $dal=new DAL_Atualizar();
     if($dados){
         echo '<form action="InformacoesColaborador.php" method="POST">
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" value="',$dados["numMec"],'" required><br><br>
             <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" required><br><br>
             <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" value="',$dados["nomeAbreviado"],'" required>
             </div>
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" value="',$dados["dataNascimento"],'" required><br>
             </div>
             <div class="caixa2">
@@ -176,7 +176,7 @@ function isThisACallback(){
         echo '<span>
         <label>Nº de Dependentes:</label><br> <input type="text" name="numDependentes" placeholder="Número de Dependentes" value="',$dados["numDependentes"],'" required></span>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" value="',$dados["rua"],', ',$dados["numPorta"],'" required><br>
         <label>Localidade:</label> <input type="text" name="localidade" placeholder="Localidade" value="', $dados["localidade"],'" required><br>
         <label>Código Postal:</label> <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" value="', $dados["codPost"],'" required><br>
@@ -203,10 +203,10 @@ function isThisACallback(){
         <label>Email:</label><br><input type="text" name="email" placeholder="email" value="',$dados["email"],'" required>
         </span>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>IBAN:</label> <input type="text" name="iban" placeholder="IBAN" value="',$dados["iban"],'" required>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Contacto de Emergência:</label><input type="text" name="contactoEmergencia" placeholder="Nome" value="',$dados["contactoEmergencia"],'" required><br>
         <label>Grau de Relacionamento:</label><input type="text" name="grauRelacionamento" placeholder="Grau de Parentesco" value="',$dados["grauRelacionamento"],'" required><br>
         <label>Contacto:</label>';
@@ -249,7 +249,7 @@ function isThisACallback(){
         echo '</select>
         </span>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Habilitações Literárias</label>
         <select name="habLiterarias" required>';
         $habLiterarias_array=$dal->obterHabilitacoesLiterarias();
@@ -317,7 +317,7 @@ function isThisACallback(){
         echo '</select>
         </span>
         </div>
-        <div class="container_button">
+        <div class="containerAtualizar_button">
         <input type="submit" value="Atualizar Informações / Registar">
         </div>
         </form>';
@@ -327,12 +327,12 @@ function isThisACallback(){
     function showFormRegistar($dados){
         $dal=new DAL_Atualizar();
             echo '<form action="InformacoesColaborador.php" method="POST">
-                <div class="container">
+                <div class="containerAtualizar">
                 <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico"><br><br>
                 <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" required><br><br>
                 <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" required>
                 </div>
-                <div class="container">
+                <div class="containerAtualizar">
                 <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" required><br>
                 </div>
                 <div class="caixa2">
@@ -389,7 +389,7 @@ function isThisACallback(){
             echo '<span>
             <label>Nº de Dependentes:</label><br> <input type="text" name="numDependentes" placeholder="Número de Dependentes" required></span>
             </div>
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" required><br>
             <label>Localidade:</label> <input type="text" name="localidade" placeholder="Localidade" required><br>
             <label>Código Postal:</label> <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" required><br>
@@ -412,10 +412,10 @@ function isThisACallback(){
             <label>Email:</label><br><input type="text" name="email" placeholder="email" value="',$dados["email"],'" readonly required>
             </span>
             </div>
-            <div class="container">
+            <div class="containerAtualizar">
             <label>IBAN:</label> <input type="text" name="iban" placeholder="IBAN" required>
             </div>
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Contacto de Emergência:</label><input type="text" name="contactoEmergencia" placeholder="Nome" required><br>
             <label>Grau de Relacionamento:</label><input type="text" name="grauRelacionamento" placeholder="Grau de Parentesco" required><br>
             <label>Contacto:</label>';
@@ -446,7 +446,7 @@ function isThisACallback(){
             echo '</select>
             </span>
             </div>
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Habilitações Literárias</label>
             <select name="habLiterarias" required>';
             $habLiterarias_array=$dal->obterHabilitacoesLiterarias();
@@ -498,7 +498,7 @@ function isThisACallback(){
             echo '</select>
             </span>
             </div>
-            <div class="container_button">
+            <div class="containerAtualizar_button">
             <input type="submit" value="Atualizar Informações / Registar">
             </div>
             </form>';
@@ -507,12 +507,12 @@ function isThisACallback(){
     $dal=new DAL_Atualizar();
     if($dados){
         echo '<form action="atualizar_perfil.php" method="POST">
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" value="',$dados["numMec"],'" readonly required><br><br>
             <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" readonly required><br><br>
             <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" value="',$dados["nomeAbreviado"],'" readonly required>
             </div>
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" value="',$dados["dataNascimento"],'" readonly required><br>
             </div>';
 
@@ -549,7 +549,7 @@ function isThisACallback(){
 
         $situacaoIrs_array=$dal->obterSituacaoIrs();
 
-        echo '<div class="container">
+        echo '<div class="containerAtualizar">
         <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" value="',$dados["rua"],', ',$dados["numPorta"],'" readonly required><br>
         <label>Localidade:</label> <input type="text" name="localidade" placeholder="Localidade" value="', $dados["localidade"],'" readonly required><br>
         <label>Código Postal:</label> <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" value="', $dados["codPost"],'" readonly required><br>
@@ -576,7 +576,7 @@ function isThisACallback(){
         <label>Email:</label><br><input type="text" name="email" placeholder="email" value="',$dados["email"],'" readonly required>
         </span>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Contacto de Emergência:</label><input type="text" name="contactoEmergencia" placeholder="Nome" value="',$dados["contactoEmergencia"],'" readonly required><br>
         <label>Grau de Relacionamento:</label><input type="text" name="grauRelacionamento" placeholder="Grau de Parentesco" value="',$dados["grauRelacionamento"],'" readonly required><br>
         <label>Contacto:</label>';
@@ -591,7 +591,7 @@ function isThisACallback(){
         echo '</select>
         <input type="text" name="contacto" placeholder=""9********" value="',$dados["contacto"],'" readonly required><br>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Habilitações Literárias</label>
         <select name="habLiterarias" disabled required>';
         $habLiterarias_array=$dal->obterHabilitacoesLiterarias();
