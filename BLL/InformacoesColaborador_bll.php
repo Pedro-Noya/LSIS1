@@ -2,12 +2,16 @@
 session_start();
 require_once __DIR__ . '/../DAL/InformacoesColaborador_dal.php';
 
+if($_GET){
+    $_SESSION["emailColaborador"]=$_GET["email"];
+}
 
 function obterDadosPerfil(){
     $dal=new DAL_Atualizar();
     $dados=$dal->obterDadosUtilizador($_SESSION["email"]);
     if($dados["papel"]==3){
-        $email=$_GET["email"];
+        //$email=$_GET["email"];
+        $dadosColaborador=$dal->obterDadosPerfil($_SESSION["emailColaborador"]);
         if($_POST){
             //Separação da Morada em Rua e Nº da Porta
             list($rua, $numPorta)=explode(", ", $_POST["morada"]);
@@ -23,17 +27,27 @@ function obterDadosPerfil(){
             $dal->atualizarDadosFinanceiros($_POST["email"], $_POST["cc"], $_POST["nif"], $_POST["niss"],
             $_POST["situacaoIrs"], $_POST["numDependentes"], $_POST["iban"], $_POST["remuneracao"]);
 
-            $dal->atualizarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
-            if($dados["papel"]==1){
-                $dal->atualizarDadosContrato_Colaborador($_POST["email"], $_POST["regimeHorarioTrabalho"],
-                $_POST["dataInicio"], $_POST["dataFim"]);
-            } else{
-                $dal->atualizarDadosContrato_RH($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
-                $_POST["dataInicio"], $_POST["dataFim"]);
+            //Aqui é importante ter em consideração 2 coisas:
+            //1º Considere-se que o Colaborador tem um voucher NOS com a data 26-09-2025.
+            //Contudo, o RH viu melhor e apercebeu-se que tinha atribuído o voucher errado!
+            //Qual seria a solução para este problema? Óbivamente era "desassociar" o voucher atual desse colaborador
+            //e associar o novo certo.
+            //Como se faria uma coisa dessas? Uma solução é, antes de atualizar os dados extras do colaborador, vai-se
+            //usar uma função para atualizar o estado do voucher antigo para 0 e o novo para 1 e depois sim atualizam-se os dados.
+            //Vão ser usadas, então, duas funções para a atualização do estado do voucher antigo e do voucher novo.
+            if(!(is_null($dadosColaborador["idVoucherNos"])) || $dadosColaborador["idVoucherNos"]!=""){
+                $dal->removerVoucher($dadosColaborador["idVoucherNos"]);
             }
+            if($_POST["voucherNos"]!=""){
+                $dal->adicionarVoucher($_POST["voucherNos"]);
+            }
+            $dal->atualizarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
+            $dal->atualizarDadosContrato_RH($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
+            $_POST["dataInicio"], $_POST["dataFim"]);
         }
-        $dadosColaborador=$dal->obterDadosPerfil($email);
-        showFormRegistar_RH($dadosColaborador);
+
+            //header("Location: index.php");
+            showFormRegistar_RH($dadosColaborador);
     }
     if($dados["papel"]==2){
         $email=$_GET["email"];
@@ -51,7 +65,7 @@ function isThisACallback(){
     function showFormRegistar_RH($dados){  
     $dal=new DAL_Atualizar();
     if($dados){
-        echo '<form action="atualizar_perfil.php" method="POST">
+        echo '<form action="InformacoesColaborador.php" method="POST">
             <div class="container">
             <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" value="',$dados["numMec"],'" required><br><br>
             <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" required><br><br>
@@ -182,7 +196,23 @@ function isThisACallback(){
         <label>Continente</label><input type="text" name="cartaoContinente" placeholer="Nº Cartão Continente" value="',$dados["cartaoContinente"],'" required>
         </span>
         <span>
-        <label>Voucher NOS</label><input type="date" name="voucherNos" value="',$dados["VoucherNos"],'" required/>
+        <label>Voucher NOS</label>
+        <select name="voucherNos">
+        <option value="',null,'">Selecione um voucher NOS</option>';
+        $voucherNos_array=$dal->obterVoucherNos();
+        if($dados["idVoucherNos"]!=null){
+            $dataVoucherNosColaborador=$dal->obterDataVoucher($dados["idVoucherNos"]);
+            echo '<option value="',$dados["idVoucherNos"],'" selected>',$dataVoucherNosColaborador["voucherNos"],'</option>';
+        }
+        foreach($voucherNos_array as $voucherNos){
+            if($voucherNos["idVoucherNos"]==$dados["idVoucherNos"]){
+                echo '<option value="',$voucherNos["idVoucherNos"],'" selected>',$voucherNos["voucherNos"],'</option>';
+            } else{
+                echo '<option value="',$voucherNos["idVoucherNos"],'">',$voucherNos["voucherNos"],'</option>';
+            }
+        }
+
+        echo '</select>
         </span>
         </div>
         <div class="container">

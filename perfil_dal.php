@@ -116,6 +116,7 @@ class DAL_Atualizar{
         $result=$sql->get_result();
         return $result->fetch_assoc();
     }
+    
     function obterDadosColaborador($email){
         $sql=$this->conn->prepare("SELECT * FROM Utilizador WHERE email=?");
         $sql->bind_param("s",$email);
