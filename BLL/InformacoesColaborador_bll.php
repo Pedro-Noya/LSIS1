@@ -44,6 +44,8 @@ function obterDadosPerfil(){
                 $dal->registarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
                 $dal->registarDadosContrato($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
                 $_POST["dataInicio"], $_POST["dataFim"]);
+
+                header("Location: index.php");
             }
             showFormRegistar($dados);
         } else {
@@ -79,6 +81,8 @@ function obterDadosPerfil(){
                 $dal->atualizarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
                 $dal->atualizarDadosContrato_RH($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
                 $_POST["dataInicio"], $_POST["dataFim"]);
+
+                header("Location: index.php");
             }
             showFormAtualizar($dadosColaborador);
         }
