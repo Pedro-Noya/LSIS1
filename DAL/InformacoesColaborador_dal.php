@@ -137,6 +137,14 @@ class DAL_Atualizar{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    function atualizarEstado($email){
+        $estado=1;
+        $sql=$this->conn->prepare("UPDATE Utilizador SET
+        estado = ?
+        WHERE email = ?");
+        $sql->bind_param("is",$estado,$email);
+        $sql->execute();
+    }
     function atualizarDadosPessoais($numMec, $email, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel, $sexo,
     $numPorta, $rua, $codPost, $localidade, $nacionalidade, $designacaoDdiContacto, $contacto, $contactoEmergencia, 
     $grauRelacionamento, $matricula){
@@ -283,19 +291,20 @@ class DAL_Atualizar{
         $sql->execute();
     }
 
-    function registarDadosExtras($email, $cartaoContinente, $VoucherNos){
-        $newEmail=$email;
-        $sql=$this->conn->prepare("INSERT INTO DadosExtrasColaborador (
-        email,
-        cartaoContinente,
-        VoucherNos) VALUES (?, ?, ?)");
-
-        $sql->bind_param("ssi", $newEmail, $cartaoContinente, $VoucherNos);
-
+    function registarDadosExtras($email, $cartaoContinente, $voucherNos){
+        if(is_null($voucherNos) || $voucherNos==""){
+            $sql=$this->conn->prepare("INSERT INTO DadosExtrasColaborador(email, cartaoContinente, idVoucherNos)
+            VALUES(?, ?, NULL)");
+            $sql->bind_param("ss",$email,$cartaoContinente);
+        } else{
+            $sql=$this->conn->prepare("INSERT INTO DadosExtrasColaborador(email, cartaoContinente, idVoucherNos)
+            VALUES(?, ?, ?)");
+            $sql->bind_param("ssi",$email,$cartaoContinente,$voucherNos);
+        }
         $sql->execute();
     }
 
-    function atualizarDadosContrato_Colaborador($email, $regimeHorarioTrabalho, $dataInicio, $dataFim){
+    /*function atualizarDadosContrato_Colaborador($email, $regimeHorarioTrabalho, $dataInicio, $dataFim){
         $newEmail=$email;
         $sql=$this->conn->prepare("UPDATE DadosContratoColaborador SET
         email = ?,
@@ -307,7 +316,7 @@ class DAL_Atualizar{
         $sql->bind_param("sssss", $newEmail, $regimeHorarioTrabalho, $dataInicio, $dataFim, $email);
 
         $sql->execute();
-    }
+    }*/
 
     function atualizarDadosContrato_RH($email, $tipoContrato, $regimeHorarioTrabalho, $dataInicio, $dataFim){
         $newEmail=$email;
