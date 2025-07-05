@@ -8,14 +8,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $idAlerta = $_POST['idAlerta'] ?? null;
 
-    if ($idAlerta) {
-        $resultado = $bll->eliminarAlerta((int)$idAlerta);
-        echo json_encode(['success' => $resultado]);
+    $resultado = $bll->atualizardataEmissao(
+        $idAlerta,
+        date('Y-m-d')
+    );
+
+    if ($resultado) {
+        echo json_encode(['success' => true]);
         exit();
     } else {
-        echo json_encode(['success' => false, 'message' => 'ID do alerta não fornecido']);
+        echo json_encode(['success' => false]);
         exit();
     }
 }
 ?>
-

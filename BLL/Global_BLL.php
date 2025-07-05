@@ -23,7 +23,7 @@ function enviarEmailRegisto($emailPessoal, $emailEmpresa, $nome, $password) {
     $mail->setFrom('grupo5tlantic@test-pzkmgq7zzenl059v.mlsender.net', 'TLantic');
     $mail->addAddress($emailPessoal, $nome);
 
-    $mail->addAttachment('Imagens/mailLogo.png', 'Imagem-Logo.png');
+    $mail->addAttachment(__DIR__ . '/../Imagens/mailLogo.png', 'Imagem-Logo.png');
 
     $mail->isHTML(true);
     $mail->Subject = 'Foi criada a sua conta na TLantic';
@@ -36,11 +36,10 @@ function enviarEmailRegisto($emailPessoal, $emailEmpresa, $nome, $password) {
                    <p>Obrigado por se juntar a nós!</p>";
 
     $mail->send();
-    echo '<script>alert("Email enviado com sucesso!");</script>';
 
     return true;
   } catch (Exception $e) {
-    echo "Erro ao enviar o email: {$mail->ErrorInfo}";
+    error_log("Erro ao enviar o email: {$mail->ErrorInfo}");
     return false;
   }
 }
@@ -62,7 +61,7 @@ function enviarEmailAlerta($email, $titulo, $descricao) {
         $mail->setFrom('grupo5tlantic@test-pzkmgq7zzenl059v.mlsender.net', 'TLantic');
         $mail->addAddress($email, 'Colaborador(a)');
 
-        $mail->addAttachment('Imagens/mailLogo.png', 'Imagem-Logo.png');
+        $mail->addAttachment(__DIR__ . '/../Imagens/mailLogo.png', 'Imagem-Logo.png');
 
         $mail->isHTML(true);
         $mail->Subject = "Alerta: {$titulo}";
@@ -71,11 +70,10 @@ function enviarEmailAlerta($email, $titulo, $descricao) {
                    <p>Obrigado por se juntar a nós!</p>";
 
         $mail->send();
-        echo '<script>alert("Email enviado com sucesso!");</script>';
 
         return true;
   } catch (Exception $e) {
-    echo "Erro ao enviar o email: {$mail->ErrorInfo}";
+    error_log("Erro ao enviar o email: {$mail->ErrorInfo}");
     return false;
   }
 }

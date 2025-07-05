@@ -18,7 +18,7 @@ class Alertas_BLL {
     }
 
     public function enviarAlerta($tipo, $descricao, $email) {
-        enviarEmailAlerta($email, $tipo, $descricao);
+        return enviarEmailAlerta($email, $tipo, $descricao);
     }
 
     public function existeAlerta($tipo, $email, $periodicidade, $descricao) {
@@ -31,6 +31,10 @@ class Alertas_BLL {
 
     public function eliminarAlerta($idAlerta) {
         return $this->dal->eliminarAlerta($idAlerta);
+    }
+
+    public function atualizardataEmissao($idAlerta, $data) {
+        return $this->dal->atualizardataEmissao($idAlerta, $data);
     }
 }
 

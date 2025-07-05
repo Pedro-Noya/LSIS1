@@ -61,5 +61,15 @@ class Alertas_DAL {
             return "Erro ao eliminar alerta: " . $stmt->error;
         }
     }
+
+    public function atualizardataEmissao($idAlerta, $data) {
+        $stmt = $this->conn->prepare("UPDATE alerta SET dataEmissao = ? WHERE idAlerta = ?");
+        $stmt->bind_param("si", $data, $idAlerta);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return "Erro ao atualizar data de emissão: " . $stmt->error;
+        }
+    }
 }
 ?>

@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" id="localizacao" name="localizacao" required>
 
             <label for="dataCriacao">Data de Criação:</label>
-            <input type="date" id="dataCriacao" name="dataCriacao" value="<?= date('Y-m-d') ?>" disabled>
+            <input type="date" id="dataCriacao" name="dataCriacao" value="<?= date('Y-m-d') ?>">
 
             <button type="submit">Registar Equipa</button>
         </form>
