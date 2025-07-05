@@ -29,5 +29,37 @@ class Alertas_DAL {
             return "Erro ao obter alertas: " . $this->conn->error;
         }
     }
+
+    public function existeAlerta($tipo, $email, $periodicidade, $descricao) {
+        $stmt = $this->conn->prepare("SELECT idAlerta FROM alerta WHERE tipo = ? AND email = ? AND periodicidade = ? AND descricao = ?");
+        $stmt->bind_param("ssis", $tipo, $email, $periodicidade, $descricao);
+        $stmt->execute();
+        $stmt->bind_result($idAlerta);
+        if ($stmt->fetch()) {
+            return $idAlerta;
+        } else {
+            return null;
+        }
+    }
+
+    public function atualizarAlerta($idAlerta, $tipo, $descricao, $periodicidade, $email) {
+        $stmt = $this->conn->prepare("UPDATE alerta SET tipo = ?, descricao = ?, periodicidade = ?, email = ? WHERE idAlerta = ?");
+        $stmt->bind_param("ssisi", $tipo, $descricao, $periodicidade, $email, $idAlerta);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return "Erro ao atualizar alerta: " . $stmt->error;
+        }
+    }
+
+    public function eliminarAlerta($idAlerta) {
+        $stmt = $this->conn->prepare("DELETE FROM alerta WHERE idAlerta = ?");
+        $stmt->bind_param("i", $idAlerta);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return "Erro ao eliminar alerta: " . $stmt->error;
+        }
+    }
 }
 ?>

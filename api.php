@@ -5,9 +5,9 @@ header("Content-Type: application/json; charset=UTF-8");
 
 // Configuração da base de dados
 $host = "localhost";
-$dbname = "tlantic";     // ⚠️ Muda aqui
-$user = "root";             // ⚠️ Muda aqui
-$password = "";           // ⚠️ Muda aqui
+$dbname = "tlantic";    
+$user = "root";             
+$password = "";           
 
 // Conectar ao MySQL
 try {

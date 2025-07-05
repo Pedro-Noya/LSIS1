@@ -20,15 +20,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
             $mensagemErro = 'Erro ao enviar alerta único.';
         }
     } else {
-        $resultado = $bll->cadastrarAlerta(
-            $_POST['tipo'],
-            $_POST['descricao'],
-            (int)$_POST['periodicidade'],
-            $_POST['email'],
-            date('Y-m-d')
-        );
-        if (!$resultado) {
-            $mensagemErro = 'Erro ao cadastrar alerta: ' . $resultado;
+        $idAlerta = $_POST['idAlerta'] ?? null;
+        if ($idAlerta)
+        {
+            header('Content-Type: application/json');
+            $resultado = $bll->atualizarAlerta(
+                (int)$idAlerta,
+                $_POST['tipo'],
+                $_POST['descricao'],
+                (int)$_POST['periodicidade'],
+                $_POST['email']
+            );
+            echo json_encode(['success' => $resultado]);
+            exit();
+        } else {
+            $resultado = $bll->cadastrarAlerta(
+                $_POST['tipo'],
+                $_POST['descricao'],
+                (int)$_POST['periodicidade'],
+                $_POST['email'],
+                date('Y-m-d')
+            );
+            if (!$resultado) {
+                $mensagemErro = 'Erro ao cadastrar alerta: ' . $resultado;
+            }
         }
     }
 
@@ -88,12 +103,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
         <?php
             foreach ($bll->listarAlertas() as $alerta) {
                 echo '<div class="alerta-card" data-id="' . htmlspecialchars($alerta['idAlerta']) . '">';
-                echo '<h3 class="tipo">' . htmlspecialchars($alerta['tipo']) . '</h3>';
-                echo '<p class="descricao">' . htmlspecialchars($alerta['descricao']) . '</p>';
+                echo '<p class="tipo"><strong>Tipo: </strong>' . htmlspecialchars($alerta['tipo']) . '</p>';
+                echo '<p class="descricao"><strong>Descrição: </strong>' . htmlspecialchars($alerta['descricao']) . '</p>';
                 echo '<p class="periodicidade"><strong>Periodicidade:</strong> ' . htmlspecialchars($alerta['periodicidade']) . ' dias</p>';
                 echo '<p class="email"><strong>Email:</strong> ' . htmlspecialchars($alerta['email']) . '</p>';
                 echo '<p class="dataEmissao"><strong>Data de Criação:</strong> ' . htmlspecialchars($alerta['dataEmissao']) . '</p>';
                 echo '<button class="btn editar-btn">Editar</button>';
+                echo '<button class="btn eliminar-btn">Eliminar</button>';
                 echo '</div>';
             }
         ?>

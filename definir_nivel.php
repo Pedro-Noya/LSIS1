@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $bll = new Listar_Trabalhadores_BLL();
         $bll->definirNivel($email, (int)$nivel);
         echo json_encode(['success' => true]);
-        exit;
+        exit();
     }
 }
 

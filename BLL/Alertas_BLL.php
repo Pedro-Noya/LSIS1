@@ -20,6 +20,18 @@ class Alertas_BLL {
     public function enviarAlerta($tipo, $descricao, $email) {
         enviarEmailAlerta($email, $tipo, $descricao);
     }
+
+    public function existeAlerta($tipo, $email, $periodicidade, $descricao) {
+        return $this->dal->existeAlerta($tipo, $email, $periodicidade, $descricao);
+    }
+
+    public function atualizarAlerta($idAlerta, $tipo, $descricao, $periodicidade, $email) {
+        return $this->dal->atualizarAlerta($idAlerta, $tipo, $descricao, $periodicidade, $email);
+    }
+
+    public function eliminarAlerta($idAlerta) {
+        return $this->dal->eliminarAlerta($idAlerta);
+    }
 }
 
 ?>
