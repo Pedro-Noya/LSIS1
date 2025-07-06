@@ -54,9 +54,12 @@ function obterDadosPerfil(){
             showFormAtualizar($dados, $controlo, $disabled);
         }
         else{
+            $dadosBase=$dal->obterDadosUtilizador($_SESSION["email"]);
             if($_POST){
                 //Separação da Morada em Rua e Nº da Porta
                 list($rua, $numPorta)=explode(", ", $_POST["morada"]);
+
+                $dal->atualizarColaborador($_POST["nome"], $_POST["email"], $_POST["password"]);
 
                 $dal->registarDadosPessoais($_POST["numMec"], $_POST["email"], $_POST["nomeAbreviado"], $_POST["dataNascimento"],
                 $_POST["designacaoDdiTelemovel"], $_POST["telemovel"], $_POST["sexo"], $numPorta, $rua,
@@ -82,7 +85,7 @@ function obterDadosPerfil(){
 
                 header("Location: index.php");
             }
-            showFormRegistar();
+            showFormRegistar($dadosBase);
         }
     }
     else if($result["papel"]==2 || $result["papel"]==3 || $result["papel"]==4){
@@ -91,7 +94,7 @@ function obterDadosPerfil(){
             //Separação da Morada em Rua e Nº da Porta
             list($rua, $numPorta)=explode(", ", $_POST["morada"]);
 
-            $dal->atualizarColaborador($_POST["nome"], $_POST["email"]);
+            $dal->atualizarColaborador($_POST["nome"], $_POST["email"], $_POST["password"]);
 
             $dal->atualizarDadosPessoais($_POST["numMec"], $_POST["email"], $_POST["nomeAbreviado"], $_POST["dataNascimento"],
             $_POST["designacaoDdiTelemovel"], $_POST["telemovel"], $_POST["sexo"], $numPorta, $rua,
@@ -370,12 +373,12 @@ function showFormAtualizar($dados, $controlo, $disabled){
     }
 }
 
-function showFormRegistar(){  
+function showFormRegistar($dadosBase){  
     $dal=new DAL_Atualizar();
         echo '<form action="perfil.php" method="POST">
             <div class="containerAtualizar">
             <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" readonly required><br><br>
-            <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" required><br><br>
+            <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dadosBase["nome"],'"required><br><br>
             <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" required>
             </div>
             <div class="containerAtualizar">
@@ -460,6 +463,8 @@ function showFormRegistar(){
         <span>
         <label>Email:</label><br><input type="text" name="email" value="',$_SESSION["email"],'" placeholder="email" readonly required>
         </span>
+        <span>
+        <label>Password:</label><br><input type="password" name="password" value="',$dadosBase["password_hash"],'" required>
         </div>
         <div class="containerAtualizar">
         <label>IBAN:</label> <input type="text" name="iban" placeholder="IBAN" required>
