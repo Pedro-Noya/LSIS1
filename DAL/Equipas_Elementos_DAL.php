@@ -28,7 +28,7 @@ class Equipa_Elementos_DAL {
 
     public function adicionarElemento($nomeEquipa, $emailElemento, $db) {
 
-        if (!in_array($db, ['colaboradoresequipa', 'coordenadoresequipa'])) {
+        if (!in_array($db, ['colaboradoresequipa'])) {
           die("Tabela inválida.");
         }
         // Verifica se o elemento já está na equipa
