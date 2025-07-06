@@ -36,12 +36,5 @@ include "dashboard_bll.php";
                     
                 </div>
             </div>
-            <div class="box">
-                <h2>Demográficas Empresariais</h2>
-                <div class="stats">
-                    <div><strong>95</strong><br>Taxa de Retenção</div>
-                    <div><strong>2,5</strong><br>Remuneração Média</div>
-                </div>
-            </div>
     </body>
 </html>
