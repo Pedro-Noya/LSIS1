@@ -19,7 +19,7 @@ class Equipas_Elementos_BLL {
                 return "O elemento não existe";
             }
 
-        if ($papelElemento !== 1 && $papelElemento !== 2) {
+        if ($papelElemento !== 1 && $papelElemento !== 2 && $papelElemento !== 3) {
             return "O elemento não pode ser adicionado à equipa, pois não é um colaborador ou coordenador.";
         }
 

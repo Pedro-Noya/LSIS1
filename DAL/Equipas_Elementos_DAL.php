@@ -28,9 +28,9 @@ class Equipa_Elementos_DAL {
 
     public function adicionarElemento($nomeEquipa, $emailElemento, $db) {
 
-        if (!in_array($db, ['colaboradoresequipa'])) {
+        /*if (!in_array($db, ['colaboradoresequipa'])) {
           die("Tabela inválida.");
-        }
+        }*/
         // Verifica se o elemento já está na equipa
         $stmt = $this->conn->prepare("SELECT * FROM $db WHERE nomeEquipa = ? AND email = ?");
         $stmt->bind_param("ss", $nomeEquipa, $emailElemento);
