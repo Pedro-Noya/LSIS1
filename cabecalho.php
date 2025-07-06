@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="CSS/global.css" />
+<link rel="stylesheet" href="/PortalColaborador/CSS/global.css" />
 <div class="topbar">
     <div class="topnav">
         <div class="logo">tlantic</div>

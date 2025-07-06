@@ -28,5 +28,14 @@ class Equipa_DAL {
         
         return $stmt->execute();
     }
+
+    public function obterEquipas() {
+        $query = "SELECT * FROM equipa";
+        $resultado = $this->conn->query($query);
+        if (!$resultado) {
+            die("Erro na consulta: " . $this->conn->error);
+        }
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
 }
 ?>

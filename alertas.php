@@ -64,56 +64,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
 <body>
     <?php include 'cabecalho.php'; ?>
 
-    <div class="container">
-        <?php if (!empty($mensagemErro)): ?>
+    <div class="section-title">Alertas | Criar Alertas</div>
+
+    <br/>
+
+    <?php if (!empty($mensagemErro)): ?>
         <div class="erro"><?= htmlspecialchars($mensagemErro) ?></div>
-        <?php endif; ?>
-    </div>
+    <?php endif; ?>
 
-    <div class="container">
-        <h1>Alertas</h1>
+    <div class="containers-row">
+        <div class="container">
+            <h1>Alertas</h1>
 
-        <?php if (isset($_GET['sucesso'])): ?>
-            <div class="alerta-card" style="background:#d4edda;color:#155724;">Alerta cadastrado com sucesso!</div>
-        <?php endif; ?>
+            <?php if (isset($_GET['sucesso'])): ?>
+                <div class="alerta-card" style="background:#d4edda;color:#155724;">Alerta cadastrado com sucesso!</div>
+            <?php endif; ?>
 
-        <div class="novo-alerta">
-            <h2>Novo Alerta</h2>
-            <form method="post">
-                <label>Tipo:</label><br/>
-                <select name="tipo" required style="width:100%;">
-                    <option value="" selected disabled>Tipo de Alerta</option>
-                    <option value="documentacao">Documentação</option>
-                </select>
-                <br/><br/>
-                <label>Corpo do email:</label><br/>
-                    <textarea name="descricao" required style="width:100%;"></textarea>
-                <br/><br/>
-                <label>Periodicidade (dias):</label><br/>
-                    <input type="number" name="periodicidade" min="0" placeholder="Definir como 0 para alerta único!" required style="width:100%;">
-                <br/><br/>
-                <label>Email para envio:</label><br/>
-                    <input type="email" name="email" required style="width:100%;">
-                <br/><br/>
-                <button class="btn" type="submit">Cadastrar Alerta</button>
-            </form>
+            <div class="novo-alerta">
+                <h2>Novo Alerta</h2>
+                <form method="post">
+                    <label>Tipo:</label><br/>
+                    <select name="tipo" required style="width:100%;">
+                        <option value="" selected disabled>Tipo de Alerta</option>
+                        <option value="documentacao">Documentação</option>
+                    </select>
+                    <br/><br/>
+                    <label>Corpo do email:</label><br/>
+                        <textarea name="descricao" required style="width:100%;"></textarea>
+                    <br/><br/>
+                    <label>Periodicidade (dias):</label><br/>
+                        <input type="number" name="periodicidade" min="0" placeholder="Definir como 0 para alerta único!" required style="width:100%;">
+                    <br/><br/>
+                    <label>Email para envio:</label><br/>
+                        <input type="email" name="email" required style="width:100%;">
+                    <br/><br/>
+                    <button class="btn" type="submit">Cadastrar Alerta</button>
+                </form>
+            </div>
         </div>
 
-        <h2>Alertas Existentes</h2>
-        <?php
-            foreach ($bll->listarAlertas() as $alerta) {
-                echo '<div class="alerta-card" data-id="' . htmlspecialchars($alerta['idAlerta']) . '">';
-                echo '<p class="tipo"><strong>Tipo: </strong>' . htmlspecialchars($alerta['tipo']) . '</p>';
-                echo '<p class="descricao"><strong>Descrição: </strong>' . htmlspecialchars($alerta['descricao']) . '</p>';
-                echo '<p class="periodicidade"><strong>Periodicidade:</strong> ' . htmlspecialchars($alerta['periodicidade']) . ' dias</p>';
-                echo '<p class="email"><strong>Email:</strong> ' . htmlspecialchars($alerta['email']) . '</p>';
-                echo '<p class="dataEmissao"><strong>Data de Criação:</strong> ' . htmlspecialchars($alerta['dataEmissao']) . '</p>';
-                echo '<button class="btn editar-btn">Editar</button>';
-                echo '<button class="btn eliminar-btn">Eliminar</button>';
-                echo '</div>';
-            }
-        ?>
-        
+        <div class="container">
+            <h2>Alertas Existentes</h2>
+            <?php
+                foreach ($bll->listarAlertas() as $alerta) {
+                    echo '<div class="alerta-card" data-id="' . htmlspecialchars($alerta['idAlerta']) . '">';
+                    echo '<p class="tipo"><strong>Tipo: </strong>' . htmlspecialchars($alerta['tipo']) . '</p>';
+                    echo '<p class="descricao"><strong>Descrição: </strong>' . htmlspecialchars($alerta['descricao']) . '</p>';
+                    echo '<p class="periodicidade"><strong>Periodicidade:</strong> ' . htmlspecialchars($alerta['periodicidade']) . ' dias</p>';
+                    echo '<p class="email"><strong>Email:</strong> ' . htmlspecialchars($alerta['email']) . '</p>';
+                    echo '<p class="dataEmissao"><strong>Data de Criação:</strong> ' . htmlspecialchars($alerta['dataEmissao']) . '</p>';
+                    echo '<button class="btn editar-btn">Editar</button>';
+                    echo '<button class="btn eliminar-btn">Eliminar</button>';
+                    echo '</div>';
+                }
+            ?>
+            
+        </div>
     </div>
     <script src="JS/alertas.js"></script>
 </body>

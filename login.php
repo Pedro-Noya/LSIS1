@@ -42,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <!-- Subtítulo -->
   <div class="section-title">Login | Entrar no seu Portal</div>
 
+  <br/>
+
   <!-- Formulário -->
   <div class="container">
     <?php if (!empty($mensagemErro)): ?>

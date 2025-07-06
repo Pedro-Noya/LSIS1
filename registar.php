@@ -45,7 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <meta charset="UTF-8" />
   <title>Portal do Colaborador - Registo</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="CSS/global.css" />
   <link rel="stylesheet" href="CSS/registar.css" />
 </head>
 <body>
@@ -53,6 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <?php include "cabecalho.php"; ?>
 
   <div class="section-title">Registar Utilizador no Portal</div>
+  <br/>
+
+  <?php if (!empty($mensagemErro)): ?>
+    <div class="erro"><?= htmlspecialchars($mensagemErro) ?></div>
+  <?php endif; ?>
 
   <div class="container">
     <form method="POST" action="">
@@ -67,9 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <button type="submit">Registar</button>
     </form>
 
-    <?php if (!empty($mensagemErro)): ?>
-      <div class="erro"><?= htmlspecialchars($mensagemErro) ?></div>
-    <?php endif; ?>
   </div>
   <script src="JS/capsLockWarning.js"></script>
 </body>

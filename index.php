@@ -6,7 +6,6 @@
 <html>
 <head>
     <title>Buttons</title>
-    <link rel="stylesheet" href="CSS/global.css" />
 </head>
 <body>
     <?php include "cabecalho.php"; ?>
@@ -30,7 +29,7 @@
         }
     ?>
     <button onclick="location.href='registar.php'">Registar</button>
-    <button onclick="location.href='atualizar_perfil.php'">Atualizar</button>
+    <button onclick="location.href='InformacoesColaborador.php'">Atualizar</button>
 
 </body>
 </html>
