@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       exit();
     } else if ($resultado === 'inativo') {
       login($_POST['email'], $bll);
-      header("Location: index.php"); 
+      header("Location: perfil.php"); 
       exit();
     } else {
       $mensagemErro = $resultado;

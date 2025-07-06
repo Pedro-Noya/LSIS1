@@ -14,7 +14,6 @@ include "dashboard_bll.php";
     </head>
     <body>
         <?php include "cabecalho.php"; ?>
-        <h1>Portal do Colaborador</h1>
             <div class="tabs">
                 <div class="active">Dashboard</div>
                     <div>Info Pessoal</div>
@@ -32,16 +31,17 @@ include "dashboard_bll.php";
             <br><br>
             <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
 
-                <div class="content">
-                    <div class="box">
-                        
-                    </div>
-
+            <div class="content">
                 <div class="box">
-                    <h2>Demográficas Empresariais</h2>
-                    <div class="stats">
-                        <div><strong>95</strong><br>Taxa de Retenção</div>
-                        <div><strong>2,5</strong><br>Remuneração Média</div>
-                    </div>
+                    
+                </div>
+            </div>
+            <div class="box">
+                <h2>Demográficas Empresariais</h2>
+                <div class="stats">
+                    <div><strong>95</strong><br>Taxa de Retenção</div>
+                    <div><strong>2,5</strong><br>Remuneração Média</div>
+                </div>
+            </div>
     </body>
 </html>

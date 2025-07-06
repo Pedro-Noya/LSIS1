@@ -12,7 +12,7 @@ class Listar_Trabalhadores_DAL {
 
     function exportarColaboradoresExcel($email){
         $filename="Lista_Colaboradores";
-        $file_ending="xls"
+        $file_ending="xls";
         header("Content-Type: application/xls");    
         header("Content-Disposition: attachment; filename=$filename.'.'.$file_ending");  
         header("Pragma: no-cache"); 

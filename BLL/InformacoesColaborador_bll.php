@@ -92,14 +92,14 @@ function obterDadosPerfil(){
         $dadosColaborador=$dal->obterDadosPerfil($email);
         showFormCoordenador($dadosColaborador);
     }
-}
 
-function isThisACallback(){
-    if($_POST){ //Acrescentar mais validações que possam ser necessárias
-        return true;
+    function isThisACallback(){
+        if($_POST){ //Acrescentar mais validações que possam ser necessárias
+            return true;
+        }
+        return false;
     }
-    return false;
-}
+
     function showFormAtualizar($dados){  
     $dal=new DAL_Atualizar();
     if($dados){

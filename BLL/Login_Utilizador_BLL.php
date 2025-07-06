@@ -27,7 +27,7 @@ class Login_Utilizador_BLL {
         $_SESSION['utilizador_id'] = $utilizador['id'];
         $_SESSION['nome'] = $utilizador['nome'];
 
-        return ($utilizador['estado'] === 1) ? 'ativo' : 'inativo';
+        return ($utilizador['estado'] == 1) ? 'ativo' : 'inativo';
     }
 
     public function obterPapelPorEmail($email) {

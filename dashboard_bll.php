@@ -14,7 +14,7 @@ function obterFuncao(){
     $funcao=$dal->obterFuncao($email);
     return $funcao;
 }
-function showStatistics($papelMax){
+function showStatistics(){
     $funcao=obterFuncao();
     switch($funcao["papel"]){
         case 2:
