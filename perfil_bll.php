@@ -8,7 +8,7 @@ function obterDadosPerfil(){
     //$dados=$dal->obterDadosUtilizador($_SESSION["email"]);
     $result=$dal->obterEstadoPapel($_SESSION["email"]);
     if($result["papel"]==1){
-        if($result["estado"]==true){
+        if($result["estado"]==1){
             $dados=$dal->obterDadosPerfil($_SESSION["email"]);
             if($_POST){
                 //Separação da Morada em Rua e Nº da Porta
@@ -33,6 +33,13 @@ function obterDadosPerfil(){
                 $dal->atualizarDadosFinanceiros($_POST["email"], $_POST["cc"], $_POST["nif"], $_POST["niss"],
                 $_POST["situacaoIrs"], $_POST["numDependentes"], $_POST["iban"], $_POST["remuneracao"]);
 
+                if(!(is_null($dadosColaborador["idVoucherNos"])) || $dadosColaborador["idVoucherNos"]!=""){
+                    $dal->removerVoucher($dadosColaborador["idVoucherNos"]);
+                }
+                if($_POST["voucherNos"]!=""){
+                    $dal->adicionarVoucher($_POST["voucherNos"]);
+                }
+
                 $dal->atualizarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
 
                 $dal->atualizarDadosContrato($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
@@ -40,7 +47,7 @@ function obterDadosPerfil(){
 
                 //$dal->atualizarPedidos($_POST["email"], $rua, $numPorta);
 
-                header("Location: perfil.php");
+                header("Location: index.php");
             }
             $controlo="readonly";
             $disabled="disabled";
@@ -62,6 +69,10 @@ function obterDadosPerfil(){
                 $dal->registarDadosFinanceiros($_POST["email"], $_POST["cc"], $_POST["nif"], $_POST["niss"],
                 $_POST["situacaoIrs"], $_POST["numDependentes"], $_POST["iban"], $_POST["remuneracao"]);
 
+                if($_POST["voucherNos"]!=""){
+                    $dal->adicionarVoucher($_POST["voucherNos"]);
+                }
+
                 $dal->registarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
 
                 $dal->registarDadosContrato($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
@@ -69,7 +80,7 @@ function obterDadosPerfil(){
 
                 $dal->atualizarEstadoColaborador($_POST["email"]);
 
-                header("Location: perfil.php");
+                header("Location: index.php");
             }
             showFormRegistar();
         }
@@ -100,7 +111,7 @@ function obterDadosPerfil(){
 
             //$dal->atualizarPedidos($_POST["email"], $rua, $numPorta);
 
-            header("Location: perfil.php");
+            header("Location: index.php");
         }
         $controlo="";
         $disabled="";
@@ -125,12 +136,12 @@ function showFormAtualizar($dados, $controlo, $disabled){
             $select="disabled";
         }
         echo '<form action="perfil.php" method="POST" enctype="multipart/form-data">
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" value="',$dados["numMec"],'" ',$controlo,' required><br><br>
             <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" value="',$dados["nome"],'" ',$controlo,' required><br><br>
             <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" value="',$dados["nomeAbreviado"],'" ',$controlo,' required>
             </div>
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" value="',$dados["dataNascimento"],'" ',$controlo,' required><br>
             </div>
             <div class="caixa2">
@@ -203,7 +214,7 @@ function showFormAtualizar($dados, $controlo, $disabled){
         echo '<span>
         <label>Nº de Dependentes:</label><br> <input type="text" name="numDependentes" placeholder="Número de Dependentes" value="',$dados["numDependentes"],'" required></span>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" value="',$dados["rua"],', ',$dados["numPorta"],'" required>
         <div class="input-file-wrapper">
         <label for="ficheiroMorada" class="input-file-label">Escolher comprovativo de morada</label>
@@ -238,10 +249,10 @@ function showFormAtualizar($dados, $controlo, $disabled){
         <label>Password:</label><br><input type="password" name="password" placeholder="Palavra-Passe" value="',$dados["password_hash"],'" required>
         </span>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>IBAN:</label> <input type="text" name="iban" placeholder="IBAN" value="',$dados["iban"],'" required>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Contacto de Emergência:</label><input type="text" name="contactoEmergencia" placeholder="Nome" value="',$dados["contactoEmergencia"],'" required><br>
         <label>Grau de Relacionamento:</label><input type="text" name="grauRelacionamento" placeholder="Grau de Parentesco" value="',$dados["grauRelacionamento"],'" required><br>
         <label>Contacto:</label>';
@@ -275,7 +286,7 @@ function showFormAtualizar($dados, $controlo, $disabled){
         <input type="date" name="voucherNos" value="',$dados["idVoucherNos"],'" ',$controlo,' hidden/>
         </span>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Habilitações Literárias</label>
         <select name="habLiterarias" required>';
         $habLiterarias_array=$dal->obterHabilitacoesLiterarias();
@@ -352,7 +363,7 @@ function showFormAtualizar($dados, $controlo, $disabled){
         echo '</select>
         </span>
         </div>
-        <div class="container_button">
+        <div class="containerAtualizar_button">
         <input type="submit" value="Atualizar Informações / Registar">
         </div>
         </form>';
@@ -362,12 +373,12 @@ function showFormAtualizar($dados, $controlo, $disabled){
 function showFormRegistar(){  
     $dal=new DAL_Atualizar();
         echo '<form action="perfil.php" method="POST">
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Nº Mecanográfico:</label><br> <input type="text" name="numMec" placeholder="Nº Mecanográfico" readonly required><br><br>
             <label>Nome Completo:</label><br> <input type="text" name="nome" placeholder="Nome Completo" required><br><br>
             <label>Nome Abreviado:</label><br> <input type="text" name="nomeAbreviado" placeholder="ex: António Silva" required>
             </div>
-            <div class="container">
+            <div class="containerAtualizar">
             <label>Data de Nascimento:</label><br> <input type="date" name="dataNascimento" required><br>
             </div>
             <div class="caixa2">
@@ -427,7 +438,7 @@ function showFormRegistar(){
         echo '<span>
         <label>Nº de Dependentes:</label><br> <input type="text" name="numDependentes" placeholder="Número de Dependentes" required></span>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Morada:</label> <input type="text" name="morada" placeholder="Rua, Nº da Porta" required><br>
         <label>Localidade:</label> <input type="text" name="localidade" placeholder="Localidade" required><br>
         <label>Código Postal:</label> <input type="text" name="codPostal" placeholder="Código Postal (ex: 4320-350)" required><br>
@@ -450,10 +461,10 @@ function showFormRegistar(){
         <label>Email:</label><br><input type="text" name="email" value="',$_SESSION["email"],'" placeholder="email" readonly required>
         </span>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>IBAN:</label> <input type="text" name="iban" placeholder="IBAN" required>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Contacto de Emergência:</label><input type="text" name="contactoEmergencia" placeholder="Nome" required><br>
         <label>Grau de Relacionamento:</label><input type="text" name="grauRelacionamento" placeholder="Grau de Parentesco" required><br>
         <label>Contacto:</label>';
@@ -478,16 +489,14 @@ function showFormRegistar(){
         #É correr o array sexo_array e ver em qual indice o valor do sexo é igual ao sexo do colaborador em questão.
 
         echo '<label>Voucher NOS:</label><br> <select name="voucherNos">
-        <option value="',null,'">Indique uma data VoucherNOS</option>';
+        <option value="',null,'" selected>Indique uma data VoucherNOS</option>';
         foreach($voucherNos_array as $resultado){
-            if($resultado["estado"]==0){
-                echo '<option value="',$resultado["idVoucherNos"],'">',$resultado["voucherNos"],'</option>';
-            }
+            echo '<option value="',$resultado["idVoucherNos"],'">',$resultado["voucherNos"],'</option>';
         }
         echo '</select><br>
         </span>
         </div>
-        <div class="container">
+        <div class="containerAtualizar">
         <label>Habilitações Literárias</label>
         <select name="habLiterarias" required>';
         $habLiterarias_array=$dal->obterHabilitacoesLiterarias();
@@ -543,7 +552,7 @@ function showFormRegistar(){
         echo '</select>
         </span>
         </div>
-        <div class="container_button">
+        <div class="containerAtualizar_button">
         <input type="submit" value="Atualizar Informações / Registar">
         </div>
         </form>';

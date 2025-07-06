@@ -101,10 +101,26 @@ class DAL_Atualizar{
     }
 
     function obterVoucherNos(){
-        $sql=$this->conn->prepare("SELECT * FROM VoucherNos");
+        $estado=0;
+        $sql=$this->conn->prepare("SELECT * FROM VoucherNos WHERE estado=?");
+        $sql->bind_param("i",$estado);
         $sql->execute();
         $result=$sql->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function removerVoucher($idVoucherNos){
+        $estado=0;
+        $sql=$this->conn->prepare("UPDATE VoucherNos SET estado = ? WHERE idVoucherNos = ?");
+        $sql->bind_param("ii",$estado,$idVoucherNos);
+        $sql->execute();
+    }
+
+    function adicionarVoucher($idVoucherNos){
+        $estado=1;
+        $sql=$this->conn->prepare("UPDATE VoucherNos SET estado = ? WHERE idVoucherNos = ?");
+        $sql->bind_param("ii",$estado,$idVoucherNos);
+        $sql->execute();
     }
 
     function obterDataVoucherNos($email){
@@ -282,28 +298,36 @@ class DAL_Atualizar{
 
     
 
-    function atualizarDadosExtras($email, $cartaoContinente, $VoucherNos){
+    function atualizarDadosExtras($email, $cartaoContinente, $voucherNos){
         $newEmail=$email;
-        $sql=$this->conn->prepare("UPDATE DadosExtrasColaborador SET
-        email = ?,
-        cartaoContinente = ?,
-        idVoucherNos = ?
-        WHERE email = ?");
-
-        $sql->bind_param("ssis", $newEmail, $cartaoContinente, $VoucherNos, $email);
-
+        if (is_null($voucherNos) || $voucherNos==""){
+            $sql = $this->conn->prepare("UPDATE DadosExtrasColaborador SET
+            email = ?,
+            cartaoContinente = ?,
+            idVoucherNos = NULL
+            WHERE email = ?");
+            $sql->bind_param("sss", $newEmail, $cartaoContinente, $email);
+        } else {
+            $sql = $this->conn->prepare("UPDATE DadosExtrasColaborador SET
+            email = ?,
+            cartaoContinente = ?,
+            idVoucherNos = ?
+            WHERE email = ?");
+            $sql->bind_param("ssis", $newEmail, $cartaoContinente, $voucherNos, $email);
+        }
         $sql->execute();
     }
 
-    function registarDadosExtras($email, $cartaoContinente, $VoucherNos){
-        $newEmail=$email;
-        $sql=$this->conn->prepare("INSERT INTO DadosExtrasColaborador (
-        email,
-        cartaoContinente,
-        idVoucherNos) VALUES (?, ?, ?)");
-
-        $sql->bind_param("ssi", $newEmail, $cartaoContinente, $VoucherNos);
-
+    function registarDadosExtras($email, $cartaoContinente, $voucherNos){
+        if(is_null($voucherNos) || $voucherNos==""){
+            $sql=$this->conn->prepare("INSERT INTO DadosExtrasColaborador(email, cartaoContinente, idVoucherNos)
+            VALUES(?, ?, NULL)");
+            $sql->bind_param("ss",$email,$cartaoContinente);
+        } else{
+            $sql=$this->conn->prepare("INSERT INTO DadosExtrasColaborador(email, cartaoContinente, idVoucherNos)
+            VALUES(?, ?, ?)");
+            $sql->bind_param("ssi",$email,$cartaoContinente,$voucherNos);
+        }
         $sql->execute();
     }
 
