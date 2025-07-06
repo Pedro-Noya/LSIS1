@@ -30,11 +30,7 @@ class Equipas_Elementos_BLL {
 
 
         // 3. Adicionar elemento à equipa
-        if ($papelElemento === 1) {
-            $sucesso = $this->equipaElementosDAL->adicionarElemento($nomeEquipa, $emailElemento, "colaboradoresequipa");
-        } else {
-            $sucesso = $this->equipaElementosDAL->adicionarElemento($nomeEquipa, $emailElemento, "coordenadoresequipa");
-        }
+        $sucesso = $this->equipaElementosDAL->adicionarElemento($nomeEquipa, $emailElemento, "colaboradoresequipa");
 
         if (!$sucesso) {
             return "Erro ao adicionar o elemento à equipa.";
