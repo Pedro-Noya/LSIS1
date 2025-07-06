@@ -119,16 +119,6 @@ class Equipa_Elementos_DAL {
         if ($resultado->num_rows > 0) {
             return true;
         }
-
-        // Verifica na tabela de coordenadores
-        $stmt = $this->conn->prepare("SELECT * FROM coordenadoresequipa WHERE email = ?");
-        $stmt->bind_param("s", $emailElemento);
-        if (!$stmt->execute()) {
-            die("Erro ao executar a query: " . $stmt->error);
-        }
-        $resultado = $stmt->get_result();
-
-        return $resultado->num_rows > 0;
     }
 
 }
