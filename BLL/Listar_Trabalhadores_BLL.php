@@ -36,9 +36,9 @@ class Listar_Trabalhadores_BLL {
         foreach ($equipas as $equipa) {
             $nomeEquipa = $equipa['nomeEquipa'];
             $elementosColaboradores = $this->listarTrabalhadoresDAL->obterElementosPorEquipa($nomeEquipa, 'colaboradoresequipa', $utilizadores);
-            $elementosCoordenadores = $this->listarTrabalhadoresDAL->obterElementosPorEquipa($nomeEquipa, 'coordenadoresequipa', $utilizadores);
+            /*$elementosCoordenadores = $this->listarTrabalhadoresDAL->obterElementosPorEquipa($nomeEquipa, 'ColaboradoresEquipa', $utilizadores);
             
-            $elementosEquipa = array_merge($elementosCoordenadores, $elementosColaboradores);
+            $elementosEquipa = array_merge($elementosCoordenadores, $elementosColaboradores);*/
             $equipasArray[$nomeEquipa] = $elementosEquipa;
         }
 
@@ -51,6 +51,9 @@ class Listar_Trabalhadores_BLL {
         ];
     }
 
+    function exportarColaboradoresExcel($email){
+        $this->exportarColaboradoresExcel($email);
+    }
     public function definirPapel($email, $papel) {
         if (!in_array($papel, [1, 2, 3, 4])) {
             return "Papel inválido.";

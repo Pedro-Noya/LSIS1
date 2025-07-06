@@ -15,25 +15,6 @@ include "dashboard_bll.php";
     <body>
         <?php include "cabecalho.php"; ?>
         <h1>Portal do Colaborador</h1>
-
-        <div class="tabs">
-            <div class="active">Dashboard</div>
-                <div>Info Pessoal</div>
-                <div>Benefícios</div>
-                <div>Férias</div>
-                <div>Formações</div>
-            </div>
-            <div id="idadeMedia"></div>
-            <?php
-            showStatistics();
-            ?>
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-            <br><br>
-            <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
-            <div class="content">
-                <div class="box">
-                    
-                </div>
             <div class="tabs">
                 <div class="active">Dashboard</div>
                     <div>Info Pessoal</div>
@@ -42,14 +23,15 @@ include "dashboard_bll.php";
                     <div>Formações</div>
                 </div>
                 <div id="idadeMedia"></div>
-                <?php
+            <?php
                 showStatistics();
-                ?>
-                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-                <br><br>
-                <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
-                <br><br>
-                <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+            ?>
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            <br><br>
+            <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+            <br><br>
+            <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+
                 <div class="content">
                     <div class="box">
                         

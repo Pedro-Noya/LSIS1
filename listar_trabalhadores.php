@@ -43,7 +43,9 @@ $trabalhadores = $bll->listarTrabalhadores();
             <option value="administradores">Administradores</option>
             <option value="equipas">Equipas</option>
         </select>
-
+        <?php
+        $bll->exportarColaboradoresExcel($_SESSION[$email]);
+        ?>
         <div id="colaboradores" class="categoria" style="display:none">
         <h3>Colaboradores</h3>
         <?php foreach ($trabalhadores['colaboradores'] as $colaborador): ?>
@@ -63,6 +65,7 @@ $trabalhadores = $bll->listarTrabalhadores();
                 <?php endforeach; ?>
             </select>
             <button onclick="definirPapel('<?= htmlspecialchars($colaborador['email']) ?>')">Definir</button>
+            <button onclick="exportarColaboradorExcel()">Exportar informação para Excel</button>
             </div>
         <?php endforeach; ?>
         </div>

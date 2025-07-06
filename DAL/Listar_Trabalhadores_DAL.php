@@ -10,6 +10,43 @@ class Listar_Trabalhadores_DAL {
         }
     }
 
+    function exportarColaboradoresExcel($email){
+        $filename="Lista_Colaboradores";
+        $file_ending="xls"
+        header("Content-Type: application/xls");    
+        header("Content-Disposition: attachment; filename=$filename.'.'.$file_ending");  
+        header("Pragma: no-cache"); 
+        header("Expires: 0");
+        $sep = "\t";
+
+        $stmt=$this->conn->prepare("SELECT * FROM Utilizador");
+        $stmt->execute();
+        $resultado=$stmt->get_result();
+        while ($property = mysqli_fetch_field($resultado)) { //fetch table field name
+            echo $property->name."\t";
+        }
+        print("\n");    
+
+        while($row = mysqli_fetch_row($resultado))  //fetch_table_data
+        {
+            $schema_insert = "";
+            for($j=0; $j< mysqli_num_fields($resultado);$j++)
+            {
+                if(!isset($row[$j]))
+                    $schema_insert .= "NULL".$sep;
+                elseif ($row[$j] != "")
+                    $schema_insert .= "$row[$j]".$sep;
+                else
+                    $schema_insert .= "".$sep;
+            }
+            $schema_insert = str_replace($sep."$", "", $schema_insert);
+            $schema_insert = preg_replace("/\r\n|\n\r|\n|\r/", " ", $schema_insert);
+            $schema_insert .= "\t";
+            print(trim($schema_insert));
+            print "\n";
+        }
+    }
+
     public function obterElementosPorEquipa($nomeEquipa, $db, $utilizadores) {
         if (!in_array($db, ['colaboradoresequipa', 'coordenadoresequipa'])) {
             die("Tabela inválida.");

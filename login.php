@@ -17,11 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($resultado === 'ativo') {
       login($_POST['email'], $bll);
-      header("Location: dashboard.php");
+      header("Location: index.php");
       exit();
     } else if ($resultado === 'inativo') {
       login($_POST['email'], $bll);
-      header("Location: atualizar_perfil.php"); 
+      header("Location: index.php"); 
       exit();
     } else {
       $mensagemErro = $resultado;
