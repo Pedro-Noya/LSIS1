@@ -51,6 +51,9 @@ class Listar_Trabalhadores_BLL {
         ];
     }
 
+    function exportarColaboradoresExcel($email){
+        $this->exportarColaboradoresExcel($email);
+    }
     public function definirPapel($email, $papel) {
         if (!in_array($papel, [1, 2, 3, 4])) {
             return "Papel inválido.";
