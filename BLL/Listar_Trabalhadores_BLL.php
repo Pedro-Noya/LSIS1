@@ -52,7 +52,7 @@ class Listar_Trabalhadores_BLL {
     }
 
     function exportarColaboradoresExcel($email){
-        $this->exportarColaboradoresExcel($email);
+        $this->listarTrabalhadoresDAL->exportarColaboradoresExcel($email);
     }
     
     public function definirPapel($email, $papel) {

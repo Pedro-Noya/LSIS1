@@ -1,6 +1,5 @@
 <?php
 require_once 'BLL/Listar_Trabalhadores_BLL.php';
-
 session_start();
 
 $converterPapel = [
@@ -43,9 +42,6 @@ $trabalhadores = $bll->listarTrabalhadores();
             <option value="administradores">Administradores</option>
             <option value="equipas">Equipas</option>
         </select>
-        <?php
-        $bll->exportarColaboradoresExcel($_SESSION[$email]);
-        ?>
         <div id="colaboradores" class="categoria" style="display:none">
         <h3>Colaboradores</h3>
         <?php foreach ($trabalhadores['colaboradores'] as $colaborador): ?>
@@ -54,7 +50,7 @@ $trabalhadores = $bll->listarTrabalhadores();
             
             <!-- Botão Atualizar Perfil -->
             <button onclick="atualizarPerfil('<?= htmlspecialchars($colaborador['email']) ?>')">Atualizar Perfil</button>
-            
+            <button onclick="exportarDados('<?= htmlspecialchars($colaborador['email']) ?>')">Exportar Dados</button>
             <!-- Dropdown Papel -->
             <h3>Cargo</h3>
             <select id="papel-<?= htmlspecialchars($colaborador['email']) ?>">
@@ -65,9 +61,9 @@ $trabalhadores = $bll->listarTrabalhadores();
                 <?php endforeach; ?>
             </select>
             <button onclick="definirPapel('<?= htmlspecialchars($colaborador['email']) ?>')">Definir</button>
-            <button onclick="exportarColaboradorExcel()">Exportar informação para Excel</button>
             </div>
         <?php endforeach; ?>
+        <button onclick="exportarDadosTodos()">Exportar informação para Excel</button>
         </div>
 
         <div id="coordenadores" class="categoria" style="display:none">

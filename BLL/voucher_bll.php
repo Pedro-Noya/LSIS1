@@ -21,3 +21,8 @@ function listAllVouchers(){
     </div>';
 }
 
+function createVoucher($voucher){
+    $dal=new DAL_Voucher();
+    $dal->insertVoucher($voucher);
+}
+

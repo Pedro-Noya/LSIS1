@@ -14,5 +14,12 @@ class DAL_Voucher{
         $resultado=$sql->get_result();
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
+
+    function insertVoucher($voucher){
+        $sql=$this->conn->prepare("INSERT INTO VoucherNos(voucherNos)
+                                VALUES(?)");
+        $sql->bind_param("s",$voucher);
+        $sql->execute();
+    }
 }
 ?>

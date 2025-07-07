@@ -11,40 +11,33 @@ class Listar_Trabalhadores_DAL {
     }
 
     function exportarColaboradoresExcel($email){
-        $filename="Lista_Colaboradores";
-        $file_ending="xls";
-        header("Content-Type: application/xls");    
-        header("Content-Disposition: attachment; filename=$filename.'.'.$file_ending");  
-        header("Pragma: no-cache"); 
-        header("Expires: 0");
-        $sep = "\t";
+        //echo "Ola";
+        $sql = $this->conn->prepare("SELECT * FROM utilizador JOIN DadosPessoaisColaborador ON DadosPessoaisColaborador.email=Utilizador.email
+                                      JOIN DadosHabilitacoesColaborador ON DadosHabilitacoesColaborador.email=DadosPessoaisColaborador.email
+                                      JOIN DadosFinanceirosColaborador ON DadosFinanceirosColaborador.email=DadosPessoaisColaborador.email
+                                      JOIN DadosExtrasColaborador ON DadosExtrasColaborador.email=DadosPessoaisColaborador.email
+                                      JOIN DadosContratoColaborador ON DadosContratoColaborador.email=DadosPessoaisColaborador.email
+                                    ");
+        $sql->execute();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=Colaboradores.xls");
 
-        $stmt=$this->conn->prepare("SELECT * FROM Utilizador");
-        $stmt->execute();
-        $resultado=$stmt->get_result();
-        while ($property = mysqli_fetch_field($resultado)) { //fetch table field name
-            echo $property->name."\t";
+        echo "<table border='1'>";
+        echo "<tr><th>Email</th><th>Nome</th><th>Nº Mecanográfico</th><th>Nome Abreviado</th>
+        <th>Data de Nascimento</th><th>Designação DDI Telemóvel</th>
+        </tr>";
+        foreach ($result as $row) {
+            echo "<tr>";
+            echo "<td>{$row['email']}</td>";
+            echo "<td>{$row['nome']}</td>";
+            echo "<td>{$row['numMec']}</td>";
+            echo "<td>{$row['nomeAbreviado']}</td>";
+            echo "<td>{$row['dataNascimento']}</td>";
+            echo "<td>{$row['designacaoDdiTelemovel']}</td>";
+            echo "</tr>";
         }
-        print("\n");    
-
-        while($row = mysqli_fetch_row($resultado))  //fetch_table_data
-        {
-            $schema_insert = "";
-            for($j=0; $j< mysqli_num_fields($resultado);$j++)
-            {
-                if(!isset($row[$j]))
-                    $schema_insert .= "NULL".$sep;
-                elseif ($row[$j] != "")
-                    $schema_insert .= "$row[$j]".$sep;
-                else
-                    $schema_insert .= "".$sep;
-            }
-            $schema_insert = str_replace($sep."$", "", $schema_insert);
-            $schema_insert = preg_replace("/\r\n|\n\r|\n|\r/", " ", $schema_insert);
-            $schema_insert .= "\t";
-            print(trim($schema_insert));
-            print "\n";
-        }
+        echo "</table>";
     }
 
     public function obterElementosPorEquipa($nomeEquipa, $db, $utilizadores) {
