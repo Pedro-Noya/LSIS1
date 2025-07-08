@@ -1,6 +1,7 @@
 <?php
 require_once '../BLL/Equipas_Elementos_BLL.php';
 require_once '../BLL/Global_BLL.php';
+require_once '../BLL/Logger_BLL.php';
 
 session_start();
 
@@ -16,11 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
 
     $bll = new Equipas_Elementos_BLL();
+    $loggerBLL = new Logger_BLL();
     if ($acao === 'remover') {
-        // Remover elemento da equipa
         $resultado = $bll->removerElementoEquipa($nomeEquipa, $emailElemento);
     } else {
-        // Adicionar elemento à equipa
         if (empty($nomeEquipa) || empty($emailElemento)) {
             $mensagemErro = "Por favor, preencha todos os campos.";
             return;
@@ -30,10 +30,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($resultado === true) {
-        header("Location: equipasElementos.php"); // Redireciona após registo bem-sucedido
+        $loggerBLL->registarLog(
+            $_SESSION['email'],
+            "Executou a ação '$acao elemento' na equipa: $nomeEquipa",
+            "Elemento: $emailElemento"
+        );
+        header("Location: equipasElementos.php");
         exit();
     } else {
-        $mensagemErro = $resultado; // Mensagem de erro da BLL
+        $mensagemErro = $resultado;
     }
 }
 ?>

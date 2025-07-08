@@ -1,6 +1,6 @@
 <?php
 require_once '../BLL/Equipas_BLL.php';
-
+require_once '../BLL/Logger_BLL.php';
 
 session_start();
 
@@ -14,7 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bll = new Equipa_BLL();
     $resultado = $bll->registarEquipa($nomeEquipa, $localizacao, $dataCriacao);
 
-    if ($resultado === true) {
+    if ($resultado === true) {~
+        $loggerBLL = new LoggerBLL();
+        $loggerBLL->registarLog(
+            $_SESSION['email'],
+            "Registou uma nova equipa: $nomeEquipa",
+            "Localização: $localizacao\nData de Criação: $dataCriacao"
+        );
         header("Location: equipasElementos.php"); // Redireciona após registo bem-sucedido
         exit();
     } else {
