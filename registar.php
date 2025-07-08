@@ -1,5 +1,6 @@
 <?php
 require_once 'BLL/Registo_Utilizador_BLL.php';
+require_once 'BLL/Logger_BLL.php';
 
 session_start();
 
@@ -31,8 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   );
 
   if ($resultado === true) {
-    /*header("Location: login.php");
-    exit();*/
+    $loggerBLL = new LoggerBLL();
+    $loggerBLL->registarLog(
+      $_SESSION['email'],
+      "Registou um novo colaborador: $nome",
+      "Email Pessoal: $emailPessoal\nEmail: $email"
+    );
   } else {
     $mensagemErro = $resultado;
   }

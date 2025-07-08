@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
                 (int)$_POST['periodicidade'],
                 $_POST['email']
             );
+            $loggerBLL->registarLog($_SESSION['email'], "Atualizou o alerta de ID: $idAlerta", "Tipo: " . $_POST['tipo'] . "\nDescrição: " . $_POST['descricao'] . "\nPeriodicidade: " . $_POST['periodicidade'] . " dias\nEmail: " . $_POST['email']);
             echo json_encode(['success' => $resultado]);
             exit();
         } else {

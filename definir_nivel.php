@@ -1,5 +1,6 @@
 <?php
 require_once 'BLL/Listar_Trabalhadores_BLL.php';
+require_once 'BLL/Logger_BLL.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? null;
@@ -8,6 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($email && $nivel) {
         $bll = new Listar_Trabalhadores_BLL();
         $bll->definirNivel($email, (int)$nivel);
+        $loggerBLL = new LoggerBLL();
+        $loggerBLL->registarLog($_SESSION['email'], "Definiu o nível hierarquico do coordenador $email para $nivel");
         echo json_encode(['success' => true]);
         exit();
     }

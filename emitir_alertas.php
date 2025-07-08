@@ -1,9 +1,11 @@
 <?php
 require_once 'BLL/Alertas_BLL.php';
+require_once 'BLL/Logger_BLL.php';
 
 session_start();
 
 $bll = new Alertas_BLL();
+$loggerBLL = new LoggerBLL();
 $alertasVencidos = [];
 
 foreach ($bll->listarAlertas() as $alerta) {
@@ -24,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
     );
     if (!$resultado) {
         $mensagemErro = 'Erro ao enviar alerta único.';
+    } else {
+        $loggerBLL->registarLog($_SESSION['email'], "Enviou um alerta único do tipo: " . $_POST['tipo'], "Destinatário: " . $_POST["email"] ."\nDescrição: ". $_POST['descricao']);
     }
 }
 

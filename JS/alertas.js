@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then(response => response.json())
           .then(data => {
             if (data.success) {
+
               alert('Alerta atualizado com sucesso!');
             } else {
               console.log('Erro ao atualizar alerta: ' + JSON.stringify(data));

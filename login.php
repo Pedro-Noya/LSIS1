@@ -1,5 +1,6 @@
 <?php
 require_once 'BLL/Login_Utilizador_BLL.php';
+require_once 'BLL/Logger_BLL.php';
 
 session_start();
 
@@ -13,14 +14,17 @@ function login($email, $bll) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bll = new Login_Utilizador_BLL();
+    $loggerBLL = new LoggerBLL();
     $resultado = $bll->autenticarUtilizador($_POST['email'], $_POST['password']);
 
     if ($resultado === 'ativo') {
       login($_POST['email'], $bll);
+      $loggerBLL->registarLog($_POST['email'], "Login efetuado com sucesso");
       header("Location: index.php");
       exit();
     } else if ($resultado === 'inativo') {
       login($_POST['email'], $bll);
+      $loggerBLL->registarLog($_POST['email'], "Login efetuado com sucesso");
       header("Location: perfil.php"); 
       exit();
     } else {
