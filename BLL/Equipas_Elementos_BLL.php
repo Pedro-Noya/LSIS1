@@ -19,7 +19,7 @@ class Equipas_Elementos_BLL {
                 return "O elemento não existe";
             }
 
-        if ($papelElemento !== 1 && $papelElemento !== 2) {
+        if ($papelElemento !== 1 && $papelElemento !== 2 && $papelElemento !== 3) {
             return "O elemento não pode ser adicionado à equipa, pois não é um colaborador ou coordenador.";
         }
 
@@ -30,11 +30,7 @@ class Equipas_Elementos_BLL {
 
 
         // 3. Adicionar elemento à equipa
-        if ($papelElemento === 1) {
-            $sucesso = $this->equipaElementosDAL->adicionarElemento($nomeEquipa, $emailElemento, "colaboradoresequipa");
-        } else {
-            $sucesso = $this->equipaElementosDAL->adicionarElemento($nomeEquipa, $emailElemento, "coordenadoresequipa");
-        }
+        $sucesso = $this->equipaElementosDAL->adicionarElemento($nomeEquipa, $emailElemento, "colaboradoresEquipa");
 
         if (!$sucesso) {
             return "Erro ao adicionar o elemento à equipa.";

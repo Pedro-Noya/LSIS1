@@ -15,6 +15,8 @@ function obterFuncao(){
     return $funcao;
 }
 function showStatistics(){
+    $dal=new DAL_Dashboard();
+    $email=$_SESSION["email"];
     $funcao=obterFuncao();
     switch($funcao["papel"]){
         case 2:
