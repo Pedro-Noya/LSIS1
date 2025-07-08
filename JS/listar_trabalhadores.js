@@ -65,5 +65,13 @@ function definirNivel(email) {
     })
 }
 
+function exportarDados(email){
+    window.location.href="exportarColaboradores.php?email="+encodeURIComponent(email);
+}
+
+function exportarDadosTodos(){
+    window.location.href="exportarColaboradores.php";
+}
 window.definirPapel = definirPapel;
 window.definirNivel = definirNivel;
+window.exportarDados = exportarDados;
