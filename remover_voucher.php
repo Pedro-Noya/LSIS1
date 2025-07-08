@@ -1,4 +1,8 @@
 <?php
+session_start();
+
+require_once 'BLL/Logger_BLL.php';
+
 $conn = new mysqli('localhost', 'root', '', 'tlantic');
 if ($conn->connect_error) {
     die("Erro na ligação à base de dados: " . $conn->connect_error);
@@ -11,11 +15,12 @@ if (!$idVoucherNos) {
 
 // Processar submissão
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     // Remover a associação
     $stmt1 = $conn->prepare("UPDATE DadosExtrasColaborador SET idVoucherNos = NULL WHERE idVoucherNos = ?");
     $stmt1->bind_param("i", $idVoucherNos);
     $stmt1->execute();
-
+    
     // Atualizar o estado do voucher
     $stmt2 = $conn->prepare("UPDATE VoucherNos SET estado = 0 WHERE idVoucherNos = ?");
     $stmt2->bind_param("i", $idVoucherNos);
@@ -43,6 +48,10 @@ $sql=$conn->prepare("SELECT voucherNos FROM VoucherNos WHERE idVoucherNos=?");
 $sql->bind_param("s",$idVoucherNos);
 $sql->execute();
 $voucherNos=$sql->get_result()->fetch_assoc();
+
+$loggerBLL = new LoggerBLL();
+$email = $colaboradorEmail["email"];
+$loggerBLL->registarLog($_SESSION['email'], "Desassociou o voucher NOS do trabalhador $email", "ID do Voucher: $idVoucherNos");
 ?>
 <!DOCTYPE html>
 <html lang="pt">

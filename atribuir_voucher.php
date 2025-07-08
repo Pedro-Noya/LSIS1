@@ -1,4 +1,8 @@
 <?php
+session_start();
+
+require_once 'BLL/Logger_BLL.php';
+
 $conn = new mysqli('localhost', 'root', '', 'tlantic');
 if ($conn->connect_error) {
     die("Erro na ligação à base de dados: " . $conn->connect_error);
@@ -31,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql->bind_param("i", $idVoucherNos);
         $sql->execute();
 
+        $loggerBLL = new LoggerBLL();
+        $loggerBLL->registarLog($_SESSION['email'], "Atribuiu o voucher NOS de ID: $idVoucherNos ao colaborador: $email");
         header("Location: voucher.php");
         exit;
     }

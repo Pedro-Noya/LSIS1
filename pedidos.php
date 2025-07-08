@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div id="EquipamentoExtras" style="display:none;">
-            Equipamento: <input type="text" name="equipamento"><br><br>x\
+            Equipamento: <input type="text" name="equipamento"><br><br>
             Quantidade: <input type="number" name="quantidade" min="1"><br><br>
         </div>
 
