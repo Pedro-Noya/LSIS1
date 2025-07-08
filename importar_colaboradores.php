@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
                 // Exemplo com campos base. Ajusta conforme a tua estrutura:
-                list($email, $nome, $password_hash, $numMec, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel,
+                list($email, $nome, $password_hash, $dataCriacao, $numMec, $nomeAbreviado, $dataNascimento, $designacaoDdiTelemovel, $telemovel,
                      $sexo, $numPorta, $rua, $codPost, $localidade, $nacionalidade, $ddiContacto, $contacto,
                      $contactoEmergencia, $grauRelacionamento, $matricula, $habLiterarias, $curso, $frequencia,
                      $cc, $nif, $niss, $situacaoIrs, $numDependentes, $iban, $remuneracao, $cartaoContinente,
@@ -42,13 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $password_hash=password_hash($password_hash, PASSWORD_DEFAULT);
 
                 // Inserir ou atualizar Utilizador
-                $stmt = $conn->prepare("INSERT INTO Utilizador (email, nome, password_hash, papel, estado) VALUES (?, ?, ?, 1, 1)
+                $stmt = $conn->prepare("INSERT INTO Utilizador (email, nome, password_hash, dataCriacao, papel, estado) VALUES (?, ?, ?, ?, 1, 1)
                                         ON DUPLICATE KEY UPDATE email=VALUES(email),
                                         nome = VALUES(nome),
                                         password_hash = VALUES(password_hash),
+                                        dataCriacao = VALUES(dataCriacao),
                                         papel = VALUES(papel),
                                         estado = VALUES(estado)");
-                $stmt->bind_param("sss", $email, $nome, $password_hash);
+                $stmt->bind_param("ssss", $email, $nome, $password_hash, $dataCriacao);
                 $stmt->execute();
 
                 // Inserir Dados Pessoais

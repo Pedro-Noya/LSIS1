@@ -34,7 +34,45 @@ function showStatistics(){
     $arraySexo=[];
     $arrayRenumeracao=[];
     $arrayNacionalidade=[];
+    $arrayDataCriacao=[];
+
+    $colaboradoresNaoRetidos=0;
+    $colaboradoresRetidos=0;
+    $colaboradoresTotais=0;
+
+    $numColaboradores=0;
+    $numCoordenadores=0;
+    $numRH=0;
+
     foreach($colaboradoresEquipa as $colaborador){
+        $privado=$dal->obterDadosPrivadosColaborador($colaborador["email"]);
+
+        //Para a taxa de retenção
+        if($privado["estado"]!=3){ //Quer dizer que o Colaborador ainda está mantido na Empresa
+            $colaboradoresRetidos++;
+        } else{
+            $colaboradoresNaoRetidos++;
+        }
+        $colaboradoresTotais++;
+
+        //Para a distribuição da função
+        switch($privado["papel"]){
+            case 1:
+                $numColaboradores++;
+                break;
+            case 2:
+                $numCoordenadores++;
+                break;
+            case 3:
+                $numRH++;
+                break;
+            default:
+                break;
+        }
+
+        //Para o tempo na tlantic
+        $arrayDataCriacao[]=$privado["dataCriacao"];
+
         $dadosPessoais=$dal->obterDadosPessoaisColaborador($colaborador["email"]);
         if(!($dadosPessoais==null)){
             $arrayDataNascimento[]=$dadosPessoais["dataNascimento"];
@@ -55,8 +93,14 @@ function showStatistics(){
         $idade = $dataNascimento->diff($dataAtual)->y;
         $arrayIdade[] = $idade;
     }
-    //print_r($arrayIdade);
-    //print_r($arraySexo);
+
+    $arrayTempo=[];
+    foreach($arrayDataCriacao as $dataCriacaoString){
+        $dataAtual=date_create($dataAtualString);
+        $dataCriacao=date_create($dataCriacaoString);
+        $tempo = $dataCriacao->diff($dataAtual)->y;
+        $arrayTempo[] = $tempo;
+    }
 
     $countMasculino=0;
     $countFeminino=0;
@@ -117,84 +161,172 @@ function showStatistics(){
 
     $arrayFuncao=["Colaborador","Coordenador","RH","Administrador"];
 
-    echo "<script>
-    let idades=",json_encode($arrayIdade),";
+    $percentRetidos=($colaboradoresRetidos/$colaboradoresTotais)*100;
+    $percentNaoRetidos=100-$percentRetidos;
+
+    echo '<script>
+    let idades = ' . json_encode($arrayIdade) . ';
+    let tempos = ' . json_encode($arrayTempo) . ';
     let media = ss.mean(idades);
-    document.getElementById('idadeMedia').innerHTML='<h2>Idade Média: '+media+'</h2>';
+    let mediaTempo = ss.mean(tempos);
+    document.getElementById("idadeMedia").innerHTML = "<h2>Idade Média: " + media.toFixed(1) + "</h2>";
+    document.getElementById("tempoMedio").innerHTML = "<h2>Tempo Médio na Tlantic (em anos): " + mediaTempo.toFixed(1) + "</h2>";
+
     window.onload = function() {
-    var chart=new CanvasJS.Chart('chartContainer', {
-	theme: 'light2',
-	exportEnabled: true,
-	animationEnabled: true,
-	title: {
-		text: 'Distribuição dos Colaboradores por Género'
-	},
-    data: [{
-		type: 'pie',
-		startAngle: 25,
-		toolTipContent: '<b>{label}</b>: {y}%',
-		showInLegend: 'true',
-		legendText: '{label}',
-		indexLabelFontSize: 16,
-		indexLabel: '{label} - {y}%',
-		dataPoints: [
-			{ y:",$percentMasculino," , label: 'Masculino' },
-			{ y: ",$percentFeminino,", label: 'Feminino' }
-		]
-	}]
-    });
-    chart.render();
+        new CanvasJS.Chart("chart1Mini", {
+            animationEnabled: true,
+            title: { text: "" },
+            data: [{
+                type: "pie",
+                dataPoints: [
+                    { label: "Masculino", y: '.$percentMasculino . ' },
+                    { label: "Feminino", y: '. $percentFeminino .' }
+                ]
+            }]
+        }).render();
 
-    var chart2 = new CanvasJS.Chart('chartContainer2', {
-	animationEnabled: true,
-	theme: 'light2', // 'light1', 'light2', 'dark1', 'dark2'
-	title: {
-		text: 'Distribuição da Remuneração'
-	},
-	axisY: {
-		title: 'Nº de Colaboradores'
-	},
-	axisX: {
-		title: 'Remuneração'
-	},
-	data: [{
-		type: 'column',
-		dataPoints: [
-			{ label: 'Euro', y: ",$countEuro," },	
-			{ label: 'Real', y: ",$countReal," },	
-			{ label: 'Sterling', y: ",$countSterling," },
-			{ label: 'Metical', y: ",$countMetical," }		
-		]
-	}]
-    });
-    chart2.render();
+        new CanvasJS.Chart("chart2Mini", {
+            title: { text: "" },
+            data: [{
+                type: "column",
+                dataPoints: [
+                    { label: "Euro", y: '. $countEuro .'},
+                    { label: "Real", y: '. $countReal .' },
+                    { label: "Sterling", y: '. $countSterling .'},
+                    { label: "Metical", y: '. $countMetical .' }
+                ]
+            }]
+        }).render();
 
-    var chart3 = new CanvasJS.Chart('chartContainer3', {
-	animationEnabled: true,
-	theme: 'light2', // 'light1', 'light2', 'dark1', 'dark2'
-	title: {
-		text: 'Distribuição da Nacionalidade'
-	},
-	axisY: {
-		title: 'Nº de Colaboradores'
-	},
-	axisX: {
-		title: 'Nacionalidade'
-	},
-	data: [{
-		type: 'column',
-		dataPoints: [
-			{ label: 'Andorra', y: ",$countAndorra," },
-			{ label: 'Espanha', y: ",$countEspanha," },
-			{ label: 'Portugal', y: ",$countPortugal," },
-			{ label: 'Moçambique', y: ",$countMocambique," },
-            { label: 'Brasil', y: ",$countBrasil," },
-            { label: 'Reino Unido', y: ",$countReinoUnido," }
-		]
-	}]
-    });
-    chart3.render();
+        new CanvasJS.Chart("chart3Mini",{
+            title: { text: "Distribuição da Nacionalidade" },
+            axisY: { title: "Nº de Colaboradores" },
+            axisX: { title: "Nacionalidade" },
+            data: [{
+                type: "column",
+                dataPoints: [
+                    { label: "Andorra", y: ' . $countAndorra . ' },
+                    { label: "Espanha", y: ' . $countEspanha . ' },
+                    { label: "Portugal", y: ' . $countPortugal . ' },
+                    { label: "Moçambique", y: ' . $countMocambique . ' },
+                    { label: "Brasil", y: ' . $countBrasil . ' },
+                    { label: "Reino Unido", y: ' . $countReinoUnido . ' }
+                ]
+            }]
+        }).render();
+
+        new CanvasJS.Chart("chart4Mini",{
+            title: { text: "Taxa de Retenção" },
+            data: [{
+                type: "pie",
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: ' . $percentRetidos . ', label: "Colaboradores retidos" },
+                    { y: ' . $percentNaoRetidos . ', label: "Colaboradores não retidos" }
+                ]
+            }]
+        }).render();
+
+        new CanvasJS.Chart("chart5Mini",{
+            title: { text: "Distribuição por Função" },
+            axisY: { title: "Nº de Colaboradores" },
+            axisX: { title: "Função" },
+            data: [{
+                type: "column",
+                dataPoints: [
+                    { label: "Colaborador", y: ' . $numColaboradores . ' },
+                    { label: "Coordenador", y: ' . $numCoordenadores . ' },
+                    { label: "RH", y: ' . $numRH . ' }
+                ]
+            }]
+        }).render();
     }
-    </script>";
+
+    function abrirModal(id) {
+        document.getElementById("modalGrafico").style.display = "block";
+
+        let chart;
+        switch(id){
+            case 1:
+                chart = new CanvasJS.Chart("chartModalContainer", {
+                    title: { text: "Distribuição por Género" },
+                    data: [{
+                        type: "pie",
+                        dataPoints: [
+                            { label: "Masculino", y: ' . $percentMasculino . ' },
+                            { label: "Feminino", y: ' . $percentFeminino . ' }
+                        ]
+                    }]
+                });
+                break;
+            case 2:
+                chart = new CanvasJS.Chart("chartModalContainer", {
+                    title: { text: "Distribuição da Remuneração" },
+                    data: [{
+                        type: "column",
+                        dataPoints: [
+                            { label: "Euro", y: ' . $countEuro . ' },
+                            { label: "Real", y: ' . $countReal . ' },
+                            { label: "Sterling", y: ' . $countSterling . ' },
+                            { label: "Metical", y: ' . $countMetical . ' }
+                        ]
+                    }]
+                });
+                break;
+            case 3:
+                chart = new CanvasJS.Chart("chartModalContainer", {
+                    title: { text: "Distribuição da Nacionalidade" },
+                    axisY: { title: "Nº de Colaboradores" },
+                    axisX: { title: "Nacionalidade" },
+                    data: [{
+                        type: "column",
+                        dataPoints: [
+                            { label: "Andorra", y: ' . $countAndorra . ' },
+                            { label: "Espanha", y: ' . $countEspanha . ' },
+                            { label: "Portugal", y: ' . $countPortugal . ' },
+                            { label: "Moçambique", y: ' . $countMocambique . ' },
+                            { label: "Brasil", y: ' . $countBrasil . ' },
+                            { label: "Reino Unido", y: ' . $countReinoUnido . ' }
+                        ]
+                    }]
+                });
+                break;
+            case 4:
+                chart = new CanvasJS.Chart("chartModalContainer", {
+                    title: { text: "Taxa de Retenção" },
+                    data: [{
+                        type: "pie",
+                        indexLabel: "{label} - {y}%",
+                        dataPoints: [
+                            { y: ' . $percentRetidos . ', label: "Colaboradores retidos" },
+                            { y: ' . $percentNaoRetidos . ', label: "Colaboradores não retidos" }
+                        ]
+                    }]
+                });
+                break;
+            case 5:
+                chart = new CanvasJS.Chart("chartModalContainer", {
+                    title: { text: "Distribuição por Função" },
+                    axisY: { title: "Nº de Colaboradores" },
+                    axisX: { title: "Função" },
+                    data: [{
+                        type: "column",
+                        dataPoints: [
+                            { label: "Colaborador", y: ' . $numColaboradores . ' },
+                            { label: "Coordenador", y: ' . $numCoordenadores . ' },
+                            { label: "RH", y: ' . $numRH . ' }
+                        ]
+                    }]
+                });
+                break;
+        }
+        chart.render();
+    }
+
+    function fecharModal() {
+        document.getElementById("modalGrafico").style.display = "none";
+    }
+</script>';
+
 }
 ?>
