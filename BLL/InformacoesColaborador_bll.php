@@ -99,7 +99,7 @@ function obterDadosPerfil(){
         }
         return false;
     }
-
+}
     function showFormAtualizar($dados){  
     $dal=new DAL_Atualizar();
     if($dados){
@@ -624,4 +624,3 @@ function obterDadosPerfil(){
         </form>';
         }
     }
-}

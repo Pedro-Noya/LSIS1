@@ -24,6 +24,7 @@ function mostrarItens(){
                 echo "<a href='{$base_url}dashboard.php'>Dashboard</a>";
                 echo "<a href='{$base_url}listar_trabalhadores.php'>Colaboradores</a>";
                 echo "<a href='{$base_url}perfil.php'>Perfil</a>";
+                echo "<a href='{$base_url}voucher.php'>Vouchers</a>";
                 break;
             case 4:
                 echo "<a href='{$base_url}alertas.php'>Alertas</a>";

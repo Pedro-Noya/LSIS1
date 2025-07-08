@@ -17,8 +17,8 @@ require_once "BLL/voucher_bll.php";
         <label for="estadoFilter">Filter:</label>
         <select id="estadoFilter" onchange="filterVouchers()">
           <option value="all">Todos</option>
-          <option value="1">Disponíveis</option>
-          <option value="0">Atribuídos</option>
+          <option value="0">Disponíveis</option>
+          <option value="1">Atribuídos</option>
         </select>
       </div>
       <?php
@@ -31,9 +31,9 @@ require_once "BLL/voucher_bll.php";
           <span class="close" onclick="closeModal()">&times;</span>
           <h2>Add Voucher</h2>
           <form method="POST" action="voucherController.php">
-            <label for="date">Date:</label><br>
-            <input type="date" name="date" required><br><br>
-            <button type="submit" name="create" class="add-btn">Save</button>
+            <label for="date">Date: </label><br>
+            <input type="date" name="voucherNos" required><br><br>
+            <button type="submit" name="create" class="add-btn">Criar novo voucher NOS</button>
           </form>
         </div>
       </div>
@@ -67,6 +67,16 @@ require_once "BLL/voucher_bll.php";
                   card.style.display = "none";
               }
           });
+        }
+
+        function handleVoucherAction(estado, id) {
+          if (estado === 0) {
+            // Disponível → associar
+            window.location.href = "atribuir_voucher.php?id=" + id;
+          } else {
+            // Atribuído → desassociar
+            window.location.href = "remover_voucher.php?id=" + id;
+          }
         }
       </script>
 
