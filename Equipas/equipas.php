@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bll = new Equipa_BLL();
     $resultado = $bll->registarEquipa($nomeEquipa, $localizacao, $dataCriacao);
 
-    if ($resultado === true) {~
+    if ($resultado === true) {
         $loggerBLL = new LoggerBLL();
         $loggerBLL->registarLog(
             $_SESSION['email'],

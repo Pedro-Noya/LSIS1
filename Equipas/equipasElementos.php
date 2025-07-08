@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
 
     $bll = new Equipas_Elementos_BLL();
-    $loggerBLL = new Logger_BLL();
+    $loggerBLL = new LoggerBLL();
     if ($acao === 'remover') {
         $resultado = $bll->removerElementoEquipa($nomeEquipa, $emailElemento);
     } else {

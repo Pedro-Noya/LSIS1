@@ -19,7 +19,7 @@ class LoggerDAL {
     }
 
     public function obterLogs() {
-        $stmt = $this->conn->prepare("SELECT * FROM log ORDER BY dataHora ASC");
+        $stmt = $this->conn->prepare("SELECT * FROM log ORDER BY dataHora DESC");
         if (!$stmt->execute()) {
             die("Erro ao obter logs: " . $stmt->error);
         }
