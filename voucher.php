@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "BLL/voucher_bll.php";
 ?>
 <!DOCTYPE html>
