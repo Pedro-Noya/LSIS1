@@ -1,0 +1,42 @@
+#modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Conteúdo da modal */
+#modal-content {
+    background: #fff;
+    padding: 20px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* Botão de fechar */
+.fechar-btn {
+    background-color: #c00;
+    color: #fff;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    float: right;
+    cursor: pointer;
+}
+
+table { width: 90%; margin: auto; border-collapse: collapse; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+th { background-color: #f2f2f2; }
+.detalhes { display: none; text-align: left; margin-top: 5px; padding: 10px; background: #f9f9f9; border: 1px dashed #ccc; }
+
+#modal-content button.fechar-btn {
+    margin-bottom: 10px;
+}

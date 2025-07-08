@@ -95,5 +95,10 @@ class Global_BLL {
         // Método para obter dados das equipas
         return $this->dal->getEquipas();
     }
+
+    public function criarDocumento($tipoDocumento, $conteudo, $estado) {
+        // Método para criar um documento
+        return $this->dal->criarDocumento($tipoDocumento, $conteudo, $estado);
+    }
 }
 ?>

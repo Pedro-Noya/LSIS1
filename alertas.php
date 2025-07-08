@@ -2,12 +2,14 @@
 // alertas.php
 
 require_once 'BLL/Alertas_BLL.php';
+require_once 'BLL/Logger_BLL.php';
 
 session_start();
 
 $mensagemErro = '';
 
 $bll = new Alertas_BLL();
+$loggerBLL = new LoggerBLL();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
     if ($_POST['periodicidade'] == 0) {
@@ -18,6 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
         );
         if (!$resultado) {
             $mensagemErro = 'Erro ao enviar alerta único.';
+        } else {
+            $loggerBLL->registarLog($_SESSION['email'], "Enviou um alerta único do tipo: " . $_POST['tipo'], "Destinatário: " . $_POST["email"] ."\nDescrição: ". $_POST['descricao']);
+            header('Location: alertas.php?sucesso=1');
+            exit();
         }
     } else {
         $idAlerta = $_POST['idAlerta'] ?? null;
@@ -43,6 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
             );
             if (!$resultado) {
                 $mensagemErro = 'Erro ao cadastrar alerta: ' . $resultado;
+            } else {
+                $loggerBLL->registarLog($_SESSION['email'], "Cadastrou um alerta períodico do tipo: " . $_POST['tipo'], "Destinatário: " . $_POST["email"] . "\nPeríodicidade: " . $_POST["periodicidade"] . " dias\nDescrição: ". $_POST['descricao']);
+                header('Location: alertas.php?sucesso=1');
+                exit();
             }
         }
     }

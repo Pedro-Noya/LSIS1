@@ -48,5 +48,20 @@ class Global_DAL {
 
     }
 
+    public function criarDocumento($tipoDocumento, $conteudo, $estado) {
+        $stmt = $this->conn->prepare("INSERT INTO documento (tipoDocumento, documento, estado) VALUES (?, ?, ?)");
+
+        $null = NULL;
+
+        $stmt->bind_param("sbi", $tipoDocumento, $null, $estado);
+
+        $stmt->send_long_data(1, $conteudo);
+
+        if ($stmt->execute()) {
+            return $this->conn->insert_id;
+        } else {
+            die("Erro ao inserir documento: " . $stmt->error);
+        }
+    }
 }
 ?>

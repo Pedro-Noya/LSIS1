@@ -44,7 +44,7 @@ $trabalhadores = $bll->listarTrabalhadores();
             <option value="equipas">Equipas</option>
         </select>
         <?php
-        $bll->exportarColaboradoresExcel($_SESSION[$email]);
+            $bll->exportarColaboradoresExcel($_SESSION[$email]);
         ?>
         <div id="colaboradores" class="categoria" style="display:none">
         <h3>Colaboradores</h3>
