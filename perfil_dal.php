@@ -161,14 +161,21 @@ class DAL_Atualizar{
 
     function atualizarColaborador($nome, $email, $password){
         $newEmail=$email;
-        $password_hash=password_hash($password, PASSWORD_DEFAULT);
-        $sql=$this->conn->prepare("UPDATE Utilizador SET
-        email = ?,
-        nome = ?,
-        password_hash = ?
-        WHERE email = ?");
-
-        $sql->bind_param("ssss",$newEmail, $nome, $password_hash, $email);
+        if($password!=""){
+            $password_hash=password_hash($password, PASSWORD_DEFAULT);
+            $sql=$this->conn->prepare("UPDATE Utilizador SET
+            email = ?,
+            nome = ?,
+            password_hash = ?
+            WHERE email = ?");
+            $sql->bind_param("ssss",$newEmail, $nome, $password_hash, $email);
+        } else{
+            $sql=$this->conn->prepare("UPDATE Utilizador SET
+            email = ?,
+            nome = ?
+            WHERE email = ?");
+            $sql->bind_param("sss",$newEmail, $nome, $email);
+        }
         $sql->execute();
     }
 

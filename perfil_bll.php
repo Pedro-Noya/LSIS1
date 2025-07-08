@@ -249,7 +249,7 @@ function showFormAtualizar($dados, $controlo, $disabled){
         <label>Email:</label><br><input type="text" name="email" placeholder="email" value="',$dados["email"],'" readonly required>
         </span>
         <span>
-        <label>Password:</label><br><input type="password" name="password" placeholder="Palavra-Passe" value="',$dados["password_hash"],'" required>
+        <label>Password:</label><br><input type="password" name="password" placeholder="Nova Palavra-Passe (Opcional)"">
         </span>
         </div>
         <div class="containerAtualizar">
@@ -283,11 +283,19 @@ function showFormAtualizar($dados, $controlo, $disabled){
 
         $resultado=$dal->obterDataVoucherNos($dados["email"]);
 
-        echo '<select name="voucherNos" ',$disabled,'>
-        <option value="',$dados["idVoucherNos"],'">',$resultado["voucherNos"],'</option>
-        </select>
-        <input type="date" name="voucherNos" value="',$dados["idVoucherNos"],'" ',$controlo,' hidden/>
-        </span>
+        if($dados["idVoucherNos"]!=null){
+            echo '<select name="voucherNos" ',$disabled,'>
+            <option value="',$dados["idVoucherNos"],'">',$resultado["voucherNos"],'</option>
+            </select>
+            <input type="date" name="voucherNos" value="',$dados["idVoucherNos"],'" ',$controlo,' hidden/>';
+        } else{
+            echo '<select name="voucherNos" ',$disabled,'>
+            <option value="',null,'">Não tem Voucher NOS</option>
+            </select>
+            <input type="date" name="voucherNos" value="',null,'" ',$controlo,' hidden/>';
+        }
+
+        echo '</span>
         </div>
         <div class="containerAtualizar">
         <label>Habilitações Literárias</label>

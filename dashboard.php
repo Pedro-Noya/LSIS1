@@ -15,12 +15,6 @@ include "dashboard_bll.php";
     <body>
         <?php include "cabecalho.php"; ?>
             <div class="tabs">
-                <div class="active">Dashboard</div>
-                    <div>Info Pessoal</div>
-                    <div>Benefícios</div>
-                    <div>Férias</div>
-                    <div>Formações</div>
-                </div>
                 <div id="idadeMedia"></div>
             <?php
                 showStatistics();

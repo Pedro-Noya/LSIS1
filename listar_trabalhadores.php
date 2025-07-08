@@ -31,6 +31,10 @@ $trabalhadores = $bll->listarTrabalhadores();
   <div class="section-title">Listar Trabalhadores</div>
 
     <div class="container">
+        <form action="importar_colaboradores.php" method="GET" style="margin-bottom: 10px;">
+            <button type="submit">Importar Colaboradores via CSV</button>
+        </form>
+
         <h2>Trabalhadores</h2>
 
         <label for="categoria">Selecionar categoria:</label>
