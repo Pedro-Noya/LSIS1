@@ -33,6 +33,7 @@ $logs = $logger->obterLogs(); // assume que este método já existe
                 <th>Ação</th>
                 <th>Detalhes</th>
                 <th>Data e Hora</th>
+                <th>Alterar</th>
             </tr>
         </thead>
         <tbody>
@@ -48,6 +49,12 @@ $logs = $logger->obterLogs(); // assume que este método já existe
                     </div>
                 </td>
                 <td><?= $log['dataHora'] ?></td>
+                <td>
+                    <form method="POST" action="API/eliminar_log.php" style="display:inline;" onsubmit="return confirm('Tens a certeza que queres apagar este log?');">
+                        <input type="hidden" name="idLog" value="<?= $log['idLog'] ?>">
+                        <button type="submit" class="remover-btn">Remover</button>
+                    </form>
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>

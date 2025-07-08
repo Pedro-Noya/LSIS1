@@ -41,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($tipo === 'Documentação') {
         $dado = $_POST['dado'] ?? '';
         $novoValor = $_POST['novo_valor'] ?? '';
-        $razao .= "\nDado a atualizar: $dado\nNovo valor: $novoValor";
     }
 
     $bll = new PedidoBLL();

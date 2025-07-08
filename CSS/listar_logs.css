@@ -40,3 +40,16 @@ th { background-color: #f2f2f2; }
 #modal-content button.fechar-btn {
     margin-bottom: 10px;
 }
+
+.remover-btn {
+    background-color: #b00;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.remover-btn:hover {
+    background-color: #900;
+}

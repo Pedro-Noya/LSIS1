@@ -26,4 +26,13 @@ class LoggerDAL {
         $resultado = $stmt->get_result();
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function removerLog($idLog) {
+        $stmt = $this->conn->prepare("DELETE FROM log WHERE idLog = ?");
+        $stmt->bind_param("i", $idLog);
+        if (!$stmt->execute()) {
+            die("Erro ao remover log: " . $stmt->error);
+        }
+        return true;
+    }
 }

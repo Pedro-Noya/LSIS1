@@ -15,5 +15,9 @@ class LoggerBLL {
     public function obterLogs() {
         return $this->dal->obterLogs();
     }
+
+    public function removerLog($idLog) {
+        return $this->dal->removerLog($idLog);
+    }
 }
 ?>
