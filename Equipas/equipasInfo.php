@@ -1,39 +1,48 @@
 <?php
-require_once __DIR__ . '/../BLL/Equipas_BLL.php';
+require_once "../DAL/Equipas_DAL.php";
+require_once "../DAL/Mensagem_Equipa_DAL.php";
+require_once "../DAL/Aniversario_Equipa_DAL.php";
+session_start();
 
-$bll = new Equipa_BLL();
+$nomeEquipa = $_GET['nome'] ?? null;
+if (!$nomeEquipa) {
+    echo "Equipa não especificada.";
+    exit;
+}
 
-$equipas = $bll->obterEquipas();
+$MensagemEquipa_DAL = new MensagemEquipa_DAL();
+$AniversarioEquipa_DAL = new AniversarioEquipa_DAL();
+
+$mensagens = MensagemEquipa_DAL->obterMensagensPorEquipa($nomeEquipa);
+$aniversarios = AniversarioEquipa_DAL->obterAniversariosPorEquipa($nomeEquipa);
 ?>
+
 <!DOCTYPE html>
-<html lang="pt">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipas</title>
-    <link rel="stylesheet" href="../CSS/equipas.css">
+    <title>Info da Equipa</title>
+    <link rel="stylesheet" href="../CSS/chat.css">
+    <script src="../JS/equipas_info.js" defer></script>
 </head>
 <body>
-    <?php include __DIR__ . '/../cabecalho.php'; ?>
-
-    <div class="container">
-        <h1>Selecione a Equipa</h1>
-        <div class="equipas-lista">
-            <?php if (empty($equipas)): ?>
-                <p>Nenhuma equipa encontrada.</p>
-            <?php else: ?>
-                <?php foreach ($equipas as $equipa): ?>
-                    <div class="equipa-card">
-                        <div class="nome-equipa">
-                            <h2><?= htmlspecialchars($equipa['nomeEquipa']) ?></h2>
-                        </div>
-                        <p><strong>Localização:</strong> <?= htmlspecialchars($equipa['localizacao']) ?></p>
-                        <p><strong>Data de Criação:</strong> <?= htmlspecialchars($equipa['dataCriacao']) ?></p>
-                    </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
+    <h2>Chat da Equipa: <?= htmlspecialchars($nomeEquipa) ?></h2>
+    <div id="chat-container">
+        <?php foreach ($mensagens as $msg): ?>
+            <div class="mensagem"><strong><?= htmlspecialchars($msg['emailRemetente']) ?>:</strong> <?= htmlspecialchars($msg['mensagem']) ?> <em>(<?= $msg['dataHora'] ?>)</em></div>
+        <?php endforeach; ?>
     </div>
-    <script src="../JS/equipas_info.js"></script>
+
+    <form id="chat-form" method="POST" action="../API/enviar_mensagem.php">
+        <input type="hidden" name="nomeEquipa" value="<?= htmlspecialchars($nomeEquipa) ?>">
+        <textarea name="mensagem" required></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Aniversários dos Elementos</h2>
+    <ul>
+        <?php foreach ($aniversarios as $a): ?>
+            <li><?= htmlspecialchars($a['email']) ?>: <?= date('d-m', strtotime($a['dataNascimento'])) ?></li>
+        <?php endforeach; ?>
+    </ul>
 </body>
 </html>
