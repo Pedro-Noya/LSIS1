@@ -8,6 +8,11 @@ include 'dashboard_dal.php';
     return $dados;
 }*/
 
+function obterEquipasDoUtilizador() {
+    $dal = new DAL_Dashboard();
+    $email = $_SESSION["email"];
+    return $dal->obterEquipasDoUtilizador($email);
+}
 function obterFuncao(){
     $dal=new DAL_Dashboard();
     $email=$_SESSION["email"];
@@ -17,18 +22,31 @@ function obterFuncao(){
 function showStatistics(){
     $dal=new DAL_Dashboard();
     $email=$_SESSION["email"];
-    $funcao=obterFuncao();
-    switch($funcao["papel"]){
-        case 2:
-            $colaboradoresEquipa=$dal->obterMembrosEquipa_Coordenador($email);
+    $papel=obterFuncao();
+
+    $filtroEquipa = $_GET['filtroEquipa'] ?? 'todas';
+    $colaboradoresEquipa = [];
+
+    switch ($papel["papel"]) {
+        case 2: // Coordenador
+            if ($filtroEquipa == 'todas') {
+                $colaboradoresEquipa = $dal->obterMembrosEquipa_Coordenador($email);
+            } else {
+                $colaboradoresEquipa = $dal->obterMembrosDeUmaEquipaFiltrada($filtroEquipa, 2);
+            }
             break;
-        case 3:
-            $colaboradoresEquipa=$dal->obterMembrosEquipa_RH($email);
+        case 3: // RH
+            if ($filtroEquipa == 'todas') {
+                $colaboradoresEquipa = $dal->obterMembrosEquipa_RH($email);
+            } else {
+                $colaboradoresEquipa = $dal->obterMembrosDeUmaEquipaFiltrada($filtroEquipa, 3);
+            }
             break;
         default:
-            echo "Algo deu erro! ! !";
-            break;
+            echo "Algo deu erro!";
+            return;
     }
+
     //$dadosArray=obterEmailColaborador_Coordenador();
     $arrayDataNascimento=[];
     $arraySexo=[];

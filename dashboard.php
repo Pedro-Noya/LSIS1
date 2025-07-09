@@ -17,6 +17,21 @@ include "dashboard_bll.php";
 <body>
     <?php include "cabecalho.php"; ?>
 
+    <form method="GET" style="margin: 20px;">
+        <label for="filtroEquipa">Filtrar por Equipa: </label>
+        <select name="filtroEquipa" id="filtroEquipa" onchange="this.form.submit()">
+            <option value="todas">Todas as Equipas</option>
+            <?php 
+                $equipas = obterEquipasDoUtilizador();
+                foreach ($equipas as $equipa): 
+            ?>
+                <option value="<?= $equipa['nomeEquipa'] ?>" <?= isset($_GET['filtroEquipa']) && $_GET['filtroEquipa'] == $equipa['nomeEquipa'] ? 'selected' : '' ?>>
+                    <?= $equipa['nomeEquipa'] ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </form>
+
     <div id="idadeMedia"></div>
     <div id="tempoMedio"></div>
 
