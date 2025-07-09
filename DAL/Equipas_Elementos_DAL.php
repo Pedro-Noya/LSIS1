@@ -121,6 +121,17 @@ class Equipa_Elementos_DAL {
         }
     }
 
+    public function permitirAdicionar($nomeEquipa, $emailElemento){
+        $stmt=$this->conn->prepare("SELECT * FROM ColaboradoresEquipa WHERE email = ? AND nomeEquipa = ?");
+        $stmt->bind_param("ss",$nomeEquipa,$emailElemento);
+        $stmt->execute();
+        if($stmt->num_rows()==0){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
 }
 ?>
 
