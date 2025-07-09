@@ -137,16 +137,25 @@ $trabalhadores = $bll->listarTrabalhadores();
 
         <div id="equipas" class="categoria" style="display:none">
         <h3>Equipas</h3>
-        <?php foreach ($trabalhadores['equipasArray'] as $nomeEquipa => $elementos): ?>
-            <strong><?= htmlspecialchars($nomeEquipa) ?></strong><br/>
-            <?php foreach ($elementos as $elemento): ?>
-            - <?= htmlspecialchars($elemento['nome']) ?> (<?= htmlspecialchars($elemento['email']) ?>) (<?= $converterPapel[$elemento['papel']] ?? 'Desconhecido' ?>)<br/>
+        <?php if (!empty($trabalhadores['equipasArray']) && is_array($trabalhadores['equipasArray'])): ?>
+            <?php foreach ($trabalhadores['equipasArray'] as $nomeEquipa => $elementos): ?>
+                <strong><?= htmlspecialchars($nomeEquipa) ?></strong>
+                <button class="btn" onclick="window.location.href='/PortalColaborador/Equipas/equipasInfo.php?nome=<?= urlencode($nomeEquipa) ?>'">
+                    Ver detalhes
+                </button><br/>
+                <?php if ($elementos): ?>
+                    <?php foreach ($elementos as $elemento): ?>
+                        <br/>
+                        - <?= htmlspecialchars($elemento['nome']) ?> (<?= htmlspecialchars($elemento['email']) ?>) (<?= $converterPapel[$elemento['papel']] ?? 'Desconhecido' ?>)<br/>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Nenhum elemento na equipa</p>
+                <?php endif; ?>
             <?php endforeach; ?>
-        <?php endforeach; ?>
-        </div>
-
-  </div>
-
+        <?php else: ?>
+            <p>Nenhuma equipa registada.</p>
+        <?php endif; ?>
+    </div>
 <script src="js/listar_trabalhadores.js"></script>
 </body>
 </html>
