@@ -32,8 +32,14 @@ require_once "BLL/voucher_bll.php";
           <span class="close" onclick="closeModal()">&times;</span>
           <h2>Add Voucher</h2>
           <form method="POST" action="voucherController.php">
-            <label for="date">Date: </label><br>
-            <input type="date" name="voucherNos" required><br><br>
+            <label>Data de Expiração:</label>
+            <input type="date" name="voucherNos">
+
+            <label>Descrição:</label>
+            <input type="text" name="descricao" required>
+
+            <label>Empresa:</label>
+            <input type="text" name="empresa" required>
             <button type="submit" name="create" class="add-btn">Criar novo voucher NOS</button>
           </form>
         </div>

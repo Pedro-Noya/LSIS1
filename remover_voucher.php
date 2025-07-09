@@ -43,8 +43,8 @@ $sql->bind_param("s",$colaboradorEmail["email"]);
 $sql->execute();
 $colaboradorNome=$sql->get_result()->fetch_assoc();
 
-//Vamos, também, aproveitar para ir buscar a data do Voucher NOS
-$sql=$conn->prepare("SELECT voucherNos FROM VoucherNos WHERE idVoucherNos=?");
+//Vamos, também, aproveitar para ir buscar a data de expiração do Voucher NOS, a data de criação, a descrição e a empresa
+$sql=$conn->prepare("SELECT dataCriacao, voucherNos, descricao, empresa FROM VoucherNos WHERE idVoucherNos=?");
 $sql->bind_param("s",$idVoucherNos);
 $sql->execute();
 $voucherNos=$sql->get_result()->fetch_assoc();
@@ -92,7 +92,10 @@ $loggerBLL->registarLog($_SESSION['email'], "Desassociou o voucher NOS do trabal
         <div class="voucher-info">
             <p><strong>Voucher associado a:</strong> <?= htmlspecialchars($colaboradorNome["nome"]) ?></p>
             <p><strong>Email:</strong> <?= htmlspecialchars($colaboradorEmail["email"]) ?></p>
-            <p><strong>Voucher NOS:</strong> <?= htmlspecialchars($voucherNos["voucherNos"]) ?></p>
+            <p><strong>Data de Criação:</strong> <?= htmlspecialchars($voucherNos["dataCriacao"]) ?></p>
+            <p><strong>Data de Expiração:</strong> <?= htmlspecialchars($voucherNos["voucherNos"]) ?></p>
+            <p><strong>Descrição do Voucher:</strong> <?= htmlspecialchars($voucherNos["descricao"]) ?></p>
+            <p><strong>Empresa:</strong> <?= htmlspecialchars($voucherNos["empresa"]) ?></p>
         </div>
 
         <form method="POST">
