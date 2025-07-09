@@ -50,9 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="nomeEquipa">Nome da Equipa:</label>
             <input type="text" id="nomeEquipa" name="nomeEquipa" required>
 
-            <label for="localizacao">Localização:</label>
-            <input type="text" id="localizacao" name="localizacao" required>
-
             <label for="dataCriacao">Data de Criação:</label>
             <input type="date" id="dataCriacao" name="dataCriacao" value="<?= date('Y-m-d') ?>">
 

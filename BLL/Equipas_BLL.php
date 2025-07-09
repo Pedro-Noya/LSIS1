@@ -18,7 +18,7 @@ class Equipa_BLL {
         }
 
         // 2. Inserir nova equipa
-        $sucesso = $this->dal->criarEquipa($nomeEquipa, $localizacao, $dataCriacao);
+        $sucesso = $this->dal->criarEquipa($nomeEquipa, $dataCriacao);
 
         if (!$sucesso) {
         return "Erro ao registar a equipa.";
