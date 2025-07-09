@@ -8,11 +8,10 @@ $mensagemErro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nomeEquipa = $_POST['nomeEquipa'] ?? '';
-    $localizacao = $_POST['localizacao'] ?? '';
     $dataCriacao = $_POST['dataCriacao'] ?? date('Y-m-d');
 
     $bll = new Equipa_BLL();
-    $resultado = $bll->registarEquipa($nomeEquipa, $localizacao, $dataCriacao);
+    $resultado = $bll->registarEquipa($nomeEquipa, $dataCriacao);
 
     if ($resultado === true) {
         $loggerBLL = new LoggerBLL();

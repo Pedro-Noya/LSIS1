@@ -18,7 +18,7 @@ class Equipa_DAL {
         return $resultado->fetch_assoc();
     }
 
-    public function criarEquipa($nomeEquipa, $localizacao, $dataCriacao) {
+    public function criarEquipa($nomeEquipa, $dataCriacao) {
         $query = "INSERT INTO equipa (nomeEquipa, dataCriacao) VALUES (?, ?)";
         $stmt = $this->conn->prepare($query);
         if (!$stmt) {
