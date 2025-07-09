@@ -100,5 +100,16 @@ class Global_BLL {
         // Método para criar um documento
         return $this->dal->criarDocumento($tipoDocumento, $conteudo, $estado);
     }
+
+    public function getUtilizadorporEmail($email) {
+        // Método para obter um utilizador pelo email
+        $utilizadores = $this->getUtilizadores();
+        foreach ($utilizadores as $utilizador) {
+            if ($utilizador['email'] === $email) {
+                return $utilizador;
+            }
+        }
+        return null; // Retorna null se o utilizador não for encontrado
+    }
 }
 ?>

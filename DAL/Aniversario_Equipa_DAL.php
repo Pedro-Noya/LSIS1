@@ -13,8 +13,9 @@ class AniversarioEquipa_DAL {
 
     public function obterAniversariosPorEquipa($nomeEquipa) {
         $stmt = $this->conn->prepare("
-            SELECT dpc.email, dpc.dataNascimento
+            SELECT u.nome, dpc.email, dpc.dataNascimento
             FROM DadosPessoaisColaborador dpc
+            INNER JOIN Utilizador u ON u.email = dpc.email
             INNER JOIN ColaboradoresEquipa ce ON dpc.email = ce.email
             WHERE ce.nomeEquipa = ?
         ");
@@ -22,4 +23,5 @@ class AniversarioEquipa_DAL {
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+
 }

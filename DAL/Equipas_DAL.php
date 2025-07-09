@@ -37,5 +37,24 @@ class Equipa_DAL {
         }
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function obterEquipasPorEmail($email) {
+        $stmt = $this->conn->prepare("
+            SELECT nomeEquipa FROM ColaboradoresEquipa
+            WHERE email = ?
+        ");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function existeEquipa($nomeEquipa) {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) as total FROM Equipa WHERE nomeEquipa = ?");
+        $stmt->bind_param("s", $nomeEquipa);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['total'] > 0;
+    }
+
 }
 ?>
