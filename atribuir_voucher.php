@@ -8,6 +8,11 @@ $voucherId = $_GET['id'] ?? null;
 if (!$voucherId) {
     die("Voucher inválido.");
 }
+//Vamos buscar alguns dados do Voucher em questão de forma a mostrar ao RH algumas informações adicionais
+$sql=$conn->prepare("SELECT dataCriacao, voucherNos, descricao, empresa FROM VoucherNos WHERE idVoucherNos=?");
+$sql->bind_param("i",$voucherId);
+$sql->execute();
+$voucherNos=$sql->get_result()->fetch_assoc();
 
 // Processar formulário de submissão
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -74,6 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="modal-content">
     <span class="close" onclick="window.history.back()">×</span>
     <h2>Atribuir Voucher</h2>
+     <div class="voucher-info">
+            <p><strong>Data de Criação:</strong> <?= htmlspecialchars($voucherNos["dataCriacao"]) ?></p>
+            <p><strong>Data de Expiração:</strong> <?= htmlspecialchars($voucherNos["voucherNos"]) ?></p>
+            <p><strong>Descrição do Voucher:</strong> <?= htmlspecialchars($voucherNos["descricao"]) ?></p>
+            <p><strong>Empresa:</strong> <?= htmlspecialchars($voucherNos["empresa"]) ?></p>
+        </div>
     <form method="POST">
         <input type="hidden" name="idVoucherNos" value="<?= htmlspecialchars($voucherId) ?>">
 
