@@ -40,7 +40,7 @@ function obterDadosPerfil(){
                     $dal->adicionarVoucher($_POST["voucherNos"]);
                 }
 
-                $dal->atualizarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
+                $dal->atualizarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["idVoucherNos"]);
 
                 $dal->atualizarDadosContrato($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
                 $_POST["dataInicio"], $_POST["dataFim"]);
@@ -76,7 +76,7 @@ function obterDadosPerfil(){
                     $dal->adicionarVoucher($_POST["voucherNos"]);
                 }
 
-                $dal->registarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["voucherNos"]);
+                $dal->registarDadosExtras($_POST["email"], $_POST["cartaoContinente"], $_POST["idVoucherNos"]);
 
                 $dal->registarDadosContrato($_POST["email"], $_POST["tipoContrato"], $_POST["regimeHorarioTrabalho"],
                 $_POST["dataInicio"], $_POST["dataFim"]);
@@ -287,12 +287,12 @@ function showFormAtualizar($dados, $controlo, $disabled){
             echo '<select name="voucherNos" ',$disabled,'>
             <option value="',$dados["idVoucherNos"],'">',$resultado["voucherNos"],'</option>
             </select>
-            <input type="date" name="voucherNos" value="',$dados["idVoucherNos"],'" ',$controlo,' hidden/>';
+            <input type="date" name="idVoucherNos" value="',$dados["idVoucherNos"],'" ',$controlo,' hidden/>';
         } else{
             echo '<select name="voucherNos" ',$disabled,'>
             <option value="',null,'">Não tem Voucher NOS</option>
             </select>
-            <input type="date" name="voucherNos" value="',null,'" ',$controlo,' hidden/>';
+            <input type="date" name="idVoucherNos" value="',null,'" ',$controlo,' hidden/>';
         }
 
         echo '</span>
@@ -472,7 +472,8 @@ function showFormRegistar($dadosBase){
         <label>Email:</label><br><input type="text" name="email" value="',$_SESSION["email"],'" placeholder="email" readonly required>
         </span>
         <span>
-        <label>Password:</label><br><input type="password" name="password" value="',$dadosBase["password_hash"],'" required>
+        <label>Password:</label><br><input type="password" name="password" placeholder="Nova Palavra-Passe (Opcional)"">
+        </span>
         </div>
         <div class="containerAtualizar">
         <label>IBAN:</label> <input type="text" name="iban" placeholder="IBAN" required>
@@ -501,7 +502,7 @@ function showFormRegistar($dadosBase){
         $voucherNos_array=$dal->obterVoucherNos();
         #É correr o array sexo_array e ver em qual indice o valor do sexo é igual ao sexo do colaborador em questão.
 
-        echo '<label>Voucher NOS:</label><br> <select name="voucherNos">
+        echo '<label>Voucher NOS:</label><br> <select name="idVoucherNos">
         <option value="',null,'" selected>Indique uma data VoucherNOS</option>';
         foreach($voucherNos_array as $resultado){
             echo '<option value="',$resultado["idVoucherNos"],'">',$resultado["voucherNos"],'</option>';
