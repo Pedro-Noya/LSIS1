@@ -193,69 +193,152 @@ function showStatistics(){
 
     window.onload = function() {
         new CanvasJS.Chart("chart1Mini", {
-            animationEnabled: true,
-            title: { text: "" },
+            theme: "light2",
+            backgroundColor: "#ffffff",
+            title: {
+                text: "Distribuição por Género",
+                fontFamily: "Montserrat",
+                fontColor: "#0767ea",
+                fontSize: 16
+            },
+            legend: {
+                fontFamily: "Montserrat",
+                fontColor: "#1a3760"
+            },
             data: [{
                 type: "pie",
+                indexLabelFontFamily: "Montserrat",
+                indexLabelFontColor: "#1a3760",
                 dataPoints: [
-                    { label: "Masculino", y: '.$percentMasculino . ' },
-                    { label: "Feminino", y: '. $percentFeminino .' }
+                    { label: "Masculino", y: ' . $percentMasculino . ', color: "#0767ea" },
+                    { label: "Feminino", y: ' . $percentFeminino . ', color: "#2a9df3" }
                 ]
             }]
         }).render();
 
         new CanvasJS.Chart("chart2Mini", {
-            title: { text: "" },
+            theme: "light2",
+            backgroundColor: "#ffffff",
+            title: {
+                text: "Distribuição da Remuneração",
+                fontFamily: "Montserrat",
+                fontColor: "#0767ea",
+                fontSize: 16
+            },
+            axisY: {
+                title: "Colaboradores",
+                labelFontFamily: "Montserrat",
+                labelFontColor: "#1a3760",
+                gridColor: "#dfeaf2",
+                lineColor: "#2a9df3"
+            },
+            axisX: {
+                labelFontFamily: "Montserrat",
+                labelFontColor: "#1a3760",
+                lineColor: "#2a9df3"
+            },
             data: [{
                 type: "column",
+                color: "#2a9df3",
                 dataPoints: [
-                    { label: "Euro", y: '. $countEuro .'},
-                    { label: "Real", y: '. $countReal .' },
-                    { label: "Sterling", y: '. $countSterling .'},
-                    { label: "Metical", y: '. $countMetical .' }
+                { label: "Euro", y: ' . $countEuro . ' },
+                { label: "Real", y: ' . $countReal . ' },
+                { label: "Sterling", y: ' . $countSterling . ' },
+                { label: "Metical", y: ' . $countMetical . ' }
                 ]
             }]
         }).render();
 
-        new CanvasJS.Chart("chart3Mini",{
-            title: { text: "Distribuição da Nacionalidade" },
-            axisY: { title: "Nº de Colaboradores" },
-            axisX: { title: "Nacionalidade" },
+        new CanvasJS.Chart("chart3Mini", {
+            theme: "light2",
+            backgroundColor: "#ffffff",
+            title: {
+                text: "Distribuição da Nacionalidade",
+                fontFamily: "Montserrat",
+                fontColor: "#0767ea",
+                fontSize: 16
+            },
+            axisY: {
+                title: "Nº de Colaboradores",
+                labelFontFamily: "Montserrat",
+                labelFontColor: "#1a3760",
+                gridColor: "#dfeaf2",
+                lineColor: "#2a9df3"
+            },
+            axisX: {
+                title: "Nacionalidade",
+                labelFontFamily: "Montserrat",
+                labelFontColor: "#1a3760",
+                lineColor: "#2a9df3"
+            },
             data: [{
                 type: "column",
+                color: "#2a9df3",
                 dataPoints: [
-                    { label: "Andorra", y: ' . $countAndorra . ' },
-                    { label: "Espanha", y: ' . $countEspanha . ' },
-                    { label: "Portugal", y: ' . $countPortugal . ' },
-                    { label: "Moçambique", y: ' . $countMocambique . ' },
-                    { label: "Brasil", y: ' . $countBrasil . ' },
-                    { label: "Reino Unido", y: ' . $countReinoUnido . ' }
+                { label: "Andorra", y: ' . $countAndorra . ' },
+                { label: "Espanha", y: ' . $countEspanha . ' },
+                { label: "Portugal", y: ' . $countPortugal . ' },
+                { label: "Moçambique", y: ' . $countMocambique . ' },
+                { label: "Brasil", y: ' . $countBrasil . ' },
+                { label: "Reino Unido", y: ' . $countReinoUnido . ' }
                 ]
             }]
         }).render();
 
-        new CanvasJS.Chart("chart4Mini",{
-            title: { text: "Taxa de Retenção" },
+        new CanvasJS.Chart("chart4Mini", {
+            theme: "light2",
+            backgroundColor: "#ffffff",
+            title: {
+                text: "Taxa de Retenção",
+                fontFamily: "Montserrat",
+                fontColor: "#0767ea",
+                fontSize: 16
+            },
+            legend: {
+                fontFamily: "Montserrat",
+                fontColor: "#1a3760"
+            },
             data: [{
                 type: "pie",
-                indexLabel: "{label} - {y}%",
+                indexLabelFontFamily: "Montserrat",
+                indexLabelFontColor: "#1a3760",
+                indexLabel: "{label} - {y.toFixed(1)}%",
                 dataPoints: [
-                    { y: ' . $percentRetidos . ', label: "Colaboradores retidos" },
-                    { y: ' . $percentNaoRetidos . ', label: "Colaboradores não retidos" }
+                { label: "Colaboradores retidos", y: ' . $percentRetidos . ', color: "#2a9df3" },
+                { label: "Colaboradores não retidos", y: ' . $percentNaoRetidos . ', color: "#0767ea" }
                 ]
             }]
         }).render();
 
-        new CanvasJS.Chart("chart5Mini",{
-            title: { text: "Distribuição por Função" },
-            axisY: { title: "Nº de Colaboradores" },
-            axisX: { title: "Função" },
+        new CanvasJS.Chart("chart5Mini", {
+            theme: "light2",
+            backgroundColor: "#ffffff",
+            title: {
+                text: "Distribuição por Função",
+                fontFamily: "Montserrat",
+                fontColor: "#0767ea",
+                fontSize: 16
+            },
+            axisY: {
+                title: "Nº de Colaboradores",
+                labelFontFamily: "Montserrat",
+                labelFontColor: "#1a3760",
+                gridColor: "#dfeaf2",
+                lineColor: "#2a9df3"
+            },
+            axisX: {
+                title: "Função",
+                labelFontFamily: "Montserrat",
+                labelFontColor: "#1a3760",
+                lineColor: "#2a9df3"
+            },
             data: [{
                 type: "column",
+                color: "#2a9df3",
                 dataPoints: [
-                    { label: "Colaborador", y: ' . $numColaboradores . ' },
-                    { label: "Coordenador", y: ' . $numCoordenadores . ' },
-                    { label: "RH", y: ' . $numRH . ' }
+                { label: "Colaborador", y: ' . $numColaboradores . ' },
+                { label: "Coordenador", y: ' . $numCoordenadores . ' },
+                { label: "RH", y: ' . $numRH . ' }
                 ]
             }]
         }).render();
@@ -268,72 +351,156 @@ function showStatistics(){
         switch(id){
             case 1:
                 chart = new CanvasJS.Chart("chartModalContainer", {
-                    title: { text: "Distribuição por Género" },
+                    theme: "light2",
+                    backgroundColor: "#ffffff",
+                    title: {
+                        text: "Distribuição por Género",
+                        fontFamily: "Montserrat",
+                        fontColor: "#0767ea",
+                        fontSize: 16
+                    },
+                    legend: {
+                        fontFamily: "Montserrat",
+                        fontColor: "#1a3760"
+                    },
                     data: [{
                         type: "pie",
+                        indexLabelFontFamily: "Montserrat",
+                        indexLabelFontColor: "#1a3760",
                         dataPoints: [
-                            { label: "Masculino", y: ' . $percentMasculino . ' },
-                            { label: "Feminino", y: ' . $percentFeminino . ' }
+                            { label: "Masculino", y: ' . $percentMasculino . ', color: "#0767ea" },
+                            { label: "Feminino", y: ' . $percentFeminino . ', color: "#2a9df3" }
                         ]
                     }]
                 });
                 break;
             case 2:
                 chart = new CanvasJS.Chart("chartModalContainer", {
-                    title: { text: "Distribuição da Remuneração" },
+                    theme: "light2",
+                    backgroundColor: "#ffffff",
+                    title: {
+                        text: "Distribuição da Remuneração",
+                        fontFamily: "Montserrat",
+                        fontColor: "#0767ea",
+                        fontSize: 16
+                    },
+                    axisY: {
+                        title: "Colaboradores",
+                        labelFontFamily: "Montserrat",
+                        labelFontColor: "#1a3760",
+                        gridColor: "#dfeaf2",
+                        lineColor: "#2a9df3"
+                    },
+                    axisX: {
+                        labelFontFamily: "Montserrat",
+                        labelFontColor: "#1a3760",
+                        lineColor: "#2a9df3"
+                    },
                     data: [{
                         type: "column",
+                        color: "#2a9df3",
                         dataPoints: [
-                            { label: "Euro", y: ' . $countEuro . ' },
-                            { label: "Real", y: ' . $countReal . ' },
-                            { label: "Sterling", y: ' . $countSterling . ' },
-                            { label: "Metical", y: ' . $countMetical . ' }
+                        { label: "Euro", y: ' . $countEuro . ' },
+                        { label: "Real", y: ' . $countReal . ' },
+                        { label: "Sterling", y: ' . $countSterling . ' },
+                        { label: "Metical", y: ' . $countMetical . ' }
                         ]
                     }]
                 });
                 break;
             case 3:
                 chart = new CanvasJS.Chart("chartModalContainer", {
-                    title: { text: "Distribuição da Nacionalidade" },
-                    axisY: { title: "Nº de Colaboradores" },
-                    axisX: { title: "Nacionalidade" },
+                    theme: "light2",
+                    backgroundColor: "#ffffff",
+                    title: {
+                        text: "Distribuição da Nacionalidade",
+                        fontFamily: "Montserrat",
+                        fontColor: "#0767ea",
+                        fontSize: 16
+                    },
+                    axisY: {
+                        title: "Nº de Colaboradores",
+                        labelFontFamily: "Montserrat",
+                        labelFontColor: "#1a3760",
+                        gridColor: "#dfeaf2",
+                        lineColor: "#2a9df3"
+                    },
+                    axisX: {
+                        title: "Nacionalidade",
+                        labelFontFamily: "Montserrat",
+                        labelFontColor: "#1a3760",
+                        lineColor: "#2a9df3"
+                    },
                     data: [{
                         type: "column",
+                        color: "#2a9df3",
                         dataPoints: [
-                            { label: "Andorra", y: ' . $countAndorra . ' },
-                            { label: "Espanha", y: ' . $countEspanha . ' },
-                            { label: "Portugal", y: ' . $countPortugal . ' },
-                            { label: "Moçambique", y: ' . $countMocambique . ' },
-                            { label: "Brasil", y: ' . $countBrasil . ' },
-                            { label: "Reino Unido", y: ' . $countReinoUnido . ' }
+                        { label: "Andorra", y: ' . $countAndorra . ' },
+                        { label: "Espanha", y: ' . $countEspanha . ' },
+                        { label: "Portugal", y: ' . $countPortugal . ' },
+                        { label: "Moçambique", y: ' . $countMocambique . ' },
+                        { label: "Brasil", y: ' . $countBrasil . ' },
+                        { label: "Reino Unido", y: ' . $countReinoUnido . ' }
                         ]
                     }]
                 });
                 break;
             case 4:
                 chart = new CanvasJS.Chart("chartModalContainer", {
-                    title: { text: "Taxa de Retenção" },
+                    theme: "light2",
+                    backgroundColor: "#ffffff",
+                    title: {
+                        text: "Taxa de Retenção",
+                        fontFamily: "Montserrat",
+                        fontColor: "#0767ea",
+                        fontSize: 16
+                    },
+                    legend: {
+                        fontFamily: "Montserrat",
+                        fontColor: "#1a3760"
+                    },
                     data: [{
                         type: "pie",
-                        indexLabel: "{label} - {y}%",
+                        indexLabelFontFamily: "Montserrat",
+                        indexLabelFontColor: "#1a3760",
+                        indexLabel: "{label} - {y.toFixed(1)}%",
                         dataPoints: [
-                            { y: ' . $percentRetidos . ', label: "Colaboradores retidos" },
-                            { y: ' . $percentNaoRetidos . ', label: "Colaboradores não retidos" }
+                        { label: "Colaboradores retidos", y: ' . $percentRetidos . ', color: "#2a9df3" },
+                        { label: "Colaboradores não retidos", y: ' . $percentNaoRetidos . ', color: "#0767ea" }
                         ]
                     }]
                 });
                 break;
             case 5:
                 chart = new CanvasJS.Chart("chartModalContainer", {
-                    title: { text: "Distribuição por Função" },
-                    axisY: { title: "Nº de Colaboradores" },
-                    axisX: { title: "Função" },
+                    theme: "light2",
+                    backgroundColor: "#ffffff",
+                    title: {
+                        text: "Distribuição por Função",
+                        fontFamily: "Montserrat",
+                        fontColor: "#0767ea",
+                        fontSize: 16
+                    },
+                    axisY: {
+                        title: "Nº de Colaboradores",
+                        labelFontFamily: "Montserrat",
+                        labelFontColor: "#1a3760",
+                        gridColor: "#dfeaf2",
+                        lineColor: "#2a9df3"
+                    },
+                    axisX: {
+                        title: "Função",
+                        labelFontFamily: "Montserrat",
+                        labelFontColor: "#1a3760",
+                        lineColor: "#2a9df3"
+                    },
                     data: [{
                         type: "column",
+                        color: "#2a9df3",
                         dataPoints: [
-                            { label: "Colaborador", y: ' . $numColaboradores . ' },
-                            { label: "Coordenador", y: ' . $numCoordenadores . ' },
-                            { label: "RH", y: ' . $numRH . ' }
+                        { label: "Colaborador", y: ' . $numColaboradores . ' },
+                        { label: "Coordenador", y: ' . $numCoordenadores . ' },
+                        { label: "RH", y: ' . $numRH . ' }
                         ]
                     }]
                 });
