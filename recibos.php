@@ -22,7 +22,7 @@ $recibos = getRecibosFiltrados();
     <?php if ($papel == 3): ?>
         <!-- Filtro -->
         <form method="GET">
-            <label for="filtroEmail">Filtrar por Utilizador:</label>
+            <label for="filtroEmail">Filtrar por Colaborador:</label>
             <select name="filtroEmail" onchange="this.form.submit()">
                 <option value="">Todos</option>
                 <?php foreach (getTodosEmailsParaFiltro() as $user): ?>
@@ -39,7 +39,7 @@ $recibos = getRecibosFiltrados();
             <input type="text" name="nomeRecibo" placeholder="Nome do Recibo" required>
             <input type="text" name="vencimento" placeholder="Valor de Vencimento" required>
             <select name="email" required>
-                <option value="">Selecionar Utilizador</option>
+                <option value="">Selecionar Colaborador</option>
                 <?php foreach (getTodosEmailsParaFiltro() as $user): ?>
                     <option value="<?= $user['email'] ?>"><?= $user['email'] ?></option>
                 <?php endforeach; ?>
