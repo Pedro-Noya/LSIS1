@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . "/../DAL/Mensagem_Equipa_DAL.php";
 require_once __DIR__ . "/../BLL/Logger_BLL.php";
-session_start();
+require_once __DIR__ . "/../verificar_acesso.php";
+verificarAcesso([1,2,3,4]);
 
 $nomeEquipa = $_POST['nomeEquipa'] ?? '';
 $email = $_SESSION['email'] ?? '';

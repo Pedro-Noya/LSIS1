@@ -2,7 +2,8 @@
 require_once __DIR__ . "/../DAL/Formacoes_DAL.php";
 require_once __DIR__ . "/../BLL/Pedido_BLL.php";
 require_once __DIR__ . '/../BLL/Logger_BLL.php';
-session_start();
+require_once __DIR__ . "/../verificar_acesso.php";
+verificarAcesso([1,2,3,4]);
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['papel'] != 1) {
     header("Location: ../formacoes.php");

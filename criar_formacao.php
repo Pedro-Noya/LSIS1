@@ -1,9 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || ($_SESSION['papel'] != 3 && $_SESSION['papel'] != 4)) {
-    header("Location: login.php");
-    exit();
-}
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([3,4]);
 ?>
 <!DOCTYPE html>
 <html lang="pt">

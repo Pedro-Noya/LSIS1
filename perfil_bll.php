@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([1,2,3,4]);
 require_once 'perfil_dal.php';
 
 

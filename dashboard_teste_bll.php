@@ -1,6 +1,6 @@
 <?php
-// dashboard_bll.php
-// Business Logic Layer - processamento e agregação de dados
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([2,3]);
 
 require_once 'dashboard_teste_dal.php';
 

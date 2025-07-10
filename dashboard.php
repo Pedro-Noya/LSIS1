@@ -1,5 +1,7 @@
 <?php
 include "dashboard_bll.php";
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([2,3]);
 ?>
 
 <!DOCTYPE html>

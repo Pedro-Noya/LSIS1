@@ -1,12 +1,8 @@
 <?php
 require_once __DIR__ . "/../BLL/Formacoes_BLL.php";
 require_once __DIR__ . "/../BLL/Logger_BLL.php";
-session_start();
-
-if (!isset($_SESSION['logged_in']) || ($_SESSION['papel'] != 3 && $_SESSION['papel'] != 4)) {
-    http_response_code(403);
-    exit("Sem permissão.");
-}
+require_once __DIR__ . "/../verificar_acesso.php";
+verificarAcesso([3, 4]);
 
 $email = $_POST['email'] ?? '';
 $id = $_POST['idFormacao'] ?? '';

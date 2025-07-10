@@ -2,8 +2,8 @@
 require_once '../BLL/Equipas_Elementos_BLL.php';
 require_once '../BLL/Global_BLL.php';
 require_once '../BLL/Logger_BLL.php';
-
-session_start();
+require_once __DIR__ . "/../verificar_acesso.php";
+verificarAcesso([3]);
 
 $mensagemErro = '';
 

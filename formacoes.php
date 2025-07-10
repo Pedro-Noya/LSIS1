@@ -1,9 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: login.php");
-    exit();
-}
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([1,2,3,4]);
 require_once "BLL/Formacoes_BLL.php";
 $formacoesBLL = new Formacoes_BLL();
 $formacoes = $formacoesBLL->obterFormacoes();

@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([1,2,3,4]);
 
 require_once 'BLL/Pedido_BLL.php';
 require_once 'BLL/Global_BLL.php';

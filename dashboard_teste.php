@@ -1,5 +1,6 @@
 <?php
-// dashboard.php
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([2,3]);
 require_once 'dashboard_teste_bll.php';
 
 // Carregar dados processados

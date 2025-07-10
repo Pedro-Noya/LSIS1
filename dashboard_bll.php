@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([2,3]);
 include 'dashboard_dal.php';
 
 /*function obterEmailColaborador_Coordenador(){

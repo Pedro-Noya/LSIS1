@@ -1,7 +1,8 @@
 <?php
-session_start();
 
 require_once 'BLL/Logger_BLL.php';
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([3]);
 
 $conn = new mysqli('localhost', 'root', '', 'tlantic');
 if ($conn->connect_error) {

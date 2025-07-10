@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../BLL/Alertas_BLL.php';
 require_once __DIR__ . '/../BLL/Logger_BLL.php';
+require_once __DIR__ . "/../verificar_acesso.php";
+verificarAcesso([3, 4]);
 
 header('Content-Type: application/json');
 

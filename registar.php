@@ -1,8 +1,8 @@
 <?php
 require_once 'BLL/Registo_Utilizador_BLL.php';
 require_once 'BLL/Logger_BLL.php';
-
-session_start();
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([3]);
 
 function generateRandomPassword($length = 8) {
     $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

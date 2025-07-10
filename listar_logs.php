@@ -1,5 +1,7 @@
 <?php
 require_once 'BLL/Logger_BLL.php';
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([4]);
 
 $logger = new LoggerBLL();
 $logs = $logger->obterLogs(); // assume que este método já existe

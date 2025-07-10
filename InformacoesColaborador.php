@@ -1,5 +1,7 @@
 <?php
 include __DIR__ . "/BLL/InformacoesColaborador_bll.php";
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([1,2,3,4]);
 ?>
 <!DOCTYPE html>
 <html lang="pt">

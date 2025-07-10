@@ -1,5 +1,8 @@
 <meta charset="UTF-8">
 <?php
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([3,4]);
+
 $conn = new mysqli('localhost', 'root', '', 'tlantic');
 
 if ($conn->connect_error) {

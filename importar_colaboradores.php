@@ -1,5 +1,7 @@
 <meta charset="UTF-8">
 <?php
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([3,4]);
 $mensagem = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
