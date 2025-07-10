@@ -2,7 +2,7 @@
 require_once __DIR__ . "/../BLL/Formacoes_BLL.php";
 require_once __DIR__ . "/../BLL/Logger_BLL.php";
 require_once __DIR__ . "/../verificar_acesso.php";
-verificarAcesso([3,4]);
+verificarAcesso([3]);
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || ($_SESSION['papel'] != 3 && $_SESSION['papel'] != 4)) {
     header("Location: ../formacoes.php");

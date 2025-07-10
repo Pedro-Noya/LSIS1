@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/verificar_acesso.php";
-verificarAcesso([3,4]);
+verificarAcesso([3]);
 ?>
 <!DOCTYPE html>
 <html lang="pt">

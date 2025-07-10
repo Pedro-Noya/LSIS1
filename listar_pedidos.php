@@ -1,7 +1,7 @@
 <?php
 require_once 'BLL/Pedido_BLL.php';
 require_once __DIR__ . "/verificar_acesso.php";
-verificarAcesso([3,4]);
+verificarAcesso([3]);
 
 $bll = new PedidoBLL();
 $pedidos = $bll->obterPedidosPendentes();

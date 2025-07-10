@@ -6,14 +6,8 @@
         <nav>
             <?php mostrarItens();?>
         <?php
-        /*<div class="pedido-demo-box">
-            <span>🔔</span>
-            <span>Pedir uma demo</span>
-        </div>
-        <a href="#" class="btn-experiment">Experimente agora</a>
-        <a href="#">PT ▾</a>*/
         ?>
         </nav>
     </div>
-    <h1>Portal do Colaborador</h1>
+    <h1><strong>Portal do Colaborador</strong></h1>
 </div>

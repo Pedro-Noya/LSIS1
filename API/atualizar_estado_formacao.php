@@ -2,7 +2,7 @@
 require_once __DIR__ . "/../BLL/Formacoes_BLL.php";
 require_once __DIR__ . "/../BLL/Logger_BLL.php";
 require_once __DIR__ . "/../verificar_acesso.php";
-verificarAcesso([3, 4]);
+verificarAcesso([3]);
 
 $email = $_POST['email'] ?? '';
 $id = $_POST['idFormacao'] ?? '';
