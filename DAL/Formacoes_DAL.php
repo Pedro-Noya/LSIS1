@@ -70,5 +70,10 @@ class Formacoes_DAL {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function removerAssociacaoFormacao($email, $idFormacao) {
+        $stmt = $this->conn->prepare("DELETE FROM FormacoesColaboradores WHERE email = ? AND idFormacao = ?");
+        $stmt->bind_param("si", $email, $idFormacao);
+        return $stmt->execute();
+    }
 }
 ?>

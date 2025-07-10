@@ -38,5 +38,8 @@ class Formacoes_BLL {
     public function atualizarEstadoFormacao($email, $idFormacao, $estado) {
         return $this->dal->atualizarEstadoFormacao($email, $idFormacao, $estado);
     }
+    public function removerAssociacaoFormacao($email, $idFormacao) {
+        return $this->dal->removerAssociacaoFormacao($email, $idFormacao);
+    }
 }
 ?>

@@ -18,7 +18,7 @@ $formacoes = $formacoesBLL->obterFormacoes();
 
   <div class="section-title">Formações Disponíveis</div>
 
-  <?php if ($_SESSION['papel'] == 3 || $_SESSION['papel'] == 4): ?>
+  <?php if ($_SESSION['papel'] == 3): ?>
     <div class="criar-formacao-box">
       <button class="btn-criar-formacao" onclick="window.location.href='criar_formacao.php'">➕ Criar nova formação</button>
     </div>
@@ -43,10 +43,10 @@ $formacoes = $formacoesBLL->obterFormacoes();
             Ver Mais
           </button>
 
-          <?php if ($_SESSION['papel'] == 3 || $_SESSION['papel'] == 4): ?>
+          <?php if ($_SESSION['papel'] == 3): ?>
             <button class="btn-gerir-inscricoes" onclick="abrirModalInscricoes(<?= $f['idFormacao'] ?>)">👥 Gerir Inscrições</button>
           <?php endif; ?>
-          <?php if ($_SESSION['papel'] == 1): ?>
+          <?php if ($_SESSION['papel'] == 1 || $_SESSION['papel'] == 2): ?>
             <?php
               $inscrito = $formacoesBLL->verificarInscricao($_SESSION['email'], $f['idFormacao']);
             ?>

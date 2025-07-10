@@ -23,16 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         // Verificar se é pedido de inscrição em formação
-        if ($acao === 'aceitar') {
-            $pedido = $bll->obterPedidoPorId($idPedido);
+        $pedido = $bll->obterPedidoPorId($idPedido);
 
-            if ($pedido && str_starts_with($pedido['tipo'], 'Inscrição em Formação')) {
-                if (preg_match('/ID:\s*(\d+)/', $pedido['razao'], $matches)) {
-                    $idFormacao = (int) $matches[1];
-                    $email = $pedido['email'];
+        if ($pedido && str_starts_with($pedido['tipo'], 'Inscrição em Formação')) {
+            if (preg_match('/ID:\s*(\d+)/', $pedido['razao'], $matches)) {
+                $idFormacao = (int) $matches[1];
+                $email = $pedido['email'];
+                $formacoesBLL = new Formacoes_BLL();
 
-                    $formacoesBLL = new Formacoes_BLL();
+                if ($acao === 'aceitar') {
                     $formacoesBLL->atualizarEstadoFormacao($email, $idFormacao, 1);
+                } else {
+                    $formacoesBLL->removerAssociacaoFormacao($email, $idFormacao);
                 }
             }
         }

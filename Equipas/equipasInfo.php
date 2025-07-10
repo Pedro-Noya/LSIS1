@@ -25,7 +25,7 @@ if (!$nomeEquipa || !$EquipasDAL->existeEquipa($nomeEquipa)) {
         <h2>Escolha uma equipa para visualizar:</h2>
         <ul>
             <?php if (empty($equipasDoUtilizador)): ?>
-                Nenhuma equipa encontrada.
+                Não Pertence a Nenhuma Equipa!
             <?php else: ?>
                 <?php foreach ($equipasDoUtilizador as $eq): ?>
                     <li><a href="equipasInfo.php?nome=<?= urlencode($eq['nomeEquipa']) ?>">
