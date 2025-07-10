@@ -9,7 +9,6 @@ class Equipas_Elementos_BLL {
     }
 
     public function adicionarElementoEquipa($nomeEquipa, $emailElemento) {
-        // 1. Verificar se a equipa existe
         if (!$this->equipaElementosDAL->existeEquipa($nomeEquipa)) {
             return "A equipa não existe.";
         }
@@ -23,13 +22,6 @@ class Equipas_Elementos_BLL {
             return "O elemento não pode ser adicionado à equipa, pois não é um colaborador ou coordenador ou RH.";
         }
 
-        // 2. Verificar se o elemento já está numa equipa
-        /*if ($this->equipaElementosDAL->elementoTemEquipa($emailElemento)) {
-            return "O elemento já tem equipa.";
-        }*/
-
-
-        // 3. Adicionar elemento à equipa
         $sucesso = $this->equipaElementosDAL->adicionarElemento($nomeEquipa, $emailElemento, "colaboradoresEquipa");
 
         if (!$sucesso) {
@@ -40,12 +32,10 @@ class Equipas_Elementos_BLL {
     }
 
     public function removerElementoEquipa($nomeEquipa, $emailElemento) {
-        // 1. Verificar se a equipa existe
         if (!$this->equipaElementosDAL->existeEquipa($nomeEquipa)) {
             return "A equipa não existe.";
         }
 
-        // 2. Remover elemento da equipa
         $sucesso = $this->equipaElementosDAL->removerElemento($nomeEquipa, $emailElemento);
         if (!$sucesso) {
             return "Erro ao remover o elemento da equipa.";

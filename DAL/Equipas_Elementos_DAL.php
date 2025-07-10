@@ -27,11 +27,6 @@ class Equipa_Elementos_DAL {
 
 
     public function adicionarElemento($nomeEquipa, $emailElemento, $db) {
-
-        /*if (!in_array($db, ['colaboradoresequipa'])) {
-          die("Tabela inválida.");
-        }*/
-        // Verifica se o elemento já está na equipa
         $stmt = $this->conn->prepare("SELECT * FROM $db WHERE nomeEquipa = ? AND email = ?");
         $stmt->bind_param("ss", $nomeEquipa, $emailElemento);
         if (!$stmt->execute()) {
@@ -43,7 +38,6 @@ class Equipa_Elementos_DAL {
             return false;
         }
 
-        // Adiciona o elemento à equipa
         $stmt = $this->conn->prepare("INSERT INTO $db (nomeEquipa, email) VALUES (?, ?)");
         if (!$stmt) {
             die("Erro na preparação da query: " . $this->conn->error);
@@ -54,7 +48,6 @@ class Equipa_Elementos_DAL {
     }
 
     public function removerElemento($nomeEquipa, $emailElemento) {
-        // Verifica se o elemento está na equipa
         $stmt = $this->conn->prepare("SELECT * FROM colaboradoresequipa WHERE nomeEquipa = ? AND email = ?");
         $stmt->bind_param("ss", $nomeEquipa, $emailElemento);
         if (!$stmt->execute()) {
@@ -63,7 +56,6 @@ class Equipa_Elementos_DAL {
         $resultado = $stmt->get_result();
 
         if ($resultado->num_rows === 0) {
-            // Verifica na tabela de coordenadores
             $stmt = $this->conn->prepare("SELECT * FROM coordenadoresequipa WHERE nomeEquipa = ? AND email = ?");
             $stmt->bind_param("ss", $nomeEquipa, $emailElemento);
             if (!$stmt->execute()) {
@@ -72,9 +64,8 @@ class Equipa_Elementos_DAL {
             $resultado = $stmt->get_result();
 
             if ($resultado->num_rows === 0) {
-                return false; // Elemento não encontrado na equipa
+                return false;
             } else {
-                // Remove da tabela de coordenadores
                 $stmt = $this->conn->prepare("DELETE FROM coordenadoresequipa WHERE nomeEquipa = ? AND email = ?");
                 if (!$stmt) {
                     die("Erro na preparação da query: " . $this->conn->error);
@@ -83,7 +74,6 @@ class Equipa_Elementos_DAL {
                 return $stmt->execute();
             }
         } else {
-            // Remove da tabela de colaboradores
             $stmt = $this->conn->prepare("DELETE FROM colaboradoresequipa WHERE nomeEquipa = ? AND email = ?");
             if (!$stmt) {
                 die("Erro na preparação da query: " . $this->conn->error);
@@ -108,7 +98,6 @@ class Equipa_Elementos_DAL {
     }
 
     public function elementoTemEquipa($emailElemento) {
-        // Verifica na tabela de colaboradores
         $stmt = $this->conn->prepare("SELECT * FROM colaboradoresequipa WHERE email = ?");
         $stmt->bind_param("s", $emailElemento);
         if (!$stmt->execute()) {

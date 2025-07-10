@@ -10,7 +10,6 @@ function obterDadosPerfil(){
     $dal=new DAL_Atualizar();
     $dadosLogados=$dal->obterDadosUtilizador($_SESSION["email"]);
     if($dadosLogados["papel"]==3){
-        //$email=$_GET["email"];
         $dados=$dal->obterDadosUtilizador($_SESSION["emailColaborador"]);
         $dadosColaborador=$dal->obterDadosPerfil($_SESSION["emailColaborador"]);
         if($dados["estado"]==0){
@@ -50,7 +49,6 @@ function obterDadosPerfil(){
             showFormRegistar($dados);
         } else {
             if($_POST){
-                //Separação da Morada em Rua e Nº da Porta
                 list($rua, $numPorta)=explode(", ", $_POST["morada"]);
 
                 $dal->atualizarDadosPessoais($_POST["numMec"], $_POST["email"], $_POST["nomeAbreviado"], $_POST["dataNascimento"],
@@ -94,7 +92,7 @@ function obterDadosPerfil(){
     }
 
     function isThisACallback(){
-        if($_POST){ //Acrescentar mais validações que possam ser necessárias
+        if($_POST){
             return true;
         }
         return false;

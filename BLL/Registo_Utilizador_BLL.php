@@ -11,15 +11,12 @@ class Registo_Utilizador_BLL {
 
   public function registarUtilizador($emailPessoal, $nome, $email, $password) {
 
-    // 2. Verificar se o utilizador já existe
     if ($this->dal->existeUtilizador($email)) {
       return "O utilizador já existe.";
     }
 
-    // 3. Criar hash da password
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    // 4. Inserir utilizador
     $sucesso = $this->dal->createUtilizador(
       $email,
       $nome,

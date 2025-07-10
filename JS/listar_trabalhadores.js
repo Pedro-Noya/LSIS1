@@ -37,7 +37,7 @@ function definirPapel(email) {
     .then(data => {
         if (data.success) {
             alert("Papel de " + email + " definido para " + papel);
-            window.location.reload(); // or update table dynamically
+            window.location.reload();
         } else {
             alert("Erro ao atualizar papel.");
         }

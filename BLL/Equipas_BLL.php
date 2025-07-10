@@ -12,12 +12,10 @@ class Equipa_BLL {
     }
 
     public function registarEquipa($nomeEquipa, $dataCriacao) {
-        // 1. Verificar se a equipa já existe
         if ($this->dal->obterEquipaPorNome($nomeEquipa)) {
         return "A equipa já existe.";
         }
 
-        // 2. Inserir nova equipa
         $sucesso = $this->dal->criarEquipa($nomeEquipa, $dataCriacao);
 
         if (!$sucesso) {

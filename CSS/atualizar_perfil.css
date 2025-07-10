@@ -3,7 +3,7 @@ body{
 }
 .containerAtualizar_button {
     width: 80%;
-    margin: 20px auto; /* center horizontally */
+    margin: 20px auto;
     padding: 15px;
 }
 .containerAtualizar_button input {
@@ -20,7 +20,7 @@ body{
 }
 .containerAtualizar {
     width: 80%;
-    margin: 20px auto; /* center horizontally */
+    margin: 20px auto;
     border: 2px solid black;
     border-radius: 10px;
     padding: 15px;
@@ -48,7 +48,7 @@ body{
     width: 80%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin: 20px auto; /* center horizontally */
+    margin: 20px auto;
     padding: 15px;
     border: 2px solid black;
     border-radius: 10px;
@@ -68,7 +68,7 @@ body{
     width: 80%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin: 20px auto; /* center horizontally */
+    margin: 20px auto;
     padding: 15px;
     border: 2px solid black;
     border-radius: 10px;

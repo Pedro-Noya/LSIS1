@@ -1,5 +1,4 @@
 <?php
-// session_start();
 include __DIR__ . '/../DAL/cabecalho_dal.php';
 $base_url = '/PortalColaborador/';
 

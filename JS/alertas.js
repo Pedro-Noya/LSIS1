@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <strong>Tipo:</strong><br/>
         <select name="tipo" style="width:100%">
           <option value="documentacao" ${tipo.toLowerCase() === 'documentação' ? 'selected' : ''}>Documentação</option>
-          <!-- Adicione mais opções se quiser -->
         </select>
       `;
 
@@ -118,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then(response => response.json())
           .then(data => {
             if (data.success) {
-              alert('Alerta excluído com sucesso!');
+              alert('Alerta eliminado com sucesso!');
               card.remove();
             } else {
               alert('Erro ao eliminar alerta: ' + JSON.stringify(data));

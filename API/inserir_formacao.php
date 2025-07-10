@@ -26,14 +26,12 @@ if (!is_dir($uploadDir)) {
 $imagemNome = basename($_FILES['imagem']['name']);
 $nomeFinal = time() . "_" . $imagemNome;
 
-$targetPath = $uploadDir . $nomeFinal;       // usado para guardar no disco
-$caminhoParaBD = $publicDir . $nomeFinal;    // usado para guardar na base de dados
-
+$targetPath = $uploadDir . $nomeFinal;
+$caminhoParaBD = $publicDir . $nomeFinal;
 if (!move_uploaded_file($_FILES['imagem']['tmp_name'], $targetPath)) {
     die("Erro ao guardar a imagem.");
 }
 
-// Inserir na base de dados
 $formacaoBLL = new Formacoes_BLL();
 $formacaoBLL->criarFormacao(
     $_POST['titulo'],

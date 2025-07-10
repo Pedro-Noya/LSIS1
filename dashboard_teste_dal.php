@@ -9,15 +9,6 @@ class DAL_Dashboard {
         }
     }
 
-    /**
-     * Obtém todos os colaboradores com dados principais
-     * Campos esperados na tabela:
-     * - nome
-     * - dataNascimento
-     * - sexo
-     * - dataEntrada (ou equivalente)
-     * - funcao
-     */
     function obterColaboradores() {
         $sql = "SELECT nome, dataNascimento, sexo, dataEntrada, funcao FROM Colaboradores";
         $result = $this->conn->query($sql);

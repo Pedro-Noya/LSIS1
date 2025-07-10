@@ -66,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form method="POST" action="">
-            <!-- Selecionar equipa -->
             <label for="nomeEquipa">Equipa:</label>
             <select name="nomeEquipa" id="nomeEquipa" required>
                 <option value="" selected disabled>Equipa</option>
@@ -77,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endforeach; ?>
             </select>
 
-            <!-- Adicionar ou remover -->
             <label for="acao">Ação:</label>
             <select name="acao" id="acao" required>
                 <option value="" selected disabled>Ação</option>
@@ -85,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <option value="remover">Remover elemento</option>
             </select>
 
-            <!-- Email do elemento -->
             <label for="Elemento">Elemento:</label>
             <select name="Elemento" id="Elemento" required>
                 <option value="" selected disabled>Elemento</option>

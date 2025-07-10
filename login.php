@@ -42,13 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
   <?php include "cabecalho.php"; ?>
-
-  <!-- Subtítulo -->
   <div class="section-title">Login | Entrar no seu Portal</div>
-
   <br/>
 
-  <!-- Formulário -->
   <div class="container">
     <?php if (!empty($mensagemErro)): ?>
       <div class="erro"><?= htmlspecialchars($mensagemErro) ?></div>

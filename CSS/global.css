@@ -153,8 +153,8 @@ input[type="submit"]:hover,
 
 .containers-row {
     display: flex;
-    gap: 30px; /* spacing between containers */
+    gap: 30px;
     justify-content: center;
     align-items: flex-start;
-    flex-wrap: wrap; /* allows stacking on smaller screens */
+    flex-wrap: wrap;
 }

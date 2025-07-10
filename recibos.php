@@ -22,7 +22,6 @@ $recibos = getRecibosFiltrados();
     <h1>Recibos de Vencimento</h1>
 
     <?php if ($papel == 3): ?>
-        <!-- Filtro -->
         <form method="GET">
             <label for="filtroEmail">Filtrar por Colaborador:</label>
             <select name="filtroEmail" onchange="this.form.submit()">
@@ -35,7 +34,6 @@ $recibos = getRecibosFiltrados();
             </select>
         </form>
 
-        <!-- Formulário de criação -->
         <h2>Adicionar Novo Recibo</h2>
         <form method="POST" action="recibos.php">
             <input type="text" name="nomeRecibo" placeholder="Nome do Recibo" required>
@@ -58,7 +56,6 @@ $recibos = getRecibosFiltrados();
         <?php endif; ?>
     <?php endif; ?>
 
-    <!-- Lista de recibos -->
     <?php if (empty($recibos)): ?>
         <p style="margin: 20px; font-weight: bold;">Não existem recibos disponíveis para mostrar.</p>
     <?php else: ?>

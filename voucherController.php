@@ -33,7 +33,6 @@ if (isset($_POST['voucherNos']) && isset($_POST["empresa"]) && isset($_POST["des
         $sql->bind_param("ssss", $dataCriacao, $voucherNos, $descricao, $empresa);
         $sql->execute();
 
-        // Redirecionar de volta à página principal
         $loggerBLL = new LoggerBLL();
         $loggerBLL->registarLog($_SESSION['email'], "Criou um novo voucher NOS: $id", "Data de Expiração: $voucherNos");
         header("Location: voucher.php");

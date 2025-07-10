@@ -82,34 +82,29 @@ class Global_BLL {
     private $dal;
 
     public function __construct() {
-        // Inicializar a camada de acesso a dados (DAL)
         $this->dal = new Global_DAL();
     }
 
     public function getUtilizadores() {
-        // Método para obter dados globais da aplicação
         return $this->dal->getUtilizadores();
     }
 
     public function getEquipas() {
-        // Método para obter dados das equipas
         return $this->dal->getEquipas();
     }
 
     public function criarDocumento($tipoDocumento, $conteudo, $estado) {
-        // Método para criar um documento
         return $this->dal->criarDocumento($tipoDocumento, $conteudo, $estado);
     }
 
     public function getUtilizadorporEmail($email) {
-        // Método para obter um utilizador pelo email
         $utilizadores = $this->getUtilizadores();
         foreach ($utilizadores as $utilizador) {
             if ($utilizador['email'] === $email) {
                 return $utilizador;
             }
         }
-        return null; // Retorna null se o utilizador não for encontrado
+        return null;
     }
 }
 ?>

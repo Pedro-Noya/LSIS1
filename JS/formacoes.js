@@ -49,7 +49,6 @@ function abrirModalInscricoes(idFormacao) {
     });
 }
 
-// Configuração dos modais ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
   const modalDescricao = document.getElementById('modalDescricao');
   const closeDescricao = document.querySelector('.close-modal');

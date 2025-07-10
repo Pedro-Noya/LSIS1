@@ -12,7 +12,6 @@ $email = $_SESSION['email'] ?? null;
 $EquipasDAL = new Equipa_DAL();
 
 if (!$nomeEquipa || !$EquipasDAL->existeEquipa($nomeEquipa)) {
-    // Mostrar equipas do utilizador
     $equipasDoUtilizador = $EquipasDAL->obterEquipasPorEmail($email);
     ?>
     <!DOCTYPE html>

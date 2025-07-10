@@ -27,7 +27,6 @@ verificarAcesso([3]);
       listAllVouchers();
       ?>
 
-      <!-- Modal -->
       <div id="voucherModal" class="modal">
         <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
@@ -55,7 +54,6 @@ verificarAcesso([3]);
           document.getElementById("voucherModal").style.display = "none";
         }
 
-        // Close modal when clicking outside
         window.onclick = function(event) {
           const modal = document.getElementById("voucherModal");
           if (event.target === modal) {
@@ -79,10 +77,8 @@ verificarAcesso([3]);
 
         function handleVoucherAction(estado, id) {
           if (estado === 0) {
-            // Disponível → associar
             window.location.href = "atribuir_voucher.php?id=" + id;
           } else {
-            // Atribuído → desassociar
             window.location.href = "remover_voucher.php?id=" + id;
           }
         }

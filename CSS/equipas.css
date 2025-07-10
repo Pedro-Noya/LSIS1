@@ -1,11 +1,10 @@
-/* Base */
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   background-color: #ffffff;
 }
 
-/* Topbar */
 .topbar {
   background: linear-gradient(to right, #0767ea, #2a9df3);
   color: white;
@@ -100,7 +99,6 @@ form input[type="date"] {
   box-sizing: border-box;
 }
 
-/* Botão de submit */
 form button[type="submit"] {
   display: block;
   width: 100%;

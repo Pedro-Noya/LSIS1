@@ -18,9 +18,6 @@ $idade_por_funcao = $data['idade_por_funcao'];
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portal do Colaborador – Tlantic</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-<style>
-/* Estilos omitidos para brevidade - copia-os do teu ficheiro original */
-</style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-box-and-violin-plot/build/Chart.BoxPlot.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

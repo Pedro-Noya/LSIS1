@@ -23,12 +23,10 @@ $trabalhadores = $bll->listarTrabalhadores();
 </head>
 <body>
 
-  <!-- Cabeçalho completo -->
     <?php include "cabecalho.php"; ?>
     <h1>Portal do Colaborador</h1>
   </div>
 
-  <!-- Subtítulo -->
   <div class="section-title">Listar Trabalhadores</div>
 
     <div class="container">

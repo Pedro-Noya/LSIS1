@@ -1,5 +1,4 @@
 <?php
-// alertas.php
 
 require_once 'BLL/Alertas_BLL.php';
 require_once 'BLL/Logger_BLL.php';

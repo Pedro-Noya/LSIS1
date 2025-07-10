@@ -1,5 +1,5 @@
 
-// Funções para mostrar/ocultar o aviso
+
 document.addEventListener('DOMContentLoaded', function () {
   const capsWarning = document.getElementById('capsLockWarning');
   const capsSpacing = document.getElementById('capsLockSpacing');

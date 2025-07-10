@@ -22,7 +22,6 @@ class Login_Utilizador_BLL {
             return "Palavra-passe incorreta.";
         }
 
-        // Tudo certo, login com sucesso
         session_start();
         $_SESSION['utilizador_id'] = $utilizador['id'];
         $_SESSION['nome'] = $utilizador['nome'];

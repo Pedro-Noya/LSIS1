@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resultado = $bll->eliminarAlerta((int)$idAlerta);
         $loggerBLL = new LoggerBLL();
         $loggerBLL->registarLog($_SESSION['email'], "Eliminou o alerta de ID: $idAlerta");
+        echo json_encode(['success' => true]);
         exit();
     } else {
         echo json_encode(['success' => false, 'message' => 'ID do alerta não fornecido']);

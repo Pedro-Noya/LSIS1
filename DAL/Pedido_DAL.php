@@ -47,7 +47,7 @@ class PedidoDAL {
                 $stmt->bind_param("is", $id, $extras['tipo_assistencia']);
                 break;
             default:
-                return true; // tipo genérico sem extras
+                return true;
         }
 
         return $stmt->execute();

@@ -20,10 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "Registou uma nova equipa: $nomeEquipa",
             "Localização: $localizacao\nData de Criação: $dataCriacao"
         );
-        header("Location: equipasElementos.php"); // Redireciona após registo bem-sucedido
+        header("Location: equipasElementos.php");
         exit();
     } else {
-        $mensagemErro = $resultado; // Mensagem de erro da BLL
+        $mensagemErro = $resultado;
     }
 }
 ?>

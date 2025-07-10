@@ -10,7 +10,7 @@
     align-items: center;
 }
 
-/* Conteúdo da modal */
+
 #modal-content {
     background: #fff;
     padding: 20px;
@@ -21,7 +21,6 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
-/* Botão de fechar */
 .fechar-btn {
     background-color: #c00;
     color: #fff;
