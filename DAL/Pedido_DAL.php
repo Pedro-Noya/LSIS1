@@ -80,5 +80,12 @@ class PedidoDAL {
         $stmt->bind_param("ii", $estado, $idPedido);
         return $stmt->execute();
     }
+
+    public function obterPedidoPorId($idPedido) {
+        $stmt = $this->conn->prepare("SELECT * FROM pedido WHERE idPedido = ?");
+        $stmt->bind_param("i", $idPedido);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
 }
 ?>

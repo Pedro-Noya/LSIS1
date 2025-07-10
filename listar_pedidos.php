@@ -37,8 +37,8 @@ function estadoTexto($estado) {
                 <th>Email</th>
                 <th>Tipo</th>
                 <th>Razão</th>
-                <th>Data de Emissão</th>
                 <th>Detalhes</th>
+                <th>Data de Emissão</th>
                 <th>Estado</th>
                 <th>Ações</th>
             </tr>

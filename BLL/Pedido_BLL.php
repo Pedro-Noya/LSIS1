@@ -20,5 +20,9 @@ class PedidoBLL {
         return $this->dal->atualizarEstadoPedido($idPedido, $estado);
     }
 
+    public function obterPedidoPorID($idPedido) {
+        return $this->dal->obterPedidoPorID($idPedido);
+    }
+
 }
 ?>
