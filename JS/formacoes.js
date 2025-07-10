@@ -20,13 +20,13 @@ function abrirModalInscricoes(idFormacao) {
         const div = document.createElement('div');
         div.className = 'linha-inscricao';
         div.innerHTML = `
-          <strong>${inscrito.nome} (${inscrito.email})</strong><br>
-          Estado: 
-          <select data-email="${inscrito.email}" data-id="${inscrito.idFormacao}">
-            <option value="0" ${inscrito.estado == 0 ? 'selected' : ''}>Não iniciado</option>
-            <option value="1" ${inscrito.estado == 1 ? 'selected' : ''}>Em curso</option>
-            <option value="2" ${inscrito.estado == 2 ? 'selected' : ''}>Concluído</option>
-          </select>
+            <br/>
+            <strong>${inscrito.nome} (${inscrito.email})</strong><br>
+            <select data-email="${inscrito.email}" data-id="${inscrito.idFormacao}">
+                <option value="0" ${inscrito.estado == 0 ? 'selected' : ''}>Não iniciado</option>
+                <option value="1" ${inscrito.estado == 1 ? 'selected' : ''}>Em curso</option>
+                <option value="2" ${inscrito.estado == 2 ? 'selected' : ''}>Concluído</option>
+            </select>
         `;
         lista.appendChild(div);
       });

@@ -1,5 +1,6 @@
 <?php
-require_once "../BLL/Formacoes_BLL.php";
+require_once __DIR__ . "/../BLL/Formacoes_BLL.php";
+require_once __DIR__ . "/../BLL/Logger_BLL.php";
 session_start();
 
 if (!isset($_SESSION['logged_in']) || ($_SESSION['papel'] != 3 && $_SESSION['papel'] != 4)) {
@@ -18,6 +19,8 @@ if (!$email || !$id || !is_numeric($estado)) {
 
 $bll = new Formacoes_BLL();
 $bll->atualizarEstadoFormacao($email, $id, (int)$estado);
+$loggerBLL = new LoggerBLL;
+$loggerBLL->registarLog($_SESSION['email'], "Atualizou o estado de Formação de $email", "Estado: $estado \nID: $id");
 
 http_response_code(200);
 ?>

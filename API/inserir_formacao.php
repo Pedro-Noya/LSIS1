@@ -1,5 +1,6 @@
 <?php
-require_once "../BLL/Formacoes_BLL.php";
+require_once __DIR__ . "/../BLL/Formacoes_BLL.php";
+require_once __DIR__ . "/../BLL/Logger_BLL.php";
 session_start();
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || ($_SESSION['papel'] != 3 && $_SESSION['papel'] != 4)) {
@@ -42,6 +43,16 @@ $formacaoBLL->criarFormacao(
     $_POST['horario'],
     $_POST['descricao'] ?? 'Descrição não fornecida'
 );
-
+$loggerBLL = new LoggerBLL;
+$loggerBLL->registarLog(
+    $_SESSION['email'],
+    "Criou uma Formação: $idFormacao",
+    "Título: {$_POST['titulo']}\n" .
+    "Nível de Ensino: {$_POST['nivelEnsino']}\n" .
+    "Duração: {$_POST['duracao']}\n" .
+    "Localização: {$_POST['localizacao']}\n" .
+    "Horário: {$_POST['horario']}\n" .
+    "Descrição: {$_POST['descricao']}"
+);
 header("Location: ../formacoes.php");
 exit();

@@ -1,6 +1,7 @@
 <?php
-require_once "../DAL/Formacoes_DAL.php";
-require_once "../BLL/Pedido_BLL.php";
+require_once __DIR__ . "/../DAL/Formacoes_DAL.php";
+require_once __DIR__ . "/../BLL/Pedido_BLL.php";
+require_once __DIR__ . '/../BLL/Logger_BLL.php';
 session_start();
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['papel'] != 1) {
@@ -33,6 +34,8 @@ $bll->registarPedido(
     NULL,
     "Formação ID: $idFormacao"
 );
+$loggerBLL = new LoggerBLL;
+$loggerBLL->registarLog($_SESSION['email'], "Inscreveu-se na Formação: $idFormacao");
 header("Location: ../formacoes.php?msg=inscrito");
 exit();
 ?>
