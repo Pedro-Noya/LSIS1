@@ -26,7 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             return;
         }
         
+        $permitir=$bll->permitirAdicionar($nomeEquipa, $emailElemento);
+        if(!$permitir){
+            return;
+        }
         $resultado = $bll->adicionarElementoEquipa($nomeEquipa, $emailElemento);
+        
     }
 
     if ($resultado === true) {

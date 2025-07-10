@@ -11,12 +11,14 @@ class Equipa_BLL {
         $this->global_dal = new Global_DAL();
     }
 
-    public function registarEquipa($nomeEquipa, $localizacao, $dataCriacao) {
+    public function registarEquipa($nomeEquipa, $dataCriacao) {
+        // 1. Verificar se a equipa já existe
         if ($this->dal->obterEquipaPorNome($nomeEquipa)) {
         return "A equipa já existe.";
         }
 
-        $sucesso = $this->dal->criarEquipa($nomeEquipa, $localizacao, $dataCriacao);
+        // 2. Inserir nova equipa
+        $sucesso = $this->dal->criarEquipa($nomeEquipa, $dataCriacao);
 
         if (!$sucesso) {
         return "Erro ao registar a equipa.";

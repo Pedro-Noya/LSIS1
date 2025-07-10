@@ -18,13 +18,13 @@ class Equipa_DAL {
         return $resultado->fetch_assoc();
     }
 
-    public function criarEquipa($nomeEquipa, $localizacao, $dataCriacao) {
-        $query = "INSERT INTO equipa (nomeEquipa, localizacao, dataCriacao) VALUES (?, ?, ?)";
+    public function criarEquipa($nomeEquipa, $dataCriacao) {
+        $query = "INSERT INTO equipa (nomeEquipa, dataCriacao) VALUES (?, ?)";
         $stmt = $this->conn->prepare($query);
         if (!$stmt) {
             die("Erro na preparação da query: " . $this->conn->error);
         }
-        $stmt->bind_param("sss", $nomeEquipa, $localizacao, $dataCriacao);
+        $stmt->bind_param("ss", $nomeEquipa, $dataCriacao);
         
         return $stmt->execute();
     }

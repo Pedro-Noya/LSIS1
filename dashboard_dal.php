@@ -19,53 +19,63 @@ class DAL_Dashboard{
         return false;
     }
 
-    //function obterEquipaPorEmail($email){
-        /*$sql=$this->conn->prepare("SELECT nomeEquipa FROM ColaboradoresEquipa WHERE email=?");
-        $sql->bind_param("s",$email);
+    function obterEquipasDoUtilizador($email) {
+        $sql = $this->conn->prepare("SELECT DISTINCT nomeEquipa FROM ColaboradoresEquipa WHERE email = ?");
+        $sql->bind_param("s", $email);
         $sql->execute();
-        $equipa=$sql->get_result()->fetch_assoc();
-        if($equipa){
-            return $equipa;
+        return $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function obterMembrosEquipaPorPapel($email, $papelMaximo){
+        // Buscar todas as equipas do utilizador
+        $sql = $this->conn->prepare("SELECT nomeEquipa FROM ColaboradoresEquipa WHERE email=?");
+        $sql->bind_param("s", $email);
+        $sql->execute();
+        $result = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+
+        $todosColaboradores = [];
+
+        foreach ($result as $row) {
+            $nomeEquipa = $row['nomeEquipa'];
+            $sql2 = $this->conn->prepare("SELECT DISTINCT ColaboradoresEquipa.email FROM ColaboradoresEquipa 
+                JOIN Utilizador ON ColaboradoresEquipa.email=Utilizador.email
+                WHERE ColaboradoresEquipa.nomeEquipa=? AND Utilizador.papel <= ?");
+            $sql2->bind_param("si", $nomeEquipa, $papelMaximo);
+            $sql2->execute();
+            $colaboradores = $sql2->get_result()->fetch_all(MYSQLI_ASSOC);
+            $todosColaboradores = array_merge($todosColaboradores, $colaboradores);
         }
-        return false;
-    }*/
+
+        // Remover duplicados
+        $todosColaboradores = array_unique($todosColaboradores, SORT_REGULAR);
+        return $todosColaboradores;
+    }
+
+    function obterMembrosDeUmaEquipa($nomeEquipa){
+        $sql = $this->conn->prepare("SELECT DISTINCT ColaboradoresEquipa.email FROM ColaboradoresEquipa 
+            JOIN Utilizador ON ColaboradoresEquipa.email=Utilizador.email 
+            WHERE ColaboradoresEquipa.nomeEquipa=? AND Utilizador.papel<=3");
+        $sql->bind_param("s", $nomeEquipa);
+        $sql->execute();
+        return $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    function obterMembrosDeUmaEquipaFiltrada($nomeEquipa, $papelMaximo) {
+        $sql = $this->conn->prepare("SELECT DISTINCT ColaboradoresEquipa.email 
+            FROM ColaboradoresEquipa 
+            JOIN Utilizador ON ColaboradoresEquipa.email = Utilizador.email 
+            WHERE ColaboradoresEquipa.nomeEquipa = ? AND Utilizador.papel <= ?");
+        $sql->bind_param("si", $nomeEquipa, $papelMaximo);
+        $sql->execute();
+        return $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
 
     function obterMembrosEquipa_Coordenador($email){
-        //1º Passo: Determinar a equipa à qual pertence o Coordenador em questão!
-        //$equipa=obterEquipaPorEmail($email);
-        $sql=$this->conn->prepare("SELECT nomeEquipa FROM ColaboradoresEquipa WHERE email=?");
-        $sql->bind_param("s",$email);
-        $sql->execute();
-        $equipa=$sql->get_result()->fetch_assoc();
-        
-        $sql=$this->conn->prepare("SELECT ColaboradoresEquipa.email FROM ColaboradoresEquipa JOIN Utilizador ON ColaboradoresEquipa.email=Utilizador.email WHERE
-        ColaboradoresEquipa.nomeEquipa=? AND Utilizador.papel<=2");
-        $sql->bind_param("s",$equipa["nomeEquipa"]);
-        $sql->execute();
-        $colaboradores=$sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        if($colaboradores){
-            return $colaboradores;
-        }
-        return false;
+        return $this->obterMembrosEquipaPorPapel($email, 2);
     }
 
     function obterMembrosEquipa_RH($email){
-        //1º Passo: Determinar a equipa à qual pertence o Coordenador em questão!
-        //$equipa=obterEquipaPorEmail($email);
-        $sql=$this->conn->prepare("SELECT nomeEquipa FROM ColaboradoresEquipa WHERE email=?");
-        $sql->bind_param("s",$email);
-        $sql->execute();
-        $equipa=$sql->get_result()->fetch_assoc();
-        
-        $sql=$this->conn->prepare("SELECT ColaboradoresEquipa.email FROM ColaboradoresEquipa JOIN Utilizador ON ColaboradoresEquipa.email=Utilizador.email WHERE
-        ColaboradoresEquipa.nomeEquipa=? AND Utilizador.papel<=3");
-        $sql->bind_param("s",$equipa["nomeEquipa"]);
-        $sql->execute();
-        $colaboradores=$sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        if($colaboradores){
-            return $colaboradores;
-        }
-        return false;
+        return $this->obterMembrosEquipaPorPapel($email, 3);
     }
 
     function obterDadosPrivadosColaborador($email){

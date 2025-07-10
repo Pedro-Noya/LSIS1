@@ -8,11 +8,10 @@ $mensagemErro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nomeEquipa = $_POST['nomeEquipa'] ?? '';
-    $localizacao = $_POST['localizacao'] ?? '';
     $dataCriacao = $_POST['dataCriacao'] ?? date('Y-m-d');
 
     $bll = new Equipa_BLL();
-    $resultado = $bll->registarEquipa($nomeEquipa, $localizacao, $dataCriacao);
+    $resultado = $bll->registarEquipa($nomeEquipa, $dataCriacao);
 
     if ($resultado === true) {
         $loggerBLL = new LoggerBLL();
@@ -49,9 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST" action="">
             <label for="nomeEquipa">Nome da Equipa:</label>
             <input type="text" id="nomeEquipa" name="nomeEquipa" required>
-
-            <label for="localizacao">Localização:</label>
-            <input type="text" id="localizacao" name="localizacao" required>
 
             <label for="dataCriacao">Data de Criação:</label>
             <input type="date" id="dataCriacao" name="dataCriacao" value="<?= date('Y-m-d') ?>">
