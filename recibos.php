@@ -1,6 +1,8 @@
 <?php
 session_start();
 include "BLL/recibos_bll.php";
+require_once __DIR__ . "/verificar_acesso.php";
+verificarAcesso([1,2,3,4]);
 
 $email = $_SESSION['email'];
 $papel = obterFuncaoRecibos()['papel'];
