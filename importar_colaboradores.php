@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <?php
 require_once __DIR__ . "/verificar_acesso.php";
-verificarAcesso([3,4]);
+verificarAcesso([3]);
 $mensagem = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -163,6 +163,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Importar Colaboradores</title>
 </head>
 <body>
+    <?php include "cabecalho.php" ?>
+
     <h1>Importar Colaboradores via CSV</h1>
 
     <?php if ($mensagem): ?>

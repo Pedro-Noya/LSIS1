@@ -1,7 +1,7 @@
 <?php
 require_once 'BLL/Listar_Trabalhadores_BLL.php';
 require_once __DIR__ . "/verificar_acesso.php";
-verificarAcesso([3,4]);
+verificarAcesso([3]);
 
 $converterPapel = [
     1 => 'Colaborador',
