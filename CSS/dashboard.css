@@ -1,17 +1,64 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f8fb;
+    color: #1a3760;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    margin: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    background-color: #fff;
+    color: #1a3760;
+    margin-left: 10px;
+}
+
+select:focus {
+    outline: none;
+    border-color: #2a9df3;
+    box-shadow: 0 0 5px rgba(42, 157, 243, 0.5);
+}
+
+#idadeMedia, #tempoMedio {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px 0 20px 0;
+}
+
 .grid-graficos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     padding: 20px;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 .grafico-miniatura {
     height: 250px;
     cursor: pointer;
-    border: 1px solid #ccc;
+    border: 1px solid #e0e0e0;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     background-color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grafico-miniatura:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
 }
 
 .modal {
@@ -32,6 +79,7 @@
     max-width: 900px;
     border-radius: 10px;
     position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .fechar {
@@ -46,5 +94,41 @@
 }
 
 .fechar:hover {
-    color: red;
+    color: #e53935;
 }
+
+#filtroequipas {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#filtroequipas label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a3760;
+  margin-right: 10px;
+}
+
+#filtroequipas select {
+  width: 220px;
+  padding: 8px 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #1a3760;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#filtroequipas select:hover {
+  border-color: #2a9df3;
+}
+
+#filtroequipas select:focus {
+  outline: none;
+  border-color: #0767ea;
+  box-shadow: 0 0 5px rgba(7, 103, 234, 0.4);
+}
+
