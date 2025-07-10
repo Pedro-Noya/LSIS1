@@ -18,7 +18,7 @@ body {
   border-radius: 16px;
   width: 260px;
   padding: 20px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -203,3 +203,26 @@ body {
   padding: 10px;
   border-bottom: 1px solid #ccc;
 }
+
+.formacoes-header {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 30px 20px 10px 20px;
+  border-bottom: 1px solid #2a9df3;
+
+}
+
+.formacoes-header h1 {
+  font-size: 32px;
+  color: #0767ea;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.formacoes-wrapper {
+  background-color: #e1f0fd;
+  padding: 30px 20px 80px 20px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+}
+

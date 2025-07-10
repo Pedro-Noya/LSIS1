@@ -3,7 +3,6 @@
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  background-color: white;
 }
 
 
@@ -157,4 +156,18 @@ input[type="submit"]:hover,
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
+}
+.titulo-pagina {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 30px 20px 10px 20px;
+  border-bottom: 1px solid #2a9df3;
+}
+
+.titulo-pagina h1 {
+  font-size: 32px;
+  color: #0767ea;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 700;
 }

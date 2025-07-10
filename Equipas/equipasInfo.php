@@ -22,7 +22,9 @@ if (!$nomeEquipa || !$EquipasDAL->existeEquipa($nomeEquipa)) {
     </head>
     <body>
         <?php include "../cabecalho.php"; ?>
-        <h2>Escolha uma equipa para visualizar:</h2>
+        <div class="titulo-pagina">
+            <h1>Escolha uma equipa para visualizar:</h1>
+        </div>
         <ul>
             <?php if (empty($equipasDoUtilizador)): ?>
                 Não Pertence a Nenhuma Equipa!
@@ -57,13 +59,17 @@ $aniversarios = $AniversarioEquipa_DAL->obterAniversariosPorEquipa($nomeEquipa);
 </head>
 <body>
     <?php include "../cabecalho.php"; ?>
-    <h2>Chat da Equipa: <?= htmlspecialchars($nomeEquipa) ?></h2>
-    <div id="chat-container">
-        <?php foreach ($mensagens as $msg): ?>
-            <?php $Remetente = $GlobalBLL->getUtilizadorporEmail($msg['emailRemetente']); ?>
-            <div class="mensagem"><strong><?= htmlspecialchars($Remetente['nome']) ?>:</strong> <?= htmlspecialchars($msg['mensagem']) ?> <em>(<?= $msg['dataHora'] ?>)</em></div>
-        <?php endforeach; ?>
+
+    <div class="titulo-pagina">
+        <h1>Chat da Equipa: <?= htmlspecialchars($nomeEquipa) ?></h1>
     </div>
+    <div id="chat-container">
+    <?php foreach ($mensagens as $msg): ?>
+        <?php $Remetente = $GlobalBLL->getUtilizadorporEmail($msg['emailRemetente']); ?>
+        <div class="mensagem"><strong><?= htmlspecialchars($Remetente['nome']) ?>:</strong> <?= htmlspecialchars($msg['mensagem']) ?> <em>(<?= $msg['dataHora'] ?>)</em></div>
+    <?php endforeach; ?>
+    </div>
+
 
     <form id="chat-form" method="POST" action="../API/enviar_mensagem.php">
         <input type="hidden" name="nomeEquipa" value="<?= htmlspecialchars($nomeEquipa) ?>">
