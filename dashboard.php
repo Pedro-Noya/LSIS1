@@ -18,20 +18,22 @@ verificarAcesso([2,3]);
 <body>
     <?php include "cabecalho.php"; ?>
 
-    <form method="GET" style="margin: 20px;">
-        <label for="filtroEquipa">Filtrar por Equipa: </label>
-        <select name="filtroEquipa" id="filtroEquipa" onchange="this.form.submit()">
+    <div class="filtro-container">
+        <form method="GET" class="filtro-form">
+            <label for="filtroEquipa">Filtrar por Equipa:</label>
+            <select name="filtroEquipa" id="filtroEquipa" onchange="this.form.submit()">
             <option value="todas">Todas as Equipas</option>
-            <?php 
-                $equipas = obterEquipasDoUtilizador();
-                foreach ($equipas as $equipa): 
+            <?php
+            $equipas = obterEquipasDoUtilizador();
+            foreach ($equipas as $equipa):
             ?>
                 <option value="<?= $equipa['nomeEquipa'] ?>" <?= isset($_GET['filtroEquipa']) && $_GET['filtroEquipa'] == $equipa['nomeEquipa'] ? 'selected' : '' ?>>
-                    <?= $equipa['nomeEquipa'] ?>
+                <?= $equipa['nomeEquipa'] ?>
                 </option>
             <?php endforeach; ?>
-        </select>
-    </form>
+            </select>
+        </form>
+    </div>
 
     <div class="metricas-container">
     <div id="idadeMedia" class="card-metrica esquerda"></div>
