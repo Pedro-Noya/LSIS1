@@ -25,6 +25,7 @@ if (isset($_SESSION["email"])) {
     <br/>
     <div class="container">
         <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+            <strong>Navegar para outra página</strong>
             <div class="botoes">
                 <?php if ($papel === 1): ?>
                     <button onclick="location.href='pedidos.php'">Pedidos</button>
@@ -61,7 +62,6 @@ if (isset($_SESSION["email"])) {
             <p class="texto">Bem-vindo ao Portal do Colaborador</p>
             <div class="botoes">
                 <button onclick="location.href='login.php'">Login</button>
-                <button onclick="location.href='registar.php'">Registar</button>
             </div>
         <?php endif; ?>
     </div>
