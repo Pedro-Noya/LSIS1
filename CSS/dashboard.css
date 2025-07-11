@@ -132,3 +132,35 @@ select:focus {
   box-shadow: 0 0 5px rgba(7, 103, 234, 0.4);
 }
 
+.metricas-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 40px;
+  gap: 20px;
+}
+
+.card-metrica {
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px 30px;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  color: #0767ea;
+  font-size: 20px;
+  font-weight: 600;
+  flex: 1;
+}
+
+.card-metrica h2 {
+  margin: 0;
+  color: #0767ea;
+}
+
+.esquerda {
+  text-align: left;
+}
+
+.direita {
+  text-align: right;
+}
