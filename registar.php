@@ -56,7 +56,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   <?php include "cabecalho.php"; ?>
 
-  <div class="section-title">Registar Utilizador no Portal</div>
+  <div class="titulo-pagina">
+      <h1>Registar Trabalhador</h1>
+  </div>
   <br/>
 
   <?php if (!empty($mensagemErro)): ?>

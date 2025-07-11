@@ -58,7 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php include "../cabecalho.php"; ?>
 
-    <div class="section-title">Registo de Equipa</div>
+    <div class="titulo-pagina">
+        <h1>Editar Equipas</h1>
+    </div>
+
+    <br/>
 
     <div class="container">
         <?php if (!empty($mensagemErro)): ?>

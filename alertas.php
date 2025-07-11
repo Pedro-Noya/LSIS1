@@ -74,7 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
 <body>
     <?php include 'cabecalho.php'; ?>
 
-    <div class="section-title">Alertas | Criar Alertas</div>
+    <div class="titulo-pagina">
+        <h1>Alertas</h1>
+    </div>
 
     <br/>
 

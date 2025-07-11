@@ -95,7 +95,7 @@ verificarAcesso([2,3]);
 <body>
     <?php include "cabecalho.php"; ?>
 
-    <form method="GET" style="margin: 20px;">
+    <form method="GET" style="margin: 30px;">
         <label for="filtroEquipa">Filtrar por Equipa: </label>
         <select name="filtroEquipa" id="filtroEquipa" onchange="this.form.submit()">
             <option value="todas">Todas as Equipas</option>

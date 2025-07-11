@@ -23,7 +23,6 @@ function listAllVouchers(){
         </div>
     </div>
     <div style="text-align: center; margin-top: 30px;">
-        <h1>Vouchers</h1>
         <button class="add-btn" onclick="openModal()">Add Voucher</button>
     </div>';
     echo '

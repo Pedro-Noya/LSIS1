@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal do Colaborador</title>
-    
-    <!-- Estilos globais e do cabeçalho -->
     <link rel="stylesheet" href="/PortalColaborador/CSS/global.css">
     <link rel="stylesheet" href="/PortalColaborador/CSS/cabecalho.css">
 </head>
@@ -22,7 +20,9 @@
                 <?php mostrarItens(); ?>
             </nav>
         </div>
-        <h1><strong>Portal do Colaborador</strong></h1>
+        <div class="titulo-top">
+            <h1>Portal do Colaborador</h1>
+        </div>
     </div>
     <script src="/PortalColaborador/JS/cabecalho.js"></script>
 </body>

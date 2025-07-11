@@ -27,11 +27,14 @@ function estadoTexto($estado) {
         th { background-color: #f2f2f2; }
         button { margin: 2px; }
     </style>
+    <link rel="stylesheet" href="/PortalColaborador/CSS/listar_pedidos.css">
 </head>
 <body>
     <?php include 'cabecalho.php'; ?>
-
-    <h2 style="text-align:center;">Lista de Pedidos</h2>
+    <div class="titulo-pagina">
+        <h1>Lista de Pedidos</h1>
+    </div>
+    <br/>
 
     <table>
         <thead>

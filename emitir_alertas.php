@@ -46,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tipo'])) {
         <div class="erro"><?= htmlspecialchars($mensagemErro) ?></div>
     <?php endif; ?>
 
-    <div class="section-title">Alertas | Emitir Alertas</div>
+    <div class="titulo-pagina">
+        <h1>Alertas</h1>
+    </div>
 
     <br/>
 

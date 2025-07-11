@@ -18,7 +18,11 @@ $logs = $logger->obterLogs();
 <body>
     <?php include 'cabecalho.php';   ?>
 
-    <h2 style="text-align:center;">Histórico de Ações (Logs)</h2>
+    <div class="titulo-pagina">
+        <h1>Histórico de Ações (Logs)</h1>
+    </div>
+
+    <br/>
 
     <div id="modal">
         <div id="modal-content">

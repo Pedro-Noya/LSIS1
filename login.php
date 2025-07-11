@@ -42,7 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
   <?php include "cabecalho.php"; ?>
-  <div class="section-title">Login | Entrar no seu Portal</div>
+    <div class="titulo-pagina">
+        <h1>Login</h1>
+    </div>
   <br/>
 
   <div class="container">
@@ -59,10 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <button type="submit">Login</button>
     </form>
-
-    <div class="link">
-      <a href="passReset.php">Esqueci-me da palavra-passe</a>
-    </div>
   </div>
   <script src="js/capsLockWarning.js"></script>
   <script src="js/login.js"></script>

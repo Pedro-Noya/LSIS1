@@ -40,8 +40,6 @@ function mostrarItens(){
             case 4:
                 echo "<a href='{$base_url}listar_logs.php'>Logs</a>";
                 echo "<a href='{$base_url}alertas.php'>Alertas</a>";
-                echo "<a href='{$base_url}dashboard.php'>Dashboard</a>";
-                echo "<a href='{$base_url}listar_trabalhadores.php'>Colaboradores</a>";
                 echo "<a href='{$base_url}Equipas/equipasInfo.php'>Equipas</a>";
                 break;
             default:

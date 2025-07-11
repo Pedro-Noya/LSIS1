@@ -6,17 +6,19 @@ verificarAcesso([3]);
 <!DOCTYPE html>
 <html lang="pt">
     <head>
-        <meta charset="UTF-8">
-        <title>Portal do Colaborador - Dashboard</title>
         <link href="CSS/voucher.css" rel="stylesheet">
         <meta charset="UTF-8" />
         <title>Portal do Colaborador - Vouchers</title>
     </head>
     <body>
       <?php include "cabecalho.php"; ?>
+
+      <div class="titulo-pagina">
+        <h1>Vouchers</h1>
+      </div>
       
       <div class="filter-container">
-        <label for="estadoFilter">Filter:</label>
+        <label for="estadoFilter">Filtro:</label>
         <select id="estadoFilter" onchange="filterVouchers()">
           <option value="all">Todos</option>
           <option value="0">Disponíveis</option>
@@ -30,7 +32,7 @@ verificarAcesso([3]);
       <div id="voucherModal" class="modal">
         <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
-          <h2>Add Voucher</h2>
+          <h2>Adicionar Voucher</h2>
           <form method="POST" action="voucherController.php">
             <label>Data de Expiração:</label>
             <input type="date" name="voucherNos">

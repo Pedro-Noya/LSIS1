@@ -29,19 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'tipo_assistencia' => $_POST['tipo_assistencia'] ?? null
     ];
 
-
     if (isset($_FILES['documento']) && $_FILES['documento']['error'] === UPLOAD_ERR_OK) {
         $nomeTemporario = $_FILES['documento']['tmp_name'];
         $conteudo = file_get_contents($nomeTemporario);
-
         $globalBLL = new Global_BLL();
         $idDocumento = $globalBLL->criarDocumento($tipo, $conteudo, 0);
-    }
-
-
-    if ($tipo === 'Documentação') {
-        $dado = $_POST['dado'] ?? '';
-        $novoValor = $_POST['novo_valor'] ?? '';
     }
 
     $bll = new PedidoBLL();
@@ -51,36 +43,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $detalhes = null;
         switch ($tipo) {
             case 'Férias':
-                $tipo = 'Férias';
-                $detalhes = "Período: De " . $dadosExtras['data_inicio_ferias'] . " até " . $dadosExtras['data_fim_ferias']
-                            . "\nRazão: $razao";
+                $detalhes = "Período: De " . $dadosExtras['data_inicio_ferias'] . " até " . $dadosExtras['data_fim_ferias'] . "\nRazão: $razao";
                 break;
             case 'Equipamento':
-                $tipo = 'Equipamento';
-                $detalhes = "Equipamento: " . $dadosExtras['equipamento'] . "\nQuantidade: " . $dadosExtras['quantidade']
-                            . "\nRazão: $razao";
+                $detalhes = "Equipamento: " . $dadosExtras['equipamento'] . "\nQuantidade: " . $dadosExtras['quantidade'] . "\nRazão: $razao";
                 break;
             case 'Documentação':
-                $tipo = 'Documentação';
-                $detalhes = "Dado: " . $dadosExtras['dado'] . "\nNovo Valor: " . $dadosExtras['novo_valor']
-                            . "\nRazão: $razao";
+                $detalhes = "Dado: " . $dadosExtras['dado'] . "\nNovo Valor: " . $dadosExtras['novo_valor'] . "\nRazão: $razao";
                 break;
             case 'Troca de turno':
-                $tipo = 'Troca de turno';
-                $detalhes = "Data de troca: " . $dadosExtras['data_troca'] . "\nNovo turno: " . $dadosExtras['novo_turno']
-                            . "\nRazão: $razao";
+                $detalhes = "Data de troca: " . $dadosExtras['data_troca'] . "\nNovo turno: " . $dadosExtras['novo_turno'] . "\nRazão: $razao";
                 break;
             case 'Período de Trabalho Remoto':
-                $tipo = 'Trabalho Remoto';
-                $detalhes = "Período: De " . $dadosExtras['data_inicio_remoto'] . " até " . $dadosExtras['data_fim_remoto']
-                            . "\nRazão: $razao";
+                $detalhes = "Período: De " . $dadosExtras['data_inicio_remoto'] . " até " . $dadosExtras['data_fim_remoto'] . "\nRazão: $razao";
                 break;
             case 'Assistência':
                 $detalhes = "Tipo de assistência: " . $dadosExtras['tipo_assistencia'] . "\nRazão: $razao";
-                $tipo = 'Assistência';
                 break;
-            default:
-                $tipo = 'Pedido Não Especificado';
         }
         $loggerBLL->registarLog($email, "Registou um Pedido de $tipo", $detalhes);
     } else {
@@ -94,12 +73,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Submeter Pedido</title>
+    <link rel="stylesheet" href="CSS/pedidos.css">
     <script src="JS/pedidos.js" defer></script>
 </head>
 <body>
     <?php include 'cabecalho.php'; ?>
 
-    <h2>Registar Pedido</h2>
+    <div class="titulo-pagina">
+        <h1>Registar Pedido</h1>
+    </div>
 
     <?php if (isset($erro)) : ?>
         <div class="erro"><?= htmlspecialchars($erro) ?></div>
@@ -110,10 +92,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <form method="POST" enctype="multipart/form-data">
-        Email:
-        <input type="email" name="email" disabled value='<?= isset($_SESSION["email"]) ? $_SESSION["email"] : "ERRO: NÃO HÁ CONTA LOGGED IN" ?>'><br>
+        <label>Email:</label>
+        <input type="email" name="email" disabled value="<?= htmlspecialchars($_SESSION["email"] ?? 'ERRO') ?>">
 
-        Tipo:
+        <label>Tipo:</label>
         <select name="tipo" id="tipo" required>
             <option value="" selected disabled>-- Selecione --</option>
             <option value="Férias">Férias</option>
@@ -122,47 +104,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="Troca de turno">Troca de turno</option>
             <option value="Período de Trabalho Remoto">Período de Trabalho Remoto</option>
             <option value="Assistência">Assistência</option>
-        </select><br><br>
+        </select>
 
-        <div id="FeriasExtras" style="display:none;">
-            Data de início: <input type="date" name="data_inicio_ferias"><br>
-            Data de fim: <input type="date" name="data_fim_ferias"><br><br>
+        <div id="FeriasExtras" class="hidden">
+            <label>Data de início:</label>
+            <input type="date" name="data_inicio_ferias">
+
+            <label>Data de fim:</label>
+            <input type="date" name="data_fim_ferias">
         </div>
 
-        <div id="EquipamentoExtras" style="display:none;">
-            Equipamento: <input type="text" name="equipamento"><br><br>
-            Quantidade: <input type="number" name="quantidade" min="1"><br><br>
+        <div id="EquipamentoExtras" class="hidden">
+            <label>Equipamento:</label>
+            <input type="text" name="equipamento">
+
+            <label>Quantidade:</label>
+            <input type="number" name="quantidade" min="1">
         </div>
 
-        <div id="DocExtras" style="display:none;">
-            Dado a atualizar: <input type="text" name="dado"><br>
-            Novo valor: <input type="text" name="novo_valor"><br><br>
+        <div id="DocExtras" class="hidden">
+            <label>Dado a atualizar:</label>
+            <input type="text" name="dado">
+
+            <label>Novo valor:</label>
+            <input type="text" name="novo_valor">
         </div>
 
-        <div id="TrocaTurnoExtras" style="display:none;">
-            Data de troca: <input type="date" name="data_troca"><br/>
-            Novo turno:
+        <div id="TrocaTurnoExtras" class="hidden">
+            <label>Data de troca:</label>
+            <input type="date" name="data_troca">
+
+            <label>Novo turno:</label>
             <select name="novo_turno">
                 <option value="Manhã">Manhã</option>
                 <option value="Tarde">Tarde</option>
                 <option value="Noite">Noite</option>
-            </select><br/><br/>
+            </select>
         </div>
 
-        <div id="RemotoExtras" style="display:none;">
-            Data de início: <input type="date" name="data_inicio_remoto"><br>
-            Data de fim: <input type="date" name="data_fim_remoto"><br><br>
+        <div id="RemotoExtras" class="hidden">
+            <label>Data de início:</label>
+            <input type="date" name="data_inicio_remoto">
+
+            <label>Data de fim:</label>
+            <input type="date" name="data_fim_remoto">
         </div>
 
-        <div id="AssistenciaExtras" style="display:none;">
-            Tipo de assistência: <input type="text" name="tipo_assistencia"><br>
+        <div id="AssistenciaExtras" class="hidden">
+            <label>Tipo de assistência:</label>
+            <input type="text" name="tipo_assistencia">
         </div>
 
-        Razão / Descrição:
-        <textarea name="razao" required></textarea><br>
+        <label>Razão / Descrição:</label>
+        <textarea name="razao" required></textarea>
 
-        <label>Comprovativo / Documento: (OPCIONAL) </label>
-        <input type="file" name="documento"><br><br>
+        <label>Comprovativo / Documento: (opcional)</label>
+        <input type="file" name="documento">
 
         <button type="submit">Submeter Pedido</button>
     </form>
