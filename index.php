@@ -25,7 +25,6 @@ if (isset($_SESSION["email"])) {
     <br/>
     <div class="container">
         <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
-
             <div class="botoes">
                 <?php if ($papel === 1): ?>
                     <button onclick="location.href='pedidos.php'">Pedidos</button>
